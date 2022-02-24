@@ -1,7 +1,7 @@
 function getAccountState() {
 
 }
-function changeAccountState() {
+function changeAccountState(amount) {
 
 }
 
