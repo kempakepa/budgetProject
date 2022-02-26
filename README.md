@@ -15,13 +15,16 @@ Projekt ma na celu stworzenie prostej aplikacji do zarzadzania budzetem domowym
     * data
     * kwota
     * tytul (optional)
-* dodanie nowej kategorii
-* podsumowanie/bilans dla danego dnia/miesiaca/roku
 
 
 ## Moduly i ich zaleznosci
 
 ```mermaid
 sequenceDiagram
-    ModułA->>ModułB: Funkcja
+    User->>cashFlowManager: addCost
+    User->>cashFlowManager: addIncome
+    User->>AccountState: getAccountState
+    cashFlowManager->>AccountState: changeAccountState
+    User->>cashFlowManager: listAllCostAndIncome
+    User->>Filterer: filterCostAndIncome
 ```
