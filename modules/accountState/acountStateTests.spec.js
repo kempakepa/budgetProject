@@ -2,20 +2,23 @@ const { setModuleName, verify, summaryTests } = require("../../tests/tests.js");
 const { getAccountState, changeAccountState } = require("./accountState.js");
 const { changeAccountStateErrorText } = require("./errorText.js");
 
-setModuleName("AccountState Module Tests");
+const assertionText = "accountState should equal "
+const assertionErrorText = "should throw an error"
 
-verify("Check if accountState = 0", 0, getAccountState());
+setModuleName("accountState Module Tests");
+
+verify(assertionText + '0', 0, getAccountState());
 changeAccountState(15);
-verify("Check if accountState = 15", 15, getAccountState());
+verify(assertionText + '15', 15, getAccountState());
 changeAccountState(0);
-verify("Check if accountState = 15", 15, getAccountState());
+verify(assertionText + '15', 15, getAccountState());
 changeAccountState(1.5);
-verify("Check if accountState = 16.5", 16.5, getAccountState());
-verify("Check if error thrown", changeAccountStateErrorText, changeAccountState(undefined));
+verify(assertionText + '16.5', 16.5, getAccountState());
+verify(assertionErrorText, changeAccountStateErrorText, changeAccountState());
 changeAccountState(-1.5);
-verify("Check if accountState = 15.0", 15.0, getAccountState());
+verify(assertionText + '15.0', 15.0, getAccountState());
 changeAccountState();
-verify("Check if accountState = 15.0", 15.0, getAccountState());
+verify(assertionText + '15.0', 15.0, getAccountState());
 
 summaryTests();
 
