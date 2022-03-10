@@ -6,6 +6,3 @@ for i in "${files[@]}"
 do :
     node $i
 done
-
-echo "Wcisnij enter aby kontynuować..."
-read

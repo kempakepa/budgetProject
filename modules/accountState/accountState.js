@@ -1,4 +1,4 @@
-const { changeAccountStateErrorText } = require("./errorText.js");
+const { changeAccountStateErrorText } = require('./errorText.js');
 
 let accountState = 0;
 
@@ -13,4 +13,4 @@ function changeAccountState(amount) {
     }
 }
 
-module.exports = { getAccountState, changeAccountState }
+module.exports = { getAccountState, changeAccountState };
