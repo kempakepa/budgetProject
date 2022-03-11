@@ -13,7 +13,12 @@ function validateInput(title, comment, date, amount, category) {
 function isValidDate(date) {
     const regEx =
         /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/;
-    if (date.match(regEx)) {
+    if (!date.match(regEx)) {
+        return false;
+    }
+    let dateStandarizedFormat = new Date(date).toISOString().slice(0, 10);
+
+    if (date == dateStandarizedFormat) {
         return true;
     } else {
         return false;

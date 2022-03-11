@@ -32,11 +32,46 @@ verify(
     validateInput('title', 'comment', '202201-01', 0, 'category')
 );
 
-//dodac walidacje dni miesiaca
 verify(
     `should return false if date is incorrect`,
     false,
     validateInput('title', 'comment', '2022-11-31', 0, 'category')
+);
+
+verify(
+    `should return false if date is incorrect`,
+    false,
+    validateInput('title', 'comment', 'auć', 0, 'category')
+);
+
+verify(
+    `should return false if date is incorrect`,
+    false,
+    validateInput('title', 'comment', '2022-11-32', 0, 'category')
+);
+
+verify(
+    `should return false if date is incorrect`,
+    false,
+    validateInput('title', 'comment', '2022-1-1', 0, 'category')
+);
+
+verify(
+    `should return false if date is incorrect`,
+    false,
+    validateInput('title', 'comment', '-2022-1-1', 0, 'category')
+);
+
+verify(
+    `should return false if date is incorrect`,
+    false,
+    validateInput('title', 'comment', '2022-01-1', 0, 'category')
+);
+
+verify(
+    `should return false if date is incorrect`,
+    false,
+    validateInput('title', 'comment', '2022-1-01', 0, 'category')
 );
 
 verify(
