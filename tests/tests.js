@@ -6,9 +6,9 @@ let failedTests = 0;
 function setModuleName(name) {
     moduleName = name;
 
-    console.log("======================================");
+    console.log('======================================');
     console.log(`Starting ${moduleName} module tests`);
-    console.log("======================================");
+    console.log('======================================');
 }
 
 function verify(testTitle, expect, result) {
@@ -18,7 +18,7 @@ function verify(testTitle, expect, result) {
     result = changeNullAndNaNToString(result);
 
     if (JSON.stringify(expect) === JSON.stringify(result)) {
-        console.log("Funkcja dziala dobrze");
+        console.log('Funkcja dziala dobrze');
         passedTests++;
     } else {
         console.log(`[ERROR] oczekiwano: ${expect}, otrzymano ${result}`);
@@ -30,16 +30,21 @@ function summaryTests() {
     const allTests = passedTests + failedTests;
     const result = (passedTests / allTests) * 100;
 
-    console.log("\n\n=================================");
+    console.log('\n\n=================================');
     console.log(`Podsumowanie testów modułu ${moduleName}`);
     console.log(`Wynik = ${result.toFixed(2)} %`);
+
+    if (failedTests) {
+        process.exit(1);
+    }
+    process.exit(0);
 }
 
 function changeNullAndNaNToString(value) {
     if (value == null) {
-        value = "null";
+        value = 'null';
     } else if (value == NaN) {
-        value = "NaN";
+        value = 'NaN';
     }
     return value;
 }
