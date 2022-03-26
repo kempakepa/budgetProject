@@ -12,3 +12,4 @@ do :
     then exitCode=$currentExitCode
     fi
 done
+exit $exitCode
