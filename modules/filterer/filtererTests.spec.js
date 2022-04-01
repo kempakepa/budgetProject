@@ -2,7 +2,7 @@ const { setModuleName, verify, summaryTests } = require('../../tests/tests.js');
 const {
     addCost,
     addIncome,
-    listAllCostsAndIncomes,
+    listAllCostAndIncome,
 } = require('../cashFlowManager/cashFlowManager.js');
 const { filterCostAndIncome } = require('./filterer.js');
 
@@ -18,8 +18,7 @@ setModuleName('filterer Tests');
 addIncome('wynagrodzenie', 'luty', '2022-03-04', 3500, 'Praca');
 addCost('zakupy', 'luty', '2022-03-04', 201.98, 'Food');
 addCost('zakupy', 'luty', '2022-03-04', 3598.02, 'Food');
-
-//const listAllCostsAndIncomes = listAllCostAndIncome();
+let listAllCostsAndIncomes = listAllCostAndIncome();
 
 verify(
     `should return 1 array if data meet filter criteria '${comment}, ${date}, ${category}'`,
