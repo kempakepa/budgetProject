@@ -1,134 +1,222 @@
-const { setModuleName, verify, summaryTests } = require('../../tests/tests.js');
-const { validateInput } = require('./validation.js');
+const { Tests } = require('../../tests/tests.js');
+const { Validation } = require('./validation.js');
 
-setModuleName('validation cashflowManager Module Tests');
+Tests.setModuleName('validation cashflowManager Module Tests');
 
-verify(
+Tests.verify(
     `should return false if ammount type is string`,
     false,
-    validateInput('title', 'comment', '2022-01-01', 'amount', 'category')
+    new Validation(
+        'title',
+        'comment',
+        '2022-01-01',
+        'amount',
+        'category'
+    ).validateInput()
 );
 
-verify(
+Tests.verify(
     `shourld return true if all params has correct format`,
     true,
-    validateInput('title', 'comment', '2022-01-01', 11, 'category')
+    new Validation(
+        'title',
+        'comment',
+        '2022-01-01',
+        11,
+        'category'
+    ).validateInput()
 );
 
-verify(
+Tests.verify(
     `should return false if ammount is negative`,
     false,
-    validateInput('title', 'comment', '2022-01-01', -11, 'category')
+    new Validation(
+        'title',
+        'comment',
+        '2022-01-01',
+        -11,
+        'category'
+    ).validateInput()
 );
 
-verify(
+Tests.verify(
     `shourld return true if all params has correct format an amount = 0`,
     true,
-    validateInput('title', 'comment', '2022-01-01', 0, 'category')
+    new Validation(
+        'title',
+        'comment',
+        '2022-01-01',
+        0,
+        'category'
+    ).validateInput()
 );
-verify(
+Tests.verify(
     `should return false if date format is not correct`,
     false,
-    validateInput('title', 'comment', '202201-01', 0, 'category')
+    new Validation(
+        'title',
+        'comment',
+        '202201-01',
+        0,
+        'category'
+    ).validateInput()
 );
 
-verify(
+Tests.verify(
     `should return false if date is incorrect`,
     false,
-    validateInput('title', 'comment', '2022-11-31', 0, 'category')
+    new Validation(
+        'title',
+        'comment',
+        '2022-11-31',
+        0,
+        'category'
+    ).validateInput()
 );
 
-verify(
+Tests.verify(
     `should return false if date is incorrect`,
     false,
-    validateInput('title', 'comment', 'auć', 0, 'category')
+    new Validation('title', 'comment', 'auć', 0, 'category').validateInput()
 );
 
-verify(
+Tests.verify(
     `should return false if date is incorrect`,
     false,
-    validateInput('title', 'comment', '2022-11-32', 0, 'category')
+    new Validation(
+        'title',
+        'comment',
+        '2022-11-32',
+        0,
+        'category'
+    ).validateInput()
 );
 
-verify(
+Tests.verify(
     `should return false if date is incorrect`,
     false,
-    validateInput('title', 'comment', '2022-1-1', 0, 'category')
+    new Validation(
+        'title',
+        'comment',
+        '2022-1-1',
+        0,
+        'category'
+    ).validateInput()
 );
 
-verify(
+Tests.verify(
     `should return false if date is incorrect`,
     false,
-    validateInput('title', 'comment', '-2022-1-1', 0, 'category')
+    new Validation(
+        'title',
+        'comment',
+        '-2022-1-1',
+        0,
+        'category'
+    ).validateInput()
 );
 
-verify(
+Tests.verify(
     `should return false if date is incorrect`,
     false,
-    validateInput('title', 'comment', '2022-01-1', 0, 'category')
+    new Validation(
+        'title',
+        'comment',
+        '2022-01-1',
+        0,
+        'category'
+    ).validateInput()
 );
 
-verify(
+Tests.verify(
     `should return false if date is incorrect`,
     false,
-    validateInput('title', 'comment', '2022-1-01', 0, 'category')
+    new Validation(
+        'title',
+        'comment',
+        '2022-1-01',
+        0,
+        'category'
+    ).validateInput()
 );
 
-verify(
+Tests.verify(
     `should return false if date is incorrect`,
     false,
-    validateInput('title', 'comment', '2022-12-44', 0, 'category')
+    new Validation(
+        'title',
+        'comment',
+        '2022-12-44',
+        0,
+        'category'
+    ).validateInput()
 );
-verify(
+Tests.verify(
     `should return false if all parameter incorrect format passed`,
     false,
-    validateInput(undefined, undefined, undefined, undefined, undefined)
+    new Validation(
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined
+    ).validateInput()
 );
-verify(`should return false if no parameter passed`, false, validateInput());
-verify(
+Tests.verify(
+    `should return false if no parameter passed`,
+    false,
+    new Validation().validateInput()
+);
+Tests.verify(
     `should return false if not all parameters passed`,
     false,
-    validateInput('title')
+    new Validation('title').validateInput()
 );
-verify(
+Tests.verify(
     `should return false if not all parameters passed`,
     false,
-    validateInput('comment')
+    new Validation(undefined, 'comment').validateInput()
 );
-verify(
+Tests.verify(
     `should return false if not all parameters passed`,
     false,
-    validateInput('2022-02-01')
+    new Validation(undefined, undefined, '2022-02-01').validateInput()
 );
-verify(
+Tests.verify(
     `should return false if not all parameters passed`,
     false,
-    validateInput(11.11)
+    new Validation(undefined, undefined, undefined, 11.11).validateInput()
 );
-verify(
+Tests.verify(
     `should return false if not all parameters passed`,
     false,
-    validateInput('category')
+    new Validation(
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        'category'
+    ).validateInput()
 );
-verify(
+Tests.verify(
     `should return false if not all parameters passed`,
     false,
-    validateInput('title', 'comment')
+    new Validation('title', 'comment').validateInput()
 );
-verify(
+Tests.verify(
     `should return false if not all parameters passed`,
     false,
-    validateInput('title', 'comment', 'date')
+    new Validation('title', 'comment', 'date').validateInput()
 );
-verify(
+Tests.verify(
     `should return false if not all parameters passed`,
     false,
-    validateInput('title', 'comment', 'date', 11.1)
+    new Validation('title', 'comment', 'date', 11.1).validateInput()
 );
-verify(
+Tests.verify(
     `should return false if parameters incorrect format passed`,
     false,
-    validateInput('title', 'date', 'amount', 'category')
+    new Validation('title', 'date', 'amount', 'category').validateInput()
 );
 
-summaryTests();
+Tests.summaryTests();

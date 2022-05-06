@@ -1,52 +1,63 @@
-let moduleName = undefined;
+const { Logger } = require('../logger');
 
-let passedTests = 0;
-let failedTests = 0;
+class Tests extends Logger {
+    static moduleName = undefined;
 
-function setModuleName(name) {
-    moduleName = name;
+    static passedTests = 0;
+    static failedTests = 0;
 
-    console.log('======================================');
-    console.log(`Starting ${moduleName} module tests`);
-    console.log('======================================');
-}
+    static setModuleName(name) {
+        Tests.moduleName = name;
+        if (Logger.loggingLevel == '[ERROR]') {
+            console.log('======================================');
+            console.log(`Starting ${Tests.moduleName} module tests`);
+            console.log('======================================');
+        }
+    }
 
-function verify(testTitle, expect, result) {
-    console.log(`Running ${testTitle}`);
+    static summaryTests() {
+        const allTests = Tests.passedTests + Tests.failedTests;
+        const result = (Tests.passedTests / allTests) * 100;
 
-    expect = changeNullAndNaNToString(expect);
-    result = changeNullAndNaNToString(result);
+        if (Logger.loggingLevel == '[ERROR]') {
+            console.log('\n=================================');
+            console.log(`Podsumowanie testów modułu ${Tests.moduleName}`);
+            console.log(`Wynik = ${result.toFixed(2)} %`);
+        }
+    }
 
-    if (JSON.stringify(expect) === JSON.stringify(result)) {
-        console.log('Funkcja dziala dobrze');
-        passedTests++;
-    } else {
-        console.log(`[ERROR] oczekiwano: ${expect}, otrzymano ${result}`);
-        failedTests++;
+    static terminateProcess() {
+        if (Tests.failedTests) {
+            process.exit(1);
+        }
+        process.exit(0);
+    }
+
+    static verify(testTitle, expect, result) {
+        expect = Tests.changeNullAndNaNToString(expect);
+        result = Tests.changeNullAndNaNToString(result);
+
+        if (JSON.stringify(expect) === JSON.stringify(result)) {
+            Tests.passedTests++;
+            Logger.loggingLevel = '[INFO]';
+            Logger.logInfo(`Funkcja dziala dobrze`);
+        } else {
+            Logger.loggingLevel = '[ERROR]';
+            Tests.setModuleName(Tests.moduleName);
+            console.log(`Running ${testTitle}`);
+            Logger.logError(`oczekiwano: ${expect}, otrzymano ${result}`);
+            Tests.failedTests++;
+        }
+    }
+
+    static changeNullAndNaNToString(value) {
+        if (value == null) {
+            value = 'null';
+        } else if (value == NaN) {
+            value = 'NaN';
+        }
+        return value;
     }
 }
 
-function summaryTests() {
-    const allTests = passedTests + failedTests;
-    const result = (passedTests / allTests) * 100;
-
-    console.log('\n\n=================================');
-    console.log(`Podsumowanie testów modułu ${moduleName}`);
-    console.log(`Wynik = ${result.toFixed(2)} %`);
-
-    if (failedTests) {
-        process.exit(1);
-    }
-    process.exit(0);
-}
-
-function changeNullAndNaNToString(value) {
-    if (value == null) {
-        value = 'null';
-    } else if (value == NaN) {
-        value = 'NaN';
-    }
-    return value;
-}
-
-module.exports = { verify, setModuleName, summaryTests };
+module.exports = { Tests };
