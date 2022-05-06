@@ -1,16 +1,18 @@
 const { changeAccountStateErrorText } = require('./errorText.js');
 
-let accountState = 0;
+class AccountState {
+    accountState = 0;
 
-function getAccountState() {
-    return accountState;
-}
-function changeAccountState(amount) {
-    if (typeof amount == 'number') {
-        accountState = accountState + amount;
-    } else {
-        return changeAccountStateErrorText;
+    getAccountState() {
+        return this.accountState.toFixed(2);
+    }
+    changeAccountState(amount) {
+        if (typeof amount == 'number') {
+            this.accountState = this.accountState + amount;
+        } else {
+            return changeAccountStateErrorText;
+        }
     }
 }
 
-module.exports = { getAccountState, changeAccountState };
+module.exports = { AccountState };

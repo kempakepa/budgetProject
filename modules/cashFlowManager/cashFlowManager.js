@@ -1,30 +1,57 @@
-const { validateInput } = require('./validation.js');
-const { changeAccountState } = require('../accountState/accountState.js');
+const { Validation } = require('./validation.js');
 
-const listAllCostsAndIncomes = [];
+class CashFlowManager extends Validation {
+    listAllCostsAndIncomes = [];
 
-function addCost(title, comment, date, amount, category) {
-    if (validateInput(title, comment, date, amount, category)) {
-        cost = [title, comment, date, -amount, category];
-        listAllCostsAndIncomes.push(cost);
-        changeAccountState(-amount);
+    addCost() {
+        if (
+            new Validation(
+                this.title,
+                this.comment,
+                this.date,
+                this.amount,
+                this.category
+            ).validateInput()
+        ) {
+            this.cost = [
+                this.title,
+                this.comment,
+                this.date,
+                -this.amount,
+                this.category,
+            ];
+            this.listAllCostsAndIncomes.push(this.cost);
+            this.changeAccountState(-this.amount);
+        }
     }
-}
 
-function addIncome(title, comment, date, amount, category) {
-    if (validateInput(title, comment, date, amount, category)) {
-        income = [title, comment, date, amount, category];
-        listAllCostsAndIncomes.push(income);
-        changeAccountState(amount);
+    addIncome() {
+        if (
+            new Validation(
+                this.title,
+                this.comment,
+                this.date,
+                this.amount,
+                this.category
+            ).validateInput()
+        ) {
+            this.income = [
+                this.title,
+                this.comment,
+                this.date,
+                this.amount,
+                this.category,
+            ];
+            this.listAllCostsAndIncomes.push(this.income);
+            this.changeAccountState(this.amount);
+        }
     }
-}
 
-function listAllCostAndIncome() {
-    return listAllCostsAndIncomes;
+    listAllCostAndIncome() {
+        return this.listAllCostsAndIncomes;
+    }
 }
 
 module.exports = {
-    addCost,
-    addIncome,
-    listAllCostAndIncome,
+    CashFlowManager,
 };

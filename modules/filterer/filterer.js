@@ -1,74 +1,69 @@
-function filterCostAndIncome(
-    listAllCostsAndIncomes,
-    title,
-    comment,
-    date,
-    amount,
-    category
-) {
-    const filtered = [];
+const { CashFlowManager } = require('../cashFlowManager/cashFlowManager');
 
-    for (let arrayElement of listAllCostsAndIncomes) {
-        if (
-            areAllConditionsMet(
-                title,
-                comment,
-                date,
-                amount,
-                category,
-                arrayElement
-            )
-        ) {
-            filtered.push(arrayElement);
+class Filterer extends CashFlowManager {
+    filtered = [];
+    constructor(
+        listAllCostsAndIncomes,
+        title,
+        comment,
+        date,
+        amount,
+        category
+    ) {
+        super(title, comment, date, amount, category);
+        this.listAllCostsAndIncomes = listAllCostsAndIncomes;
+    }
+    filterCostAndIncome() {
+        for (let arrayElement of this.listAllCostsAndIncomes) {
+            if (this.areAllConditionsMet(arrayElement)) {
+                this.filtered.push(arrayElement);
+            }
+        }
+        return this.filtered;
+    }
+
+    isParamUndefined(param) {
+        return param == undefined;
+    }
+
+    isBetween(param, [min, max]) {
+        if (param >= min && param <= max) {
+            return param;
         }
     }
-    return filtered;
-}
 
-function isParamUndefined(param) {
-    return param == undefined;
-}
+    includesAtLeastPartStringToLowerCase(arrayElement, param) {
+        return arrayElement.toLowerCase().includes(param.toLowerCase());
+    }
 
-function isBetween(param, [min, max]) {
-    if (param >= min && param <= max) {
-        return param;
+    isUndefinedOrTextIncludesPart(param, arrayElemnt) {
+        return (
+            this.isParamUndefined(param) ||
+            this.includesAtLeastPartStringToLowerCase(arrayElemnt, param)
+        );
+    }
+
+    isUndefinedOrIsBetween(param, arrayElemnt) {
+        return (
+            this.isParamUndefined(param) ||
+            this.isBetween(arrayElemnt, [param[0], param[1]])
+        );
+    }
+
+    areAllConditionsMet(arrayElement) {
+        if (
+            this.isUndefinedOrTextIncludesPart(this.title, arrayElement[0]) &&
+            this.isUndefinedOrTextIncludesPart(this.comment, arrayElement[1]) &&
+            this.isUndefinedOrIsBetween(this.date, arrayElement[2]) &&
+            this.isUndefinedOrIsBetween(
+                this.amount,
+                Math.abs(arrayElement[3])
+            ) &&
+            this.isUndefinedOrTextIncludesPart(this.category, arrayElement[4])
+        ) {
+            return true;
+        }
     }
 }
 
-function includesAtLeastPartStringToLowerCase(arrayElement, param) {
-    return arrayElement.toLowerCase().includes(param.toLowerCase());
-}
-
-function isUndefinedOrTextIncludesPart(param, arrayElemnt) {
-    return (
-        isParamUndefined(param) ||
-        includesAtLeastPartStringToLowerCase(arrayElemnt, param)
-    );
-}
-
-function isUndefinedOrIsBetween(param, arrayElemnt) {
-    return (
-        isParamUndefined(param) || isBetween(arrayElemnt, [param[0], param[1]])
-    );
-}
-
-function areAllConditionsMet(
-    title,
-    comment,
-    date,
-    amount,
-    category,
-    arrayElement
-) {
-    if (
-        isUndefinedOrTextIncludesPart(title, arrayElement[0]) &&
-        isUndefinedOrTextIncludesPart(comment, arrayElement[1]) &&
-        isUndefinedOrIsBetween(date, arrayElement[2]) &&
-        isUndefinedOrIsBetween(amount, Math.abs(arrayElement[3])) &&
-        isUndefinedOrTextIncludesPart(category, arrayElement[4])
-    ) {
-        return true;
-    }
-}
-
-module.exports = { filterCostAndIncome };
+module.exports = { Filterer };
