@@ -328,7 +328,7 @@ Tests.verify(
     ).filterCostAndIncome()
 );
 
-verify(
+Tests.verify(
     `should return 1 arrays if data meet filter to lower case criteria: '${category}'`,
     [['wynagrodzenie', 'luty', '2022-03-04', 3500, 'Praca']],
     new Filterer(
