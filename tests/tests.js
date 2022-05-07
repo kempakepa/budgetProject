@@ -24,9 +24,6 @@ class Tests extends Logger {
             console.log(`Podsumowanie testów modułu ${Tests.moduleName}`);
             console.log(`Wynik = ${result.toFixed(2)} %`);
         }
-    }
-
-    static terminateProcess() {
         if (Tests.failedTests) {
             process.exit(1);
         }
