@@ -8,25 +8,25 @@ class Tests extends Logger {
 
     static setModuleName(name) {
         Tests.moduleName = name;
-        if (Logger.loggingLevel == '[ERROR]') {
-            console.log('======================================');
-            console.log(`Starting ${Tests.moduleName} module tests`);
-            console.log('======================================');
+        for (let i = 0; i < Tests.failedTests; i++) {
+            if (Logger.loggingLevel == '[ERROR]' && Tests.failedTests == 1) {
+                console.log('======================================');
+                console.log(`Starting ${Tests.moduleName} module tests`);
+                console.log('======================================');
+                break;
+            }
         }
     }
 
     static summaryTests() {
         const allTests = Tests.passedTests + Tests.failedTests;
         const result = (Tests.passedTests / allTests) * 100;
-
-        if (Logger.loggingLevel == '[ERROR]') {
+        if (Logger.loggingLevel == '[INFO]' && result != 100) {
             console.log('\n=================================');
             console.log(`Podsumowanie testów modułu ${Tests.moduleName}`);
             console.log(`Wynik = ${result.toFixed(2)} %`);
         }
-    }
 
-    static terminateProcess() {
         if (Tests.failedTests) {
             process.exit(1);
         }
@@ -40,13 +40,12 @@ class Tests extends Logger {
         if (JSON.stringify(expect) === JSON.stringify(result)) {
             Tests.passedTests++;
             Logger.loggingLevel = '[INFO]';
-            Logger.logInfo(`Funkcja dziala dobrze`);
         } else {
+            Tests.failedTests++;
             Logger.loggingLevel = '[ERROR]';
             Tests.setModuleName(Tests.moduleName);
             console.log(`Running ${testTitle}`);
             Logger.logError(`oczekiwano: ${expect}, otrzymano ${result}`);
-            Tests.failedTests++;
         }
     }
 
