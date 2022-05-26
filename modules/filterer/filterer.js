@@ -1,8 +1,9 @@
 const { CashFlowManager } = require('../cashFlowManager/cashFlowManager');
 
-class Filterer extends CashFlowManager {
+class Filterer {
     filtered = [];
-    constructor(
+
+    filterCostAndIncome(
         listAllCostsAndIncomes,
         title,
         comment,
@@ -10,16 +11,20 @@ class Filterer extends CashFlowManager {
         amount,
         category
     ) {
-        super(title, comment, date, amount, category);
-        this.listAllCostsAndIncomes = listAllCostsAndIncomes;
-    }
-    filterCostAndIncome() {
-        for (let arrayElement of this.listAllCostsAndIncomes) {
-            if (this.areAllConditionsMet(arrayElement)) {
-                this.filtered.push(arrayElement);
+        CashFlowManager.listAllCostsAndIncomes = listAllCostsAndIncomes;
+        this.title = title;
+        this.comment = comment;
+        this.date = date;
+        this.amount = amount;
+        this.category = category;
+        {
+            for (let arrayElement of listAllCostsAndIncomes) {
+                if (this.areAllConditionsMet(arrayElement)) {
+                    this.filtered.push(arrayElement);
+                }
             }
+            return this.filtered;
         }
-        return this.filtered;
     }
 
     isParamUndefined(param) {

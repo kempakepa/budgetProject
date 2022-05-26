@@ -8,13 +8,12 @@ class Tests extends Logger {
 
     static setModuleName(name) {
         Tests.moduleName = name;
-        for (let i = 0; i < Tests.failedTests; i++) {
-            if (Logger.loggingLevel == '[ERROR]' && Tests.failedTests == 1) {
-                console.log('======================================');
-                console.log(`Starting ${Tests.moduleName} module tests`);
-                console.log('======================================');
-                break;
-            }
+        //for (let i = 0; i < Tests.failedTests; i++) {
+        if (Logger.loggingLevel == '[ERROR]') {
+            console.log('======================================');
+            console.log(`Starting ${Tests.moduleName} module tests`);
+            console.log('======================================');
+            // }
         }
     }
 
@@ -41,8 +40,8 @@ class Tests extends Logger {
             Tests.passedTests++;
             Logger.loggingLevel = '[INFO]';
         } else {
-            Tests.failedTests++;
             Logger.loggingLevel = '[ERROR]';
+            Tests.failedTests++;
             Tests.setModuleName(Tests.moduleName);
             console.log(`Running ${testTitle}`);
             Logger.logError(`oczekiwano: ${expect}, otrzymano ${result}`);

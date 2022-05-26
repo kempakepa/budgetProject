@@ -1,13 +1,10 @@
-const { AccountState } = require('../accountState/accountState');
+//const { AccountState } = require('../accountState/accountState');
 
-class Validation extends AccountState {
+const { BaseConstructor } = require('../../utils/baseConstructor');
+
+class Validation extends BaseConstructor {
     constructor(title, comment, date, amount, category) {
-        super();
-        this.title = title;
-        this.comment = comment;
-        this.date = date;
-        this.amount = amount;
-        this.category = category;
+        super(title, comment, date, amount, category);
     }
 
     validateInput() {
