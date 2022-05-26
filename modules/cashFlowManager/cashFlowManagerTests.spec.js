@@ -3,28 +3,20 @@ const { CashFlowManager } = require('./cashFlowManager.js');
 
 Tests.setModuleName('cashFlowManager Tests');
 
-let cashFlowManager = new CashFlowManager(
-    'zakupy',
-    'lidl',
-    '2022-02-01',
-    22.22,
-    'Food'
-);
-
 Tests.verify(
     `function addCost should be fired`,
     undefined,
-    cashFlowManager.addCost()
+    new CashFlowManager().addCost('zakupy', 'lidl', '2022-02-01', 22.22, 'Food')
 );
 Tests.verify(
     `should display addCost input data in array with -amount`,
     [['zakupy', 'lidl', '2022-02-01', -22.22, 'Food']],
-    cashFlowManager.listAllCostAndIncome()
+    new CashFlowManager().listAllCostAndIncome()
 );
 Tests.verify(
     `function addCost should be fired`,
     undefined,
-    cashFlowManager.addCost()
+    new CashFlowManager().addCost('zakupy', 'lidl', '2022-02-01', 22.22, 'Food')
 );
 Tests.verify(
     `should display 2 addCost input data in array with -amount`,
@@ -32,17 +24,19 @@ Tests.verify(
         ['zakupy', 'lidl', '2022-02-01', -22.22, 'Food'],
         ['zakupy', 'lidl', '2022-02-01', -22.22, 'Food'],
     ],
-    cashFlowManager.listAllCostAndIncome()
+    new CashFlowManager().listAllCostAndIncome()
 );
-
-cashFlowManager.date = undefined;
-cashFlowManager.amount = undefined;
-cashFlowManager.category = undefined;
 
 Tests.verify(
     `function addCost should be fired`,
     undefined,
-    cashFlowManager.addCost()
+    new CashFlowManager().addCost(
+        'zakupy',
+        'lidl',
+        undefined,
+        undefined,
+        undefined
+    )
 );
 Tests.verify(
     `should display not changed 2 addCost input data in array`,
@@ -50,19 +44,13 @@ Tests.verify(
         ['zakupy', 'lidl', '2022-02-01', -22.22, 'Food'],
         ['zakupy', 'lidl', '2022-02-01', -22.22, 'Food'],
     ],
-    cashFlowManager.listAllCostAndIncome()
+    new CashFlowManager().listAllCostAndIncome()
 );
-
-cashFlowManager.title = 'wynagrodzenie';
-cashFlowManager.comment = 'luty';
-cashFlowManager.date = '2022-02-01';
-cashFlowManager.amount = 3500;
-cashFlowManager.category = 'Praca';
 
 Tests.verify(
     `function addCost should be fired`,
     undefined,
-    cashFlowManager.addIncome(
+    new CashFlowManager().addIncome(
         'wynagrodzenie',
         'luty',
         '2022-02-01',
@@ -78,19 +66,19 @@ Tests.verify(
         ['zakupy', 'lidl', '2022-02-01', -22.22, 'Food'],
         ['wynagrodzenie', 'luty', '2022-02-01', 3500, 'Praca'],
     ],
-    cashFlowManager.listAllCostAndIncome()
+    new CashFlowManager().listAllCostAndIncome()
 );
-
-cashFlowManager.title = 'stypendium';
-cashFlowManager.comment = 'luty';
-cashFlowManager.date = '2022-02-01';
-cashFlowManager.amount = 100;
-cashFlowManager.category = 'Studia';
 
 Tests.verify(
     `function addCost should be fired`,
     undefined,
-    cashFlowManager.addIncome('stypendium', 'luty', '2022-02-01', 100, 'Studia')
+    new CashFlowManager().addIncome(
+        'stypendium',
+        'luty',
+        '2022-02-01',
+        100,
+        'Studia'
+    )
 );
 Tests.verify(
     `should display 4 element array with 2 not changed addCost and 2 addIncome input data`,
@@ -100,6 +88,6 @@ Tests.verify(
         ['wynagrodzenie', 'luty', '2022-02-01', 3500, 'Praca'],
         ['stypendium', 'luty', '2022-02-01', 100, 'Studia'],
     ],
-    cashFlowManager.listAllCostAndIncome()
+    new CashFlowManager().listAllCostAndIncome()
 );
 Tests.summaryTests();

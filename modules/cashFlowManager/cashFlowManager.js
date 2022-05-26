@@ -1,9 +1,15 @@
+const { AccountState } = require('../accountState/accountState.js');
 const { Validation } = require('./validation.js');
 
-class CashFlowManager extends Validation {
-    listAllCostsAndIncomes = [];
+class CashFlowManager {
+    static listAllCostsAndIncomes = [];
 
-    addCost() {
+    addCost(title, comment, date, amount, category) {
+        this.title = title;
+        this.comment = comment;
+        this.date = date;
+        this.amount = amount;
+        this.category = category;
         if (
             new Validation(
                 this.title,
@@ -20,12 +26,17 @@ class CashFlowManager extends Validation {
                 -this.amount,
                 this.category,
             ];
-            this.listAllCostsAndIncomes.push(this.cost);
-            this.changeAccountState(-this.amount);
+            CashFlowManager.listAllCostsAndIncomes.push(this.cost);
+            new AccountState().changeAccountState(-this.amount);
         }
     }
 
-    addIncome() {
+    addIncome(title, comment, date, amount, category) {
+        this.title = title;
+        this.comment = comment;
+        this.date = date;
+        this.amount = amount;
+        this.category = category;
         if (
             new Validation(
                 this.title,
@@ -42,13 +53,13 @@ class CashFlowManager extends Validation {
                 this.amount,
                 this.category,
             ];
-            this.listAllCostsAndIncomes.push(this.income);
-            this.changeAccountState(this.amount);
+            CashFlowManager.listAllCostsAndIncomes.push(this.income);
+            new AccountState().changeAccountState(this.amount);
         }
     }
 
     listAllCostAndIncome() {
-        return this.listAllCostsAndIncomes;
+        return CashFlowManager.listAllCostsAndIncomes;
     }
 }
 
