@@ -4,41 +4,41 @@ const { changeAccountStateErrorText } = require('./errorText.js');
 
 Tests.setModuleName('accountState Module Tests');
 
-let accountState = new AccountState();
+//let accountState = new AccountState();
 
 Tests.verify(
     'accountState should equal ' + '0',
     0,
-    accountState.getAccountState()
+    new AccountState().getAccountState()
 );
-accountState.changeAccountState(15);
+new AccountState().changeAccountState(15);
 Tests.verify(
     'accountState should equal ' + '15',
     15,
-    accountState.getAccountState()
+    new AccountState().getAccountState()
 );
-accountState.changeAccountState(0);
+new AccountState().changeAccountState(0);
 Tests.verify(
     'accountState should equal ' + '15',
     15,
-    accountState.getAccountState()
+    new AccountState().getAccountState()
 );
-accountState.changeAccountState(1.5);
+new AccountState().changeAccountState(1.5);
 Tests.verify(
     'accountState should equal ' + '16.5',
     16.5,
-    accountState.getAccountState()
+    new AccountState().getAccountState()
 );
-accountState.changeAccountState(-1.5);
+new AccountState().changeAccountState(-1.5);
 Tests.verify(
     'accountState should equal ' + '15.0',
     15.0,
-    accountState.getAccountState()
+    new AccountState().getAccountState()
 );
 Tests.verify(
     `should throw an error if no param passed to changeAccountState`,
     changeAccountStateErrorText,
-    accountState.changeAccountState()
+    new AccountState().changeAccountState()
 );
 
 Tests.summaryTests();

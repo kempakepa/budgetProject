@@ -1,14 +1,14 @@
 const { changeAccountStateErrorText } = require('./errorText.js');
 
 class AccountState {
-    accountState = 0;
+    static accountState = 0;
 
     getAccountState() {
-        return this.accountState.toFixed(2);
+        return AccountState.accountState;
     }
     changeAccountState(amount) {
         if (typeof amount == 'number') {
-            this.accountState = this.accountState + amount;
+            AccountState.accountState = AccountState.accountState + amount;
         } else {
             return changeAccountStateErrorText;
         }
