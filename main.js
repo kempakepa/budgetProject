@@ -1,131 +1,51 @@
+let http = require('http');
 const {
-    CashFlowManager,
-} = require('./modules/cashFlowManager/cashFlowManager');
-const { Filterer } = require('./modules/filterer/filterer');
+    AccountStateController,
+} = require('./modules/accountState/accountStateController');
+const {
+    CashFlowManagerController,
+} = require('./modules/cashFlowManager/cashFlowManagerController');
+const {
+    FiltererController,
+} = require('./modules/filterer/filtererController.js');
 
-newRecord = new CashFlowManager(
-    'wynagrodzenie',
-    'luty',
-    '2022-03-04',
-    3500,
-    'Praca'
-);
-newRecord.addIncome();
-console.log(
-    'Current account state = ',
-    newRecord.getAccountState() + '\n',
-    'List of costs and incomes: ',
-    newRecord.listAllCostAndIncome()
-);
+http.createServer((req, res) => {
+    const url = req.url;
+    const method = req.method;
 
-newRecord.title = 'zakupy';
-newRecord.comment = 'comment';
-newRecord.date = '202203-04';
-newRecord.amount = 201.98;
-newRecord.category = 'Food';
-
-newRecord.addCost();
-console.log(
-    'Current account state = ',
-    newRecord.getAccountState() + '\n',
-    'List of costs and incomes: ',
-    newRecord.listAllCostAndIncome()
-);
-
-newRecord.title = 'zakupy';
-newRecord.comment = 'luty';
-newRecord.date = '2022-03-04';
-newRecord.amount = 3598.02;
-newRecord.category = 'Food';
-
-newRecord.addCost();
-console.log(
-    'Current account state = ',
-    newRecord.getAccountState() + '\n',
-    'List of costs and incomes: ',
-    newRecord.listAllCostAndIncome()
-);
-
-const listAllCostsAndIncomes = newRecord.listAllCostsAndIncomes;
-
-//console.time('filterer time');
-console.log('filter 1');
-console.log(
-    new Filterer(
-        listAllCostsAndIncomes,
-        undefined,
-        'luty',
-        undefined,
-        undefined,
-        undefined
-    ).filterCostAndIncome()
-);
-console.log('filter 2');
-console.log(
-    new Filterer(
-        listAllCostsAndIncomes,
-        'zakupy',
-        'luty',
-        undefined,
-        undefined,
-        undefined
-    ).filterCostAndIncome()
-);
-console.log('filter 3');
-console.log(
-    new Filterer(
-        listAllCostsAndIncomes,
-        undefined,
-        undefined,
-        ['2022-03-04', '2022-03-03'],
-        undefined,
-        undefined
-    ).filterCostAndIncome()
-);
-console.log('filter 4');
-console.log(
-    new Filterer(
-        listAllCostsAndIncomes,
-        undefined,
-        undefined,
-        ['2022-03-04', '2022-03-04'],
-        undefined,
-        'Praca'
-    ).filterCostAndIncome()
-);
-console.log('filter 5');
-console.log(
-    new Filterer(
-        listAllCostsAndIncomes,
-        undefined,
-        undefined,
-        ['2022-03-01', '2022-03-04'],
-        undefined,
-        'Praca'
-    ).filterCostAndIncome()
-);
-console.log('filter 6');
-console.log(
-    new Filterer(
-        listAllCostsAndIncomes,
-        undefined,
-        undefined,
-        undefined,
-        [0, 201.98],
-        undefined
-    ).filterCostAndIncome()
-);
-
-console.log('filter 7');
-console.log(
-    new Filterer(
-        listAllCostsAndIncomes,
-        undefined,
-        undefined,
-        undefined,
-        [0, 3500],
-        undefined
-    ).filterCostAndIncome()
-);
-
-//console.timeEnd('filterer time');
+    if (url === '/api/accountState' && method === 'GET') {
+        //console.log('Jestem w /api/accountState');
+        new AccountStateController(req, res).getAccountState();
+    } else if (url === '/api/addCostItem' && method === 'POST') {
+        //console.log('Jestem w /api/addCostItem');
+        new CashFlowManagerController(req, res).addCost();
+    } else if (url === '/api/addIncomeItem' && method === 'POST') {
+        //console.log('Jestem w /api/addIncomeItem');
+        new CashFlowManagerController(req, res).addIncome();
+    } else if (url === '/api/displayBudgetItems' && method === 'GET') {
+        //console.log('Jestem w /api/displayBudgetItems');
+        new CashFlowManagerController(req, res).listAllCostAndIncome();
+    } else if (url.startsWith('/api/filterBudgetItem') && method === 'GET') {
+        //console.log(url);
+        new FiltererController(req, res).filterCostAndIncome();
+    } else {
+        console.log('Nie ma takiego endopinta');
+    }
+    res.end();
+    /* let reqBody = '';
+        req.on('data', (part) => {
+            reqBody += part;
+        });
+        let accountState = {
+            reqURL: req.url,
+            reqMethod: req.method,
+            reqHeaders: req.headers,
+        };
+        req.on('end', () => {
+            reqBody = JSON.parse(reqBody);
+            accountState.body = reqBody;
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify(accountState));
+        }); */
+}).listen(8081);
