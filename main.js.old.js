@@ -14,7 +14,7 @@ new CashFlowManager().addIncome(
 
 console.log(
     'Current account state = ',
-    new AccountState().getAccountState() + '\n',
+    AccountState.getAccountState() + '\n',
     'List of costs and incomes: ',
     new CashFlowManager().listAllCostAndIncome()
 );
@@ -23,7 +23,7 @@ new CashFlowManager().addCost('zakupy', 'comment', '202203', 201.98, 'Food');
 
 console.log(
     'Current account state = ',
-    new AccountState().getAccountState() + '\n',
+    AccountState.getAccountState() + '\n',
     'List of costs and incomes: ',
     new CashFlowManager().listAllCostAndIncome()
 );
@@ -32,7 +32,7 @@ new CashFlowManager().addCost('zakupy', 'luty', '2022-03-04', 3598.02, 'Food');
 
 console.log(
     'Current account state = ',
-    new AccountState().getAccountState() + '\n',
+    AccountState.getAccountState() + '\n',
     'List of costs and incomes: ',
     new CashFlowManager().listAllCostAndIncome()
 );
