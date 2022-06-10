@@ -18,12 +18,10 @@ class Filterer {
         this.amount = amount;
         this.category = category;
         {
-            for (let arrayElement of listAllCostsAndIncomes) {
-                if (this.areAllConditionsMet(arrayElement)) {
-                    this.filtered.push(arrayElement);
-                }
-            }
-            return this.filtered;
+            const filteredItems = listAllCostsAndIncomes.filter(
+                (CostsAndIncome) => this.areAllConditionsMet(CostsAndIncome)
+            );
+            return filteredItems;
         }
     }
 
