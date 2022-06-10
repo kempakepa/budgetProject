@@ -3,10 +3,10 @@ const { changeAccountStateErrorText } = require('./errorText.js');
 class AccountState {
     static accountState = 0;
 
-    getAccountState() {
+    static getAccountState() {
         return AccountState.accountState;
     }
-    changeAccountState(amount) {
+    static changeAccountState(amount) {
         if (typeof amount == 'number') {
             AccountState.accountState = AccountState.accountState + amount;
         } else {

@@ -27,7 +27,7 @@ class CashFlowManager {
                 this.category,
             ];
             CashFlowManager.listAllCostsAndIncomes.push(this.cost);
-            new AccountState().changeAccountState(-this.amount);
+            AccountState.changeAccountState(-this.amount);
         }
     }
 
@@ -54,7 +54,7 @@ class CashFlowManager {
                 this.category,
             ];
             CashFlowManager.listAllCostsAndIncomes.push(this.income);
-            new AccountState().changeAccountState(this.amount);
+            AccountState.changeAccountState(this.amount);
         }
     }
 

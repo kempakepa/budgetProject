@@ -7,7 +7,7 @@ class AccountStateController extends BaseController {
     }
     getAccountState() {
         const accountState = {
-            accountStateValue: new AccountState().getAccountState(),
+            accountStateValue: AccountState.getAccountState(),
         };
         this.res.setHeader('Content-Type', 'application/json');
         this.res.statusCode = 200;

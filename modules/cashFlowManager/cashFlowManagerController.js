@@ -67,9 +67,7 @@ class CashFlowManagerController extends BaseController {
     listAllCostAndIncome() {
         this.res.setHeader('Content-Type', 'application/json');
         this.res.statusCode = 200;
-        this.res.end(
-            JSON.stringify(CashFlowManagerController.listAllCostsAndIncomes)
-        );
+        this.res.end(JSON.stringify(CashFlowManager.listAllCostsAndIncomes));
     }
 }
 
