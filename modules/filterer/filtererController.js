@@ -1,9 +1,6 @@
 const { BaseController } = require('../../utils/baseController');
 const { Helpers } = require('../../utils/helpers');
 const { CashFlowManager } = require('../cashFlowManager/cashFlowManager');
-const {
-    CashFlowManagerController,
-} = require('../cashFlowManager/cashFlowManagerController');
 const { Filterer } = require('./filterer');
 
 class FiltererController extends BaseController {
@@ -16,18 +13,20 @@ class FiltererController extends BaseController {
             .replace('/api/filterBudgetItem?', '')
             .split('&');
 
-        let reqURLParam = Helpers.reqURLParam;
-        Helpers.splitAndPushReqURLParams(reqURL);
-        Helpers.parseReqURLParams();
+        let reqURLParam = new Helpers();
+        reqURLParam.pushReqStringParams(reqURL);
+
+        let reqURLParamParsed = reqURLParam;
+        reqURLParamParsed.parseReqURLParams();
+        let paramsToPassInRequest = reqURLParamParsed.reqURLParamParsed;
 
         let reqParams = {
-            title: reqURLParam[0],
-            comment: reqURLParam[1],
-            date: reqURLParam[2],
-            amount: reqURLParam[3],
-            category: reqURLParam[4],
+            title: paramsToPassInRequest[0],
+            comment: paramsToPassInRequest[1],
+            date: paramsToPassInRequest[2],
+            amount: paramsToPassInRequest[3],
+            category: paramsToPassInRequest[4],
         };
-        console.log(reqParams, CashFlowManager.listAllCostsAndIncomes);
 
         this.res.setHeader('Content-Type', 'application/json');
         this.res.statusCode = 200;

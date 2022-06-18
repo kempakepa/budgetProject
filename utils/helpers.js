@@ -1,67 +1,48 @@
 class Helpers {
-    static reqURLParam = [];
+    reqURLParam = [];
+    reqURLParamParsed = [];
 
-    static splitAndPushReqURLParams(reqURL) {
+    pushReqStringParams(reqURL) {
         for (let el of reqURL) {
-            let reqParams = el.split('=');
-            Helpers.reqURLParam.push(reqParams.pop());
-            //console.log(Helpers.reqURLParam);
+            this.reqURLParam.push(el);
         }
     }
 
-    /* decodeAndSlice() {
-        return decodeURIComponent(
-            Helpers.reqURLParam.slice(1, Helpers.reqURLParam.length - 1)
+    splitReqURLParam(element) {
+        let regParamSplit = element.split('=');
+        return regParamSplit[1];
+    }
+
+    decodeAndSlice(element) {
+        let elementDecoded = decodeURIComponent(
+            element.slice(1, element.length - 1)
         ).split(',');
-    } */
+        return elementDecoded;
+    }
 
-    static parseReqURLParams() {
-        /* Helpers.reqURLParam.filter((element) => {
-            if (element == 'undefined') {
-                element = undefined;
-            } else if (element.includes('[') && element.includes('-')) {
-                element = this.decodeAndSlice();
-                element = [element[0].trim(), element[1].trim()];
-            } else if (element.includes('[') && !element.includes('-')) {
-                element = this.decodeAndSlice();
-                element = [parseInt(element[0], 10), parseInt(element[1], 10)];
+    parseReqURLParams() {
+        this.reqURLParam.filter((element) => {
+            if (element.includes('undefined')) {
+                this.reqURLParamParsed.push(undefined);
+            } else if (element.includes('date=[')) {
+                element = this.splitReqURLParam(element);
+                element = this.decodeAndSlice(element);
+                this.reqURLParamParsed.push([
+                    element[0].trim(),
+                    element[1].trim(),
+                ]);
+            } else if (element.includes('amount=[')) {
+                element = this.splitReqURLParam(element);
+                element = this.decodeAndSlice(element);
+                this.reqURLParamParsed.push([
+                    parseInt(element[0], 10),
+                    parseInt(element[1], 10),
+                ]);
+            } else {
+                element = this.splitReqURLParam(element);
+                this.reqURLParamParsed.push(element);
             }
-        }); */
-
-        for (let i = 0; i < Helpers.reqURLParam.length; i++) {
-            if (Helpers.reqURLParam[i] == 'undefined') {
-                Helpers.reqURLParam[i] = undefined;
-            } else if (
-                Helpers.reqURLParam[i].includes('[') &&
-                Helpers.reqURLParam[i].includes('-')
-            ) {
-                Helpers.reqURLParam[i] = decodeURIComponent(
-                    Helpers.reqURLParam[i].slice(
-                        1,
-                        Helpers.reqURLParam[i].length - 1
-                    )
-                ).split(',');
-                Helpers.reqURLParam[i] = [
-                    Helpers.reqURLParam[i][0].trim(),
-                    Helpers.reqURLParam[i][1].trim(),
-                ];
-            } else if (
-                Helpers.reqURLParam[i].includes('[') &&
-                !Helpers.reqURLParam[i].includes('-')
-            ) {
-                Helpers.reqURLParam[i] = decodeURIComponent(
-                    Helpers.reqURLParam[i].slice(
-                        1,
-                        Helpers.reqURLParam[i].length - 1
-                    )
-                ).split(',');
-
-                Helpers.reqURLParam[i] = [
-                    parseInt(Helpers.reqURLParam[i][0], 10),
-                    parseInt(Helpers.reqURLParam[i][1], 10),
-                ];
-            }
-        }
+        });
     }
 }
 
