@@ -3,6 +3,7 @@
     <head>
         <title>Search Budget Module</title>
         <meta charset="UTF-8" />
+        <script src = './filtererCalc.js'></script>
     </head>
     <body>
         <div>
@@ -24,8 +25,10 @@
         <div><input type="number" placeholder="Min Amount" id="min-amount" />
         <input type="number" placeholder="Max Amount" id="max-amount" /></div>
         <div><input type="text" placeholder="Category" id="category" /></div></br>
-        <div><input type="button" value="Send!" /></div></br>
-        <div id="confirmation_message"></div>
+        <div><input type="button" value="Send!" onclick="requestSent()"/></div></br>
+        <div id="confirmation_message"><ul id="showlist">
+            <li></li>
+        </ul></div>
         <div id="error_message"></div>
         <div>
             Go to <a href="../../index.html">the Home Page </a>or navigate to

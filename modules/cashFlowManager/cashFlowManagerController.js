@@ -31,6 +31,7 @@ class CashFlowManagerController extends BaseController {
                 -item.amount,
                 item.category,
             ];
+            this.res.setHeader('Access-Control-Allow-Origin', '*');
             this.res.statusCode = 200;
             this.res.end();
         });
@@ -59,6 +60,7 @@ class CashFlowManagerController extends BaseController {
                 item.amount,
                 item.category,
             ];
+            this.res.setHeader('Access-Control-Allow-Origin', '*');
             this.res.statusCode = 200;
             this.res.end();
         });

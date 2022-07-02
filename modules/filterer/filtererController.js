@@ -28,6 +28,7 @@ class FiltererController extends BaseController {
             category: paramsToPassInRequest[4],
         };
 
+        this.res.setHeader('Access-Control-Allow-Origin', '*');
         this.res.setHeader('Content-Type', 'application/json');
         this.res.statusCode = 200;
         this.res.end(

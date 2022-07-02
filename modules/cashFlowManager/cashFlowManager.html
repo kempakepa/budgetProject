@@ -3,6 +3,7 @@
     <head>
         <title>Manage Budget Module</title>
         <meta charset="UTF-8" />
+        <script src = './cashFlowManagerCalc.js'></script>
     </head>
     <body>
         <div>
@@ -16,10 +17,10 @@
             <input type="text" placeholder="Title" id="title" />
         </div>
         <div><input type="text" placeholder="Comment" id="comment" /></div>
-        <div><input type="date" placeholder="Date" id="skipped" /></div>
+        <div><input type="date" placeholder="Date" id="date" /></div>
         <div><input type="number" placeholder="Amount" id="amount" /></div>
         <div><input type="text" placeholder="Category" id="category" /></div></br>
-        <div><input type="button" value="Send!" /></div></br>
+        <div><input type="button" value="Send!" onclick="requestSent()"/></div></br>
         <div id="confirmation_message"></div>
         <div id="error_message"></div>
         <div>
