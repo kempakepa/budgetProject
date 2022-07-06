@@ -14,13 +14,13 @@
             <input type="radio" name= "budgetType" id="income" />Income
         </div>
         <div>
-            <input type="text" placeholder="Title" id="title" />
+            <input type="text" placeholder="Title" id="title" data-cy="title"/>
         </div>
-        <div><input type="text" placeholder="Comment" id="comment" /></div>
-        <div><input type="date" placeholder="Date" id="date" /></div>
-        <div><input type="number" placeholder="Amount" id="amount" /></div>
-        <div><input type="text" placeholder="Category" id="category" /></div></br>
-        <div><input type="button" value="Send!" onclick="requestSent()"/></div></br>
+        <div><input type="text" placeholder="Comment" id="comment" data-cy="comment"/></div>
+        <div><input type="date" placeholder="Date" id="date" data-cy="date"/></div>
+        <div><input type="number" placeholder="Amount" id="amount" data-cy="amount"/></div>
+        <div><input type="text" placeholder="Category" id="category" data-cy="category"/></div></br>
+        <div><input type="button" value="Send!" onclick="requestSent()" data-cy="sendButton"/></div></br>
         <div id="confirmation_message"></div>
         <div id="error_message"></div>
         <div>
