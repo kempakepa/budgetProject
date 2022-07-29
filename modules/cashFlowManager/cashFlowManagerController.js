@@ -1,5 +1,6 @@
 const { BaseController } = require('../../utils/baseController');
 const { CashFlowManager } = require('./cashFlowManager');
+const { Validation } = require('./validation');
 
 class CashFlowManagerController extends BaseController {
     constructor(req, res) {
@@ -17,23 +18,37 @@ class CashFlowManagerController extends BaseController {
         this.req.on('end', () => {
             const item = JSON.parse(reqBody);
 
-            new CashFlowManager().addCost(
-                item.title,
-                item.comment,
-                item.date,
-                item.amount,
-                item.category
-            );
-            this.cost = [
-                item.title,
-                item.comment,
-                item.date,
-                -item.amount,
-                item.category,
-            ];
-            this.res.setHeader('Access-Control-Allow-Origin', '*');
-            this.res.statusCode = 200;
-            this.res.end();
+            if (
+                new Validation(
+                    item.title,
+                    item.comment,
+                    item.date,
+                    item.amount,
+                    item.category
+                ).validateInput()
+            ) {
+                new CashFlowManager().addCost(
+                    item.title,
+                    item.comment,
+                    item.date,
+                    item.amount,
+                    item.category
+                );
+                this.cost = [
+                    item.title,
+                    item.comment,
+                    item.date,
+                    -item.amount,
+                    item.category,
+                ];
+                this.res.setHeader('Access-Control-Allow-Origin', '*');
+                this.res.statusCode = 200;
+                this.res.end();
+            } else {
+                this.res.setHeader('Access-Control-Allow-Origin', '*');
+                this.res.statusCode = 400;
+                this.res.end();
+            }
         });
     }
 
@@ -46,23 +61,37 @@ class CashFlowManagerController extends BaseController {
         this.req.on('end', () => {
             const item = JSON.parse(reqBody);
 
-            new CashFlowManager().addIncome(
-                item.title,
-                item.comment,
-                item.date,
-                item.amount,
-                item.category
-            );
-            this.income = [
-                item.title,
-                item.comment,
-                item.date,
-                item.amount,
-                item.category,
-            ];
-            this.res.setHeader('Access-Control-Allow-Origin', '*');
-            this.res.statusCode = 200;
-            this.res.end();
+            if (
+                new Validation(
+                    item.title,
+                    item.comment,
+                    item.date,
+                    item.amount,
+                    item.category
+                ).validateInput()
+            ) {
+                new CashFlowManager().addIncome(
+                    item.title,
+                    item.comment,
+                    item.date,
+                    item.amount,
+                    item.category
+                );
+                this.income = [
+                    item.title,
+                    item.comment,
+                    item.date,
+                    item.amount,
+                    item.category,
+                ];
+                this.res.setHeader('Access-Control-Allow-Origin', '*');
+                this.res.statusCode = 200;
+                this.res.end();
+            } else {
+                this.res.setHeader('Access-Control-Allow-Origin', '*');
+                this.res.statusCode = 400;
+                this.res.end();
+            }
         });
     }
 

@@ -28,6 +28,8 @@ class CashFlowManager {
             ];
             CashFlowManager.listAllCostsAndIncomes.push(this.cost);
             AccountState.changeAccountState(-this.amount);
+        } else {
+            return 'Invalid input';
         }
     }
 
@@ -55,6 +57,8 @@ class CashFlowManager {
             ];
             CashFlowManager.listAllCostsAndIncomes.push(this.income);
             AccountState.changeAccountState(this.amount);
+        } else {
+            return 'Invalid input';
         }
     }
 
