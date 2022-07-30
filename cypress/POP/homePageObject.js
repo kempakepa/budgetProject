@@ -10,6 +10,9 @@ class HomePageObject {
     static goToAccountStateModule() {
         cy.get('[data-cy="accountStateLink"]').click();
     }
+    static goToCashFlowManagerModule() {
+        cy.get('[data-cy="cashFlowManagerLink"]').click();
+    }
 
     static getAccountStateText() {
         return cy

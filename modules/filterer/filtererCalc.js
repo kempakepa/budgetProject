@@ -50,7 +50,11 @@ const defineQuerryParams = () => {
 };
 
 const showResultsFiltered = (value) => {
-    document.getElementById('confirmation_message').innerText = value;
+    let showValueElement = '';
+    for (const valueElement of value) {
+        showValueElement += `<li>${valueElement}</li>`;
+    }
+    document.getElementById('showlist').innerHTML = showValueElement;
 };
 //odczytywanie parametrow requesta
 const readInputelementsAndValues = () => {
