@@ -1,26 +1,26 @@
 {
-  "name": "budgetproject",
-  "version": "1.0.0",
-  "description": "Projekt ma na celu stworzenie prostej aplikacji do zarzadzania budzetem domowym",
-  "main": "main.js",
-  "directories": {
-    "test": "tests"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kempakepa/budgetProject.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/kempakepa/budgetProject/issues"
-  },
-  "homepage": "https://github.com/kempakepa/budgetProject#readme",
-  "devDependencies": {
-    "cypress": "^9.7.0"
-  }
+    "name": "budgetproject",
+    "version": "1.0.0",
+    "description": "Projekt ma na celu stworzenie prostej aplikacji do zarzadzania budzetem domowym",
+    "main": "main.js",
+    "directories": {
+        "test": "tests"
+    },
+    "scripts": {
+        "test": "node ./main.js npm test"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/kempakepa/budgetProject.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/kempakepa/budgetProject/issues"
+    },
+    "homepage": "https://github.com/kempakepa/budgetProject#readme",
+    "devDependencies": {
+        "cypress": "^9.7.0"
+    }
 }
