@@ -1,4 +1,7 @@
-const { hostname, accountStateEndpoint } = require('../utils/urlProvider');
+const {
+    hostname,
+    accountStateEndpoint,
+} = require('../utils/endpointsProvider');
 
 function getCurrentAccountState() {
     return cy.request({
