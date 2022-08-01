@@ -48,7 +48,7 @@ describe('accountState test', () => {
 
             //cy.get('a').contains('Account State module').click();
             cy.reload();
-            cy.get('#accountState').should('contain', `${accountState - 1000}`);
+            cy.get('#accountState').should('contain', `${accountState - 100}`);
             /* cy.wait(5);
             cy.get('#accountState')
                 .invoke('text')

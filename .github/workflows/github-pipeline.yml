@@ -6,8 +6,3 @@ jobs:
         steps:
             - uses: actions/checkout@v2
             - run: bash ./runTests.sh
-    api-tests:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v2
-            - run: npx cypress
