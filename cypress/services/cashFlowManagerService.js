@@ -2,7 +2,7 @@ const {
     addCostItemEndpoint,
     hostname,
     addIncomeItemEndpoint,
-} = require('../utils/urlProvider');
+} = require('../utils/endpointsProvider');
 
 function sendRequestToAddCostItem(body) {
     return cy.request({
