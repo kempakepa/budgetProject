@@ -1,7 +1,7 @@
 const { HomePageObject } = require('../../POP/homePageObject');
 const {
     sendRequestToAddCostItem,
-} = require('../services/cashFlowManagerService');
+} = require('../../services/cashFlowManagerService');
 
 describe('accountState test', () => {
     it('should initial accountState be a number value', () => {

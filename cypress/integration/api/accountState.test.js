@@ -1,8 +1,10 @@
-const { getCurrentAccountState } = require('../services/accountStateService');
+const {
+    getCurrentAccountState,
+} = require('../../services/accountStateService');
 const {
     sendRequestToAddCostItem,
     sendRequestToAddIncomeItem,
-} = require('../services/cashFlowManagerService');
+} = require('../../services/cashFlowManagerService');
 
 describe('accountState test', () => {
     it('should initial accountState be a number value', () => {

@@ -4,3 +4,5 @@ cypress/integration/2-advanced-examples
 .DS_Store
 cypress/fixtures
 cypress/support
+cypress/screenshots
+cypress/videos

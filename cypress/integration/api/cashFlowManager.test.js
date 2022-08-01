@@ -1,6 +1,6 @@
 const {
     sendRequestToAddCostItem,
-} = require('../services/cashFlowManagerService');
+} = require('../../services/cashFlowManagerService');
 
 describe('cashFlowManager test', () => {
     it('should return 200 status code if add cost body parameters valid', () => {
