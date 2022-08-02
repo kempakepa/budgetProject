@@ -14,11 +14,8 @@ class HomePageObject {
         cy.get('[data-cy="cashFlowManagerLink"]').click();
     }
 
-    static getAccountStateText() {
-        return cy
-            .get('#accountState')
-            .should('not.contain', '---')
-            .invoke('text');
+    static goToFiltererModule() {
+        cy.get('[data-cy="filtererLink"]').click();
     }
 }
 

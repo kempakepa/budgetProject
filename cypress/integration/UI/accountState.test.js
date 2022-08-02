@@ -1,3 +1,4 @@
+const { AccountStateObject } = require('../../POP/accountStateObject');
 const { HomePageObject } = require('../../POP/homePageObject');
 const {
     sendRequestToAddCostItem,
@@ -16,7 +17,7 @@ describe('accountState test', () => {
             .then(cy.log)
             .should('be.a', 'number')
             .should('equal', 0); */
-        HomePageObject.getAccountStateText()
+        AccountStateObject.getAccountStateText()
             .then(parseInt)
             .then(cy.log)
             .should('be.a', 'number');
@@ -25,7 +26,7 @@ describe('accountState test', () => {
     it('should account state be decreased about 100', () => {
         HomePageObject.visitHomePage();
         HomePageObject.goToAccountStateModule();
-        HomePageObject.getAccountStateText().then((accountStateText) => {
+        AccountStateObject.getAccountStateText().then((accountStateText) => {
             cy.log(accountStateText);
             let accountState = parseInt(accountStateText);
             //generate backend data
