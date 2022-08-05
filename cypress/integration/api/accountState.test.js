@@ -35,10 +35,9 @@ describe('accountState test', () => {
     it('should account state be increased about 1500', () => {
         let accountState = getCurrentAccountState().then((response) => {
             accountState = response.body.accountStateValue;
-            cy.log(accountState);
             sendRequestToAddIncomeItem({
                 title: 'work',
-                comment: '',
+                comment: 'comment',
                 date: '2022-02-01',
                 amount: 1500,
                 category: 'Food',
