@@ -162,6 +162,19 @@ Tests.verify(
 );
 
 Tests.verify(
+    `should return 1 array if data meet partial filter criteria: '${title}, ${comment}, ${date}, ${amount}'`,
+    [['zakupy', 'luty', '2022-03-04', -3598.02, 'Food']],
+    new Filterer().filterCostAndIncome(
+        CashFlowManager.listAllCostsAndIncomes,
+        'zak',
+        'lu',
+        ['2022-03-04', '2022-03-04'],
+        [3598.02, 3598.02],
+        undefined
+    )
+);
+
+Tests.verify(
     `should return 2 arrays if data meet filter criteria: '${title}, ${comment}, ${date}, ${category}'`,
     [
         ['zakupy', 'luty', '2022-03-04', -201.98, 'Food'],
@@ -349,6 +362,36 @@ Tests.verify(
         'LUTY',
         undefined,
         undefined,
+        undefined
+    )
+);
+
+Tests.verify(
+    `should return 3 arrays if data meet filter min = max date range criteria: '${comment}'`,
+    [
+        ['wynagrodzenie', 'luty', '2022-03-04', 3500, 'Praca'],
+        ['zakupy', 'luty', '2022-03-04', -201.98, 'Food'],
+        ['zakupy', 'luty', '2022-03-04', -3598.02, 'Food'],
+    ],
+    new Filterer().filterCostAndIncome(
+        CashFlowManager.listAllCostsAndIncomes,
+        undefined,
+        undefined,
+        ['2022-03-04', '2022-03-04'],
+        undefined,
+        undefined
+    )
+);
+
+Tests.verify(
+    `should return 1 arrays if data meet filter min = max amount range criteria: '${comment}'`,
+    [['wynagrodzenie', 'luty', '2022-03-04', 3500, 'Praca']],
+    new Filterer().filterCostAndIncome(
+        CashFlowManager.listAllCostsAndIncomes,
+        undefined,
+        undefined,
+        undefined,
+        [3500, 3500],
         undefined
     )
 );
