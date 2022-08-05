@@ -6,7 +6,7 @@ jobs:
         steps:
             - uses: actions/checkout@v2
             - run: bash ./runTests.sh
-    tests cypress:
+    tests-cypress:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
