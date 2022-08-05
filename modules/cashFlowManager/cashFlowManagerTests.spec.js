@@ -5,7 +5,7 @@ Tests.setModuleName('cashFlowManager Tests');
 
 Tests.verify(
     `1 function addCost should be fired`,
-    undefined,
+    'Cost added successfully',
     new CashFlowManager().addCost('zakupy', 'lidl', '2022-02-01', 22.22, 'Food')
 );
 Tests.verify(
@@ -15,7 +15,7 @@ Tests.verify(
 );
 Tests.verify(
     `2 function addCost should be fired`,
-    undefined,
+    'Cost added successfully',
     new CashFlowManager().addCost('zakupy', 'lidl', '2022-02-01', 22.22, 'Food')
 );
 Tests.verify(
@@ -48,8 +48,8 @@ Tests.verify(
 );
 
 Tests.verify(
-    `4 function addCost should be fired`,
-    undefined,
+    `4 function addIncome should be fired`,
+    'Income added successfully',
     new CashFlowManager().addIncome(
         'wynagrodzenie',
         'luty',
@@ -70,8 +70,8 @@ Tests.verify(
 );
 
 Tests.verify(
-    `5 function addCost should be fired`,
-    undefined,
+    `5 function addIncome should be fired`,
+    'Income added successfully',
     new CashFlowManager().addIncome(
         'stypendium',
         'luty',

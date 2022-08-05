@@ -43,11 +43,12 @@ class CashFlowManagerController extends BaseController {
                 ];
                 this.res.setHeader('Access-Control-Allow-Origin', '*');
                 this.res.statusCode = 200;
-                this.res.end();
+                //this.res.write(JSON.stringify('Cost added successfully'));
+                this.res.end(JSON.stringify('Cost added successfully'));
             } else {
                 this.res.setHeader('Access-Control-Allow-Origin', '*');
                 this.res.statusCode = 400;
-                this.res.end();
+                this.res.end(JSON.stringify('Invalid input'));
             }
         });
     }
@@ -86,11 +87,11 @@ class CashFlowManagerController extends BaseController {
                 ];
                 this.res.setHeader('Access-Control-Allow-Origin', '*');
                 this.res.statusCode = 200;
-                this.res.end();
+                this.res.end(JSON.stringify('Income added successfully'));
             } else {
                 this.res.setHeader('Access-Control-Allow-Origin', '*');
                 this.res.statusCode = 400;
-                this.res.end();
+                this.res.end(JSON.stringify('Invalid input'));
             }
         });
     }

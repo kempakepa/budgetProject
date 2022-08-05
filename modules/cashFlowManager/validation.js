@@ -10,10 +10,14 @@ class Validation extends BaseConstructor {
     validateInput() {
         const stringInput =
             typeof this.title == 'string' &&
+            this.title != '' &&
             typeof this.comment == 'string' &&
+            this.comment != '' &&
             typeof this.date == 'string' &&
+            this.date != '' &&
             this.isValidDate(this.date) &&
-            typeof this.category == 'string';
+            typeof this.category == 'string' &&
+            this.category != '';
         const numberInput = typeof this.amount == 'number' && this.amount >= 0;
 
         return stringInput && numberInput;

@@ -28,6 +28,7 @@ class CashFlowManager {
             ];
             CashFlowManager.listAllCostsAndIncomes.push(this.cost);
             AccountState.changeAccountState(-this.amount);
+            return 'Cost added successfully';
         } else {
             return 'Invalid input';
         }
@@ -57,6 +58,7 @@ class CashFlowManager {
             ];
             CashFlowManager.listAllCostsAndIncomes.push(this.income);
             AccountState.changeAccountState(this.amount);
+            return 'Income added successfully';
         } else {
             return 'Invalid input';
         }

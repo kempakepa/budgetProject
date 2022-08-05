@@ -10,19 +10,18 @@
             Welcome to Manage your Budget module, please fill in form below:
 </div></br>
         <div>
-            <input type="radio" name="budgetType" id="cost" />Cost
-            <input type="radio" name= "budgetType" id="income" />Income
+            <input type="radio" name="budgetType" id="cost" value="cost" required/>Cost
+            <input type="radio" name= "budgetType" id="income" value="income" />Income
         </div>
         <div>
-            <input type="text" placeholder="Title" id="title" data-cy="title"/>
+            <input type="text" placeholder="Title" id="title" data-cy="title" required/>
         </div>
-        <div><input type="text" placeholder="Comment" id="comment" data-cy="comment"/></div>
-        <div><input type="date" placeholder="Date" id="date" data-cy="date"/></div>
-        <div><input type="number" placeholder="Amount" id="amount" data-cy="amount"/></div>
-        <div><input type="text" placeholder="Category" id="category" data-cy="category"/></div></br>
+        <div><input type="text" placeholder="Comment" id="comment" data-cy="comment" required/></div>
+        <div><input type="date" placeholder="Date" id="date" data-cy="date" required/></div>
+        <div><input type="number" placeholder="Amount" id="amount" data-cy="amount" required/></div>
+        <div><input type="text" placeholder="Category" id="category" data-cy="category" required/></div></br>
         <div><input type="button" value="Send!" onclick="requestSent()" data-cy="sendButton"/></div></br>
-        <div id="confirmation_message"></div>
-        <div id="error_message"></div>
+        <div id="submition_message" ></div>
         <div>
             Go to <a href="../../index.html">the Home Page </a>or navigate to
             <a href="../accountState/accountState.html">Account State module</a>

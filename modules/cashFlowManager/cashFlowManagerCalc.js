@@ -8,26 +8,49 @@ const requestSent = () => {
     const reqBody = readInputelementsAndValues();
     let costOrIncome = checkIfCostOrIncome();
     if (costOrIncome) {
-        addCost(reqBody);
+        addCost(reqBody, catchSubmitionMessage);
     } else {
-        addIncome(reqBody);
+        addIncome(reqBody, catchSubmitionMessage);
     }
-    console.log(reqBody);
 };
 //wysylanie requesta, zlapanie response
-const addCost = (param) => {
+const addCost = (param, onResponse) => {
     let request = new XMLHttpRequest();
 
     const url = `${baseUrl}${port}${urlEndpointCost}`;
     request.open('POST', url);
+
+    request.responseType = 'text';
+
+    request.onload = function () {
+        if (request.readyState === request.DONE) {
+            if (request.status === 200 || request.status === 400) {
+                //return request.response;
+                const responseBody = JSON.parse(request.responseText);
+                onResponse(responseBody);
+            }
+        }
+    };
     request.send(JSON.stringify(param));
 };
 
-const addIncome = (param) => {
+const addIncome = (param, onResponse) => {
     let request = new XMLHttpRequest();
 
     const url = `${baseUrl}${port}${urlEndpointIncome}`;
     request.open('POST', url);
+
+    request.responseType = 'text';
+
+    request.onload = function () {
+        if (request.readyState === request.DONE) {
+            if (request.status === 200 || request.status === 400) {
+                //return request.response;
+                const responseBody = JSON.parse(request.responseText);
+                onResponse(responseBody);
+            }
+        }
+    };
     request.send(JSON.stringify(param));
 };
 
@@ -39,6 +62,10 @@ const checkIfCostOrIncome = () => {
         return true;
     }
     return false;
+};
+
+const catchSubmitionMessage = (value) => {
+    document.getElementById('submition_message').innerText = value;
 };
 
 //odczytywanie inputow/podmianka zawartosci
