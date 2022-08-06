@@ -12,6 +12,5 @@ jobs:
             - uses: actions/checkout@v2
             - run: |
                   npm install
-                  npm run startBackend
-                  npx cypress run --spec "cypress/integration/api/**"
+                  npm run startBackend & npx cypress run --spec "cypress/integration/api/**"
             - uses: actions/download-artifact@v3
