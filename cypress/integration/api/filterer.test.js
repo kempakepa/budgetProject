@@ -59,24 +59,45 @@ describe('filterer test', () => {
     });
 
     it('should return one array element by valid exact title filter', () => {
+        sendRequestToAddCostItem({
+            title: title,
+            comment: comment,
+            date: date,
+            amount: amount,
+            category: category,
+        });
         filterResults(title, undefined, undefined, undefined, undefined).then(
             (response) => {
                 expect(response.status).to.equal(200);
-                expect(response.body.length).to.equal(1);
+                expect(response.body.length).to.not.equal(0);
             }
         );
     });
 
     it('should return one array element by valid exact comment filter', () => {
+        sendRequestToAddCostItem({
+            title: title,
+            comment: comment,
+            date: date,
+            amount: amount,
+            category: category,
+        });
         filterResults(undefined, comment, undefined, undefined, undefined).then(
             (response) => {
                 expect(response.status).to.equal(200);
-                expect(response.body.length).to.equal(1);
+                expect(response.body.length).to.not.equal(0);
             }
         );
     });
 
     it('should return one array element by valid exact category filter', () => {
+        sendRequestToAddCostItem({
+            title: title,
+            comment: comment,
+            date: date,
+            amount: amount,
+            category: category,
+        });
         filterResults(
             undefined,
             undefined,
@@ -85,12 +106,18 @@ describe('filterer test', () => {
             category
         ).then((response) => {
             expect(response.status).to.equal(200);
-            expect(response.body.length).to.equal(1);
+            expect(response.body.length).to.not.equal(0);
         });
     });
 
     it('should return one array element by valid date range filter', () => {
-        cy.log(typeof date);
+        sendRequestToAddCostItem({
+            title: title,
+            comment: comment,
+            date: date,
+            amount: amount,
+            category: category,
+        });
         filterResults(
             undefined,
             undefined,
@@ -99,12 +126,18 @@ describe('filterer test', () => {
             undefined
         ).then((response) => {
             expect(response.status).to.equal(200);
-            expect(response.body.length).to.equal(1);
+            expect(response.body.length).to.not.equal(0);
         });
     });
 
     it('should return one array element by valid amount range filter', () => {
-        cy.log(typeof amount, amount);
+        sendRequestToAddCostItem({
+            title: title,
+            comment: comment,
+            date: date,
+            amount: amount,
+            category: category,
+        });
         filterResults(
             undefined,
             undefined,
@@ -113,11 +146,18 @@ describe('filterer test', () => {
             undefined
         ).then((response) => {
             expect(response.status).to.equal(200);
-            expect(response.body.length).to.equal(1);
+            expect(response.body.length).to.not.equal(0);
         });
     });
 
     it('should return one array element by valid title uppercased filter', () => {
+        sendRequestToAddCostItem({
+            title: title,
+            comment: comment,
+            date: date,
+            amount: amount,
+            category: category,
+        });
         filterResults(
             title.toUpperCase(),
             undefined,
@@ -126,11 +166,18 @@ describe('filterer test', () => {
             undefined
         ).then((response) => {
             expect(response.status).to.equal(200);
-            expect(response.body.length).to.equal(1);
+            expect(response.body.length).to.not.equal(0);
         });
     });
 
     it('should return one array element by valid comment uppercased filter', () => {
+        sendRequestToAddCostItem({
+            title: title,
+            comment: comment,
+            date: date,
+            amount: amount,
+            category: category,
+        });
         filterResults(
             undefined,
             comment.toUpperCase(),
@@ -139,7 +186,7 @@ describe('filterer test', () => {
             undefined
         ).then((response) => {
             expect(response.status).to.equal(200);
-            expect(response.body.length).to.equal(1);
+            expect(response.body.length).to.not.equal(0);
         });
     });
 
@@ -152,20 +199,34 @@ describe('filterer test', () => {
             category.toUpperCase()
         ).then((response) => {
             expect(response.status).to.equal(200);
-            expect(response.body.length).to.equal(1);
+            expect(response.body.length).to.not.equal(0);
         });
     });
 
     it('should return one array element by 2 valid filter criteria (title, comment)', () => {
+        sendRequestToAddCostItem({
+            title: title,
+            comment: comment,
+            date: date,
+            amount: amount,
+            category: category,
+        });
         filterResults(title, comment, undefined, undefined, undefined).then(
             (response) => {
                 expect(response.status).to.equal(200);
-                expect(response.body.length).to.equal(1);
+                expect(response.body.length).to.not.equal(0);
             }
         );
     });
 
     it('should return one array element by 2 valid filter criteria (title, date)', () => {
+        sendRequestToAddCostItem({
+            title: title,
+            comment: comment,
+            date: date,
+            amount: amount,
+            category: category,
+        });
         filterResults(
             title,
             undefined,
@@ -174,11 +235,18 @@ describe('filterer test', () => {
             undefined
         ).then((response) => {
             expect(response.status).to.equal(200);
-            expect(response.body.length).to.equal(1);
+            expect(response.body.length).to.not.equal(0);
         });
     });
 
     it('should return one array element by 2 valid filter criteria (title, amount)', () => {
+        sendRequestToAddCostItem({
+            title: title,
+            comment: comment,
+            date: date,
+            amount: amount,
+            category: category,
+        });
         filterResults(
             title,
             undefined,
@@ -187,20 +255,34 @@ describe('filterer test', () => {
             undefined
         ).then((response) => {
             expect(response.status).to.equal(200);
-            expect(response.body.length).to.equal(1);
+            expect(response.body.length).to.not.equal(0);
         });
     });
 
     it('should return one array element by 2 valid filter criteria (title, category)', () => {
+        sendRequestToAddCostItem({
+            title: title,
+            comment: comment,
+            date: date,
+            amount: amount,
+            category: category,
+        });
         filterResults(title, undefined, undefined, undefined, category).then(
             (response) => {
                 expect(response.status).to.equal(200);
-                expect(response.body.length).to.equal(1);
+                expect(response.body.length).to.not.equal(0);
             }
         );
     });
 
     it('should return one array element by 2 valid filter criteria (title, comment) to uppercase', () => {
+        sendRequestToAddCostItem({
+            title: title,
+            comment: comment,
+            date: date,
+            amount: amount,
+            category: category,
+        });
         filterResults(
             title.toUpperCase(),
             comment.toUpperCase(),
@@ -209,11 +291,18 @@ describe('filterer test', () => {
             undefined
         ).then((response) => {
             expect(response.status).to.equal(200);
-            expect(response.body.length).to.equal(1);
+            expect(response.body.length).to.not.equal(0);
         });
     });
 
     it('should return one array element by 2 valid filter criteria (title, date) to uppercase', () => {
+        sendRequestToAddCostItem({
+            title: title,
+            comment: comment,
+            date: date,
+            amount: amount,
+            category: category,
+        });
         filterResults(
             title.toUpperCase(),
             undefined,
@@ -222,11 +311,18 @@ describe('filterer test', () => {
             undefined
         ).then((response) => {
             expect(response.status).to.equal(200);
-            expect(response.body.length).to.equal(1);
+            expect(response.body.length).to.not.equal(0);
         });
     });
 
     it('should return one array element by 2 valid filter criteria (title, amount) to uppercase', () => {
+        sendRequestToAddCostItem({
+            title: title,
+            comment: comment,
+            date: date,
+            amount: amount,
+            category: category,
+        });
         filterResults(
             title.toUpperCase(),
             undefined,
@@ -235,11 +331,18 @@ describe('filterer test', () => {
             undefined
         ).then((response) => {
             expect(response.status).to.equal(200);
-            expect(response.body.length).to.equal(1);
+            expect(response.body.length).to.not.equal(0);
         });
     });
 
     it('should return one array element by 2 valid filter criteria (title, category) to uppercase', () => {
+        sendRequestToAddCostItem({
+            title: title,
+            comment: comment,
+            date: date,
+            amount: amount,
+            category: category,
+        });
         filterResults(
             title.toUpperCase(),
             undefined,
@@ -248,7 +351,26 @@ describe('filterer test', () => {
             category.toUpperCase()
         ).then((response) => {
             expect(response.status).to.equal(200);
-            expect(response.body.length).to.equal(1);
+            expect(response.body.length).to.not.equal(0);
+        });
+    });
+    it('should return one array element by all valid filter criteria', () => {
+        sendRequestToAddCostItem({
+            title: title,
+            comment: comment,
+            date: date,
+            amount: amount,
+            category: category,
+        });
+        filterResults(
+            title,
+            comment,
+            convertToFilterReqParam(date, date),
+            convertToFilterReqParam(amount, amount),
+            category
+        ).then((response) => {
+            expect(response.status).to.equal(200);
+            expect(response.body.length).to.not.equal(0);
         });
     });
 });

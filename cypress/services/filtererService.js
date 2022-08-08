@@ -21,8 +21,8 @@ function filterResults(title, comment, date, amount, category) {
     });
 }
 
-function convertToFilterReqParam(reqParam) {
-    return `[${reqParam},${reqParam}]`;
+function convertToFilterReqParam(reqParam0, reqParam1) {
+    return `[${reqParam0},${reqParam1}]`;
 }
 
 module.exports = { filterResults, convertToFilterReqParam };
