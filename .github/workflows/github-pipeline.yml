@@ -6,7 +6,7 @@ jobs:
         steps:
             - uses: actions/checkout@v2
             - run: bash ./runTests.sh
-    cypress-tests:
+    cypress-api-tests:
         runs-on: ubuntu-latest
         needs: unit-tests
         steps:
@@ -14,4 +14,13 @@ jobs:
             - run: |
                   npm install
                   npm run startBackend & npx cypress run --spec "cypress/integration/api/**"
+            - uses: actions/download-artifact@v3
+    cypress-UI-tests:
+        runs-on: ubuntu-latest
+        needs: unit-tests
+        steps:
+            - uses: actions/checkout@v2
+            - run: |
+                  npm install
+                  npm run startBackend & npx cypress run --spec "cypress/integration/UI/**"
             - uses: actions/download-artifact@v3
