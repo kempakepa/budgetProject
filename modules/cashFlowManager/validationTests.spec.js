@@ -41,7 +41,7 @@ Tests.verify(
 
 Tests.verify(
     `shourld return true if all params has correct format an amount = 0`,
-    true,
+    false,
     new Validation(
         'title',
         'comment',
