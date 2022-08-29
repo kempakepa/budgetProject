@@ -1,16 +1,21 @@
 const { CashFlowManagerObject } = require('../../POP/cashFlowManagerObject');
 const { HomePageObject } = require('../../POP/homePageObject');
+const {
+    generateFakeTextData,
+    generateFakeDatatypeData,
+    generateFakeNumeicData,
+} = require('../../utils/testDataProvider');
 
 describe('cashFlowManager tests', () => {
     it('should add Cost if valid input', () => {
         HomePageObject.visitHomePage();
         HomePageObject.goToCashFlowManagerModule();
         CashFlowManagerObject.addCostOrIncome('cost', {
-            title: 'title',
-            comment: 'comment',
-            date: '2022-02-02',
-            amount: 100,
-            category: 'Food',
+            title: generateFakeTextData(),
+            comment: generateFakeTextData(),
+            date: generateFakeDatatypeData(),
+            amount: generateFakeNumeicData(),
+            category: generateFakeTextData(),
         });
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
@@ -25,10 +30,10 @@ describe('cashFlowManager tests', () => {
         HomePageObject.goToCashFlowManagerModule();
         CashFlowManagerObject.addCostOrIncome('cost', {
             title: '{backspace}',
-            comment: 'comment',
-            date: '2022-02-02',
-            amount: 100,
-            category: 'Food',
+            comment: generateFakeTextData(),
+            date: generateFakeDatatypeData(),
+            amount: generateFakeNumeicData(),
+            category: generateFakeTextData(),
         });
         CashFlowManagerObject.getTitle().then(($input) => {
             expect($input[0].validationMessage).to.eq(
@@ -48,11 +53,11 @@ describe('cashFlowManager tests', () => {
         HomePageObject.visitHomePage();
         HomePageObject.goToCashFlowManagerModule();
         CashFlowManagerObject.addCostOrIncome('cost', {
-            title: 'title',
+            title: generateFakeTextData(),
             comment: '{backspace}',
-            date: '2022-02-02',
-            amount: 100,
-            category: 'Food',
+            date: generateFakeDatatypeData(),
+            amount: generateFakeNumeicData(),
+            category: generateFakeTextData(),
         });
         CashFlowManagerObject.getComment().then(($input) => {
             expect($input[0].validationMessage).to.eq(
@@ -72,11 +77,11 @@ describe('cashFlowManager tests', () => {
         HomePageObject.visitHomePage();
         HomePageObject.goToCashFlowManagerModule();
         CashFlowManagerObject.addCostOrIncome('cost', {
-            title: 'title',
-            comment: 'comment',
+            title: generateFakeTextData(),
+            comment: generateFakeTextData(),
             date: '{selectAll}{del}',
-            amount: 100,
-            category: 'Food',
+            amount: generateFakeNumeicData(),
+            category: generateFakeTextData(),
         });
         CashFlowManagerObject.getDate().then(($input) => {
             expect($input[0].validationMessage).to.eq(
@@ -96,11 +101,11 @@ describe('cashFlowManager tests', () => {
         HomePageObject.visitHomePage();
         HomePageObject.goToCashFlowManagerModule();
         CashFlowManagerObject.addCostOrIncome('cost', {
-            title: 'title',
-            comment: 'comment',
-            date: '2022-02-02',
+            title: generateFakeTextData(),
+            comment: generateFakeTextData(),
+            date: generateFakeDatatypeData(),
             amount: '{backspace}',
-            category: 'Food',
+            category: generateFakeTextData(),
         });
         CashFlowManagerObject.getAmount().then(($input) => {
             expect($input[0].validationMessage).to.eq(
@@ -120,10 +125,10 @@ describe('cashFlowManager tests', () => {
         HomePageObject.visitHomePage();
         HomePageObject.goToCashFlowManagerModule();
         CashFlowManagerObject.addCostOrIncome('cost', {
-            title: 'title',
-            comment: 'comment',
-            date: '2022-02-02',
-            amount: 100,
+            title: generateFakeTextData(),
+            comment: generateFakeTextData(),
+            date: generateFakeDatatypeData(),
+            amount: generateFakeNumeicData(),
             category: '{backspace}',
         });
         CashFlowManagerObject.getCategory().then(($input) => {
@@ -140,15 +145,15 @@ describe('cashFlowManager tests', () => {
             );
     });
 
-    it('should not add Cost if nagetive amount input', () => {
+    it('should not add Cost if negative amount input', () => {
         HomePageObject.visitHomePage();
         HomePageObject.goToCashFlowManagerModule();
         CashFlowManagerObject.addCostOrIncome('cost', {
-            title: 'title',
-            comment: 'comment',
-            date: '2022-02-02',
+            title: generateFakeTextData(),
+            comment: generateFakeTextData(),
+            date: generateFakeDatatypeData(),
             amount: -100,
-            category: 'category',
+            category: generateFakeTextData(),
         });
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
@@ -162,11 +167,11 @@ describe('cashFlowManager tests', () => {
         HomePageObject.visitHomePage();
         HomePageObject.goToCashFlowManagerModule();
         CashFlowManagerObject.addCostOrIncome('cost', {
-            title: 'title',
-            comment: 'comment',
-            date: '2022-02-02',
+            title: generateFakeTextData(),
+            comment: generateFakeTextData(),
+            date: generateFakeDatatypeData(),
             amount: 0,
-            category: 'category',
+            category: generateFakeTextData(),
         });
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
@@ -179,11 +184,11 @@ describe('cashFlowManager tests', () => {
         HomePageObject.visitHomePage();
         HomePageObject.goToCashFlowManagerModule();
         CashFlowManagerObject.addCostOrIncome('cost', {
-            title: 'title',
-            comment: 'comment',
-            date: '2022-02-02',
+            title: generateFakeTextData(),
+            comment: generateFakeTextData(),
+            date: generateFakeDatatypeData(),
             amount: -0.01,
-            category: 'category',
+            category: generateFakeTextData(),
         });
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
@@ -197,11 +202,11 @@ describe('cashFlowManager tests', () => {
         HomePageObject.visitHomePage();
         HomePageObject.goToCashFlowManagerModule();
         CashFlowManagerObject.addCostOrIncome('cost', {
-            title: 'title',
-            comment: 'comment',
-            date: '2022-02-02',
+            title: generateFakeTextData(),
+            comment: generateFakeTextData(),
+            date: generateFakeDatatypeData(),
             amount: 0.01,
-            category: 'category',
+            category: generateFakeTextData(),
         });
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
@@ -215,11 +220,11 @@ describe('cashFlowManager tests', () => {
         HomePageObject.visitHomePage();
         HomePageObject.goToCashFlowManagerModule();
         CashFlowManagerObject.addCostOrIncome('income', {
-            title: 'title',
-            comment: 'comment',
-            date: '2022-02-02',
-            amount: 100,
-            category: 'Food',
+            title: generateFakeTextData(),
+            comment: generateFakeTextData(),
+            date: generateFakeDatatypeData(),
+            amount: generateFakeNumeicData(),
+            category: generateFakeTextData(),
         });
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
@@ -234,10 +239,10 @@ describe('cashFlowManager tests', () => {
         HomePageObject.goToCashFlowManagerModule();
         CashFlowManagerObject.addCostOrIncome('income', {
             title: '{backspace}',
-            comment: 'comment',
-            date: '2022-02-02',
-            amount: 100,
-            category: 'Food',
+            comment: generateFakeTextData(),
+            date: generateFakeDatatypeData(),
+            amount: generateFakeNumeicData(),
+            category: generateFakeTextData(),
         });
         CashFlowManagerObject.getTitle().then(($input) => {
             expect($input[0].validationMessage).to.eq(
@@ -257,11 +262,11 @@ describe('cashFlowManager tests', () => {
         HomePageObject.visitHomePage();
         HomePageObject.goToCashFlowManagerModule();
         CashFlowManagerObject.addCostOrIncome('income', {
-            title: 'title',
+            title: generateFakeTextData(),
             comment: '{backspace}',
-            date: '2022-02-02',
-            amount: 100,
-            category: 'Food',
+            date: generateFakeDatatypeData(),
+            amount: generateFakeNumeicData(),
+            category: generateFakeTextData(),
         });
         CashFlowManagerObject.getComment().then(($input) => {
             expect($input[0].validationMessage).to.eq(
@@ -281,11 +286,11 @@ describe('cashFlowManager tests', () => {
         HomePageObject.visitHomePage();
         HomePageObject.goToCashFlowManagerModule();
         CashFlowManagerObject.addCostOrIncome('income', {
-            title: 'title',
-            comment: 'comment',
+            title: generateFakeTextData(),
+            comment: generateFakeTextData(),
             date: '{selectAll}{del}',
-            amount: 100,
-            category: 'Food',
+            amount: generateFakeNumeicData(),
+            category: generateFakeTextData(),
         });
         CashFlowManagerObject.getDate().then(($input) => {
             expect($input[0].validationMessage).to.eq(
@@ -305,11 +310,11 @@ describe('cashFlowManager tests', () => {
         HomePageObject.visitHomePage();
         HomePageObject.goToCashFlowManagerModule();
         CashFlowManagerObject.addCostOrIncome('income', {
-            title: 'title',
-            comment: 'comment',
-            date: '2022-02-02',
+            title: generateFakeTextData(),
+            comment: generateFakeTextData(),
+            date: generateFakeDatatypeData(),
             amount: '{backspace}',
-            category: 'Food',
+            category: generateFakeTextData(),
         });
         CashFlowManagerObject.getAmount().then(($input) => {
             expect($input[0].validationMessage).to.eq(
@@ -329,10 +334,10 @@ describe('cashFlowManager tests', () => {
         HomePageObject.visitHomePage();
         HomePageObject.goToCashFlowManagerModule();
         CashFlowManagerObject.addCostOrIncome('income', {
-            title: 'title',
-            comment: 'comment',
-            date: '2022-02-02',
-            amount: 100,
+            title: generateFakeTextData(),
+            comment: generateFakeTextData(),
+            date: generateFakeDatatypeData(),
+            amount: generateFakeNumeicData(),
             category: '{backspace}',
         });
         CashFlowManagerObject.getCategory().then(($input) => {
@@ -349,15 +354,15 @@ describe('cashFlowManager tests', () => {
             );
     });
 
-    it('should not add Income if nagetive amount input', () => {
+    it('should not add Income if negative amount input', () => {
         HomePageObject.visitHomePage();
         HomePageObject.goToCashFlowManagerModule();
         CashFlowManagerObject.addCostOrIncome('income', {
-            title: 'title',
-            comment: 'comment',
-            date: '2022-02-02',
+            title: generateFakeTextData(),
+            comment: generateFakeTextData(),
+            date: generateFakeDatatypeData(),
             amount: -100,
-            category: 'category',
+            category: generateFakeTextData(),
         });
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
@@ -371,11 +376,11 @@ describe('cashFlowManager tests', () => {
         HomePageObject.visitHomePage();
         HomePageObject.goToCashFlowManagerModule();
         CashFlowManagerObject.addCostOrIncome('income', {
-            title: 'title',
-            comment: 'comment',
-            date: '2022-02-02',
+            title: generateFakeTextData(),
+            comment: generateFakeTextData(),
+            date: generateFakeDatatypeData(),
             amount: 0,
-            category: 'category',
+            category: generateFakeTextData(),
         });
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
@@ -388,11 +393,11 @@ describe('cashFlowManager tests', () => {
         HomePageObject.visitHomePage();
         HomePageObject.goToCashFlowManagerModule();
         CashFlowManagerObject.addCostOrIncome('income', {
-            title: 'title',
-            comment: 'comment',
-            date: '2022-02-02',
+            title: generateFakeTextData(),
+            comment: generateFakeTextData(),
+            date: generateFakeDatatypeData(),
             amount: -0.01,
-            category: 'category',
+            category: generateFakeTextData(),
         });
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
@@ -406,11 +411,11 @@ describe('cashFlowManager tests', () => {
         HomePageObject.visitHomePage();
         HomePageObject.goToCashFlowManagerModule();
         CashFlowManagerObject.addCostOrIncome('income', {
-            title: 'title',
-            comment: 'comment',
-            date: '2022-02-02',
+            title: generateFakeTextData(),
+            comment: generateFakeTextData(),
+            date: generateFakeDatatypeData(),
             amount: 0.01,
-            category: 'category',
+            category: generateFakeTextData(),
         });
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')

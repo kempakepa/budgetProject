@@ -1,14 +1,18 @@
 const { faker } = require('@faker-js/faker');
 
-let title = `${faker.word.noun()}-${faker.random.numeric()}`;
-let comment = `${faker.word.noun()}-${faker.random.numeric()}`;
-let date = faker.date.past().toISOString().slice(0, 10);
-let amount = parseInt(faker.datatype.float());
-let category = `${faker.word.noun()}-${faker.random.numeric()}`;
+function generateFakeTextData() {
+    return `${faker.word.noun()}-${faker.random.numeric()}`;
+}
+
+function generateFakeDatatypeData() {
+    return faker.date.past().toISOString().slice(0, 10);
+}
+function generateFakeNumeicData() {
+    return parseInt(faker.datatype.float());
+}
+
 module.exports = {
-    title,
-    comment,
-    date,
-    amount,
-    category,
+    generateFakeTextData,
+    generateFakeDatatypeData,
+    generateFakeNumeicData,
 };
