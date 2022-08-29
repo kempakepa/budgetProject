@@ -15,15 +15,15 @@
         <input type="radio" name= "budgetType" id="income" data-cy="income" value="income"/>
         <label for="income">Income</label></br>
         <label for="title"></label>
-        <input type="text" placeholder="Title*" id="title" data-cy="title" required/></br>
+        <input type="text" placeholder="Title*" id="title" data-cy="title" required oninvalid="this.setCustomValidity('Please fill in this field.')"/></br>
         <label for="comment"></label>
-        <input type="text" placeholder="Comment*" id="comment" data-cy="comment" required/></br>
+        <input type="text" placeholder="Comment*" id="comment" data-cy="comment" required oninvalid="this.setCustomValidity('Please fill in this field.')"/></br>
         <label for="date"></label>
-        <input type="date" placeholder="Date*" id="date" data-cy="date" required/></br>
+        <input type="date" placeholder="Date*" id="date" data-cy="date" required oninvalid="this.setCustomValidity('Please fill in this field.')"/></br>
         <label for="amount"></label>
-        <input type="number" placeholder="Amount*" id="amount" data-cy="amount" required/></br>
+        <input type="number" placeholder="Amount*" id="amount" data-cy="amount" required oninvalid="this.setCustomValidity('Please fill in this field.')"/></br>
         <label for="category"></label>
-        <input type="text" placeholder="Category*" id="category" data-cy="category" required/></br>
+        <input type="text" placeholder="Category*" id="category" data-cy="category" required oninvalid="this.setCustomValidity('Please fill in this field.')"/></br>
         <input type="submit" value="Send!" onclick="requestSent()" data-cy="sendButton"/></br>
         <div id="submition_message" data-cy="submition_message"></div>
 </form>
