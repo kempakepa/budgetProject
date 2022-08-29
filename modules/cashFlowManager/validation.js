@@ -18,7 +18,7 @@ class Validation extends BaseConstructor {
             this.isValidDate(this.date) &&
             typeof this.category == 'string' &&
             this.category != '';
-        const numberInput = typeof this.amount == 'number' && this.amount >= 0;
+        const numberInput = typeof this.amount == 'number' && this.amount > 0;
 
         return stringInput && numberInput;
     }
@@ -29,11 +29,19 @@ class Validation extends BaseConstructor {
         if (!this.date.match(regEx)) {
             return false;
         }
+
+        /* let now = new Date();
+        let now2MonthsBefore = now.setMonth(now.getMonth() - 2);
+        now2MonthsBefore = now.toISOString().slice(0, 10); */
+
         let dateStandarizedFormat = new Date(this.date)
             .toISOString()
             .slice(0, 10);
 
-        if (this.date == dateStandarizedFormat) {
+        if (
+            this.date == dateStandarizedFormat /* &&
+            this.date >= now2MonthsBefore */
+        ) {
             return true;
         } else {
             return false;
