@@ -15,6 +15,7 @@ class CashFlowManagerObject {
     static selectCost() {
         cy.get(this.cost).click();
     }
+
     static selectIncome() {
         cy.get(this.income).click();
     }
@@ -22,6 +23,7 @@ class CashFlowManagerObject {
     static getTitle() {
         return cy.get(this.title);
     }
+
     static insertTitle(title) {
         this.getTitle().type(title);
     }
@@ -37,6 +39,7 @@ class CashFlowManagerObject {
     static getDate() {
         return cy.get(this.date);
     }
+
     static insertDate(date) {
         this.getDate().type(date);
     }

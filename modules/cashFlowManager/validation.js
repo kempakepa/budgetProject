@@ -30,17 +30,17 @@ class Validation extends BaseConstructor {
             return false;
         }
 
-        /* let now = new Date();
-        let now2MonthsBefore = now.setMonth(now.getMonth() - 2);
-        now2MonthsBefore = now.toISOString().slice(0, 10); */
+        //let now = new Date();
+        //let now2MonthsBefore = now.setMonth(now.getMonth() - 2);
+        //now2MonthsBefore = now.toISOString().slice(0, 10);
 
         let dateStandarizedFormat = new Date(this.date)
             .toISOString()
             .slice(0, 10);
 
         if (
-            this.date == dateStandarizedFormat /* &&
-            this.date >= now2MonthsBefore */
+            this.date == dateStandarizedFormat
+            //&& this.date >= now2MonthsBefore
         ) {
             return true;
         } else {
