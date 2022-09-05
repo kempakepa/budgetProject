@@ -1,22 +1,18 @@
 const { CashFlowManagerObject } = require('../../POP/cashFlowManagerObject');
 const { HomePageObject } = require('../../POP/homePageObject');
-const {
-    generateFakeTextData,
-    generateFakeDatatypeData,
-    generateFakeNumeicData,
-} = require('../../utils/testDataProvider');
+const { TestDataProvider } = require('../../utils/testDataProvider');
 
 describe('cashFlowManager tests', () => {
-    it('should add Cost if valid input', () => {
+    beforeEach(() => {
         HomePageObject.visitHomePage();
         HomePageObject.goToCashFlowManagerModule();
-        CashFlowManagerObject.addCostOrIncome('cost', {
-            title: generateFakeTextData(),
-            comment: generateFakeTextData(),
-            date: generateFakeDatatypeData(),
-            amount: generateFakeNumeicData(),
-            category: generateFakeTextData(),
-        });
+    });
+
+    it('should add Cost if 0.01 amount input', () => {
+        CashFlowManagerObject.addCostOrIncome(
+            'cost',
+            TestDataProvider.changeObjectValue('amount', 0.01)
+        );
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
             .should(
@@ -25,189 +21,24 @@ describe('cashFlowManager tests', () => {
             );
     });
 
-    it('should not add Cost if invalid empty title input', () => {
-        HomePageObject.visitHomePage();
-        HomePageObject.goToCashFlowManagerModule();
-        CashFlowManagerObject.addCostOrIncome('cost', {
-            title: '{backspace}',
-            comment: generateFakeTextData(),
-            date: generateFakeDatatypeData(),
-            amount: generateFakeNumeicData(),
-            category: generateFakeTextData(),
-        });
-        CashFlowManagerObject.getTitle().then(($input) => {
-            expect($input[0].validationMessage).to.eq(
-                CashFlowManagerObject.HTMLValidationErrorMessage
-            );
-        });
-        cy.get('input:invalid').should('have.length', 1);
+    it('should add Income if 0.01 amount input', () => {
+        CashFlowManagerObject.addCostOrIncome(
+            'income',
+            TestDataProvider.changeObjectValue('amount', 0.01)
+        );
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
             .should(
                 'equal',
-                CashFlowManagerObject.addCostOrIncomeFailureMessage
+                CashFlowManagerObject.incomeAddedConfirmationMessage
             );
     });
 
-    it('should not add Cost if invalid empty comment input', () => {
-        HomePageObject.visitHomePage();
-        HomePageObject.goToCashFlowManagerModule();
-        CashFlowManagerObject.addCostOrIncome('cost', {
-            title: generateFakeTextData(),
-            comment: '{backspace}',
-            date: generateFakeDatatypeData(),
-            amount: generateFakeNumeicData(),
-            category: generateFakeTextData(),
-        });
-        CashFlowManagerObject.getComment().then(($input) => {
-            expect($input[0].validationMessage).to.eq(
-                CashFlowManagerObject.HTMLValidationErrorMessage
-            );
-        });
-        cy.get('input:invalid').should('have.length', 1);
-        CashFlowManagerObject.getSubmitionMessage()
-            .invoke('text')
-            .should(
-                'equal',
-                CashFlowManagerObject.addCostOrIncomeFailureMessage
-            );
-    });
-
-    it('should not add Cost if invalid empty date input', () => {
-        HomePageObject.visitHomePage();
-        HomePageObject.goToCashFlowManagerModule();
-        CashFlowManagerObject.addCostOrIncome('cost', {
-            title: generateFakeTextData(),
-            comment: generateFakeTextData(),
-            date: '{selectAll}{del}',
-            amount: generateFakeNumeicData(),
-            category: generateFakeTextData(),
-        });
-        CashFlowManagerObject.getDate().then(($input) => {
-            expect($input[0].validationMessage).to.eq(
-                CashFlowManagerObject.HTMLValidationErrorMessage
-            );
-        });
-        cy.get('input:invalid').should('have.length', 1);
-        CashFlowManagerObject.getSubmitionMessage()
-            .invoke('text')
-            .should(
-                'equal',
-                CashFlowManagerObject.addCostOrIncomeFailureMessage
-            );
-    });
-
-    it('should not add Cost if invalid empty amount input', () => {
-        HomePageObject.visitHomePage();
-        HomePageObject.goToCashFlowManagerModule();
-        CashFlowManagerObject.addCostOrIncome('cost', {
-            title: generateFakeTextData(),
-            comment: generateFakeTextData(),
-            date: generateFakeDatatypeData(),
-            amount: '{backspace}',
-            category: generateFakeTextData(),
-        });
-        CashFlowManagerObject.getAmount().then(($input) => {
-            expect($input[0].validationMessage).to.eq(
-                CashFlowManagerObject.HTMLValidationErrorMessage
-            );
-        });
-        cy.get('input:invalid').should('have.length', 1);
-        CashFlowManagerObject.getSubmitionMessage()
-            .invoke('text')
-            .should(
-                'equal',
-                CashFlowManagerObject.addCostOrIncomeFailureMessage
-            );
-    });
-
-    it('should not add Cost if invalid empty category input', () => {
-        HomePageObject.visitHomePage();
-        HomePageObject.goToCashFlowManagerModule();
-        CashFlowManagerObject.addCostOrIncome('cost', {
-            title: generateFakeTextData(),
-            comment: generateFakeTextData(),
-            date: generateFakeDatatypeData(),
-            amount: generateFakeNumeicData(),
-            category: '{backspace}',
-        });
-        CashFlowManagerObject.getCategory().then(($input) => {
-            expect($input[0].validationMessage).to.eq(
-                CashFlowManagerObject.HTMLValidationErrorMessage
-            );
-        });
-        cy.get('input:invalid').should('have.length', 1);
-        CashFlowManagerObject.getSubmitionMessage()
-            .invoke('text')
-            .should(
-                'equal',
-                CashFlowManagerObject.addCostOrIncomeFailureMessage
-            );
-    });
-
-    it('should not add Cost if negative amount input', () => {
-        HomePageObject.visitHomePage();
-        HomePageObject.goToCashFlowManagerModule();
-        CashFlowManagerObject.addCostOrIncome('cost', {
-            title: generateFakeTextData(),
-            comment: generateFakeTextData(),
-            date: generateFakeDatatypeData(),
-            amount: -100,
-            category: generateFakeTextData(),
-        });
-        CashFlowManagerObject.getSubmitionMessage()
-            .invoke('text')
-            .should(
-                'equal',
-                CashFlowManagerObject.addCostOrIncomeFailureMessage
-            );
-    });
-
-    it('should not add Cost if 0 amount input', () => {
-        HomePageObject.visitHomePage();
-        HomePageObject.goToCashFlowManagerModule();
-        CashFlowManagerObject.addCostOrIncome('cost', {
-            title: generateFakeTextData(),
-            comment: generateFakeTextData(),
-            date: generateFakeDatatypeData(),
-            amount: 0,
-            category: generateFakeTextData(),
-        });
-        CashFlowManagerObject.getSubmitionMessage()
-            .invoke('text')
-            .should(
-                'equal',
-                CashFlowManagerObject.addCostOrIncomeFailureMessage
-            );
-    });
-    it('should not add Cost if -0.01 amount input', () => {
-        HomePageObject.visitHomePage();
-        HomePageObject.goToCashFlowManagerModule();
-        CashFlowManagerObject.addCostOrIncome('cost', {
-            title: generateFakeTextData(),
-            comment: generateFakeTextData(),
-            date: generateFakeDatatypeData(),
-            amount: -0.01,
-            category: generateFakeTextData(),
-        });
-        CashFlowManagerObject.getSubmitionMessage()
-            .invoke('text')
-            .should(
-                'equal',
-                CashFlowManagerObject.addCostOrIncomeFailureMessage
-            );
-    });
-
-    it('should add Cost if 0.01 amount input', () => {
-        HomePageObject.visitHomePage();
-        HomePageObject.goToCashFlowManagerModule();
-        CashFlowManagerObject.addCostOrIncome('cost', {
-            title: generateFakeTextData(),
-            comment: generateFakeTextData(),
-            date: generateFakeDatatypeData(),
-            amount: 0.01,
-            category: generateFakeTextData(),
-        });
+    it('should add Cost if valid input', () => {
+        CashFlowManagerObject.addCostOrIncome(
+            'cost',
+            TestDataProvider.changeObjectValue()
+        );
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
             .should(
@@ -217,15 +48,10 @@ describe('cashFlowManager tests', () => {
     });
 
     it('should add Income if valid input', () => {
-        HomePageObject.visitHomePage();
-        HomePageObject.goToCashFlowManagerModule();
-        CashFlowManagerObject.addCostOrIncome('income', {
-            title: generateFakeTextData(),
-            comment: generateFakeTextData(),
-            date: generateFakeDatatypeData(),
-            amount: generateFakeNumeicData(),
-            category: generateFakeTextData(),
-        });
+        CashFlowManagerObject.addCostOrIncome(
+            'income',
+            TestDataProvider.changeObjectValue()
+        );
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
             .should(
@@ -234,22 +60,64 @@ describe('cashFlowManager tests', () => {
             );
     });
 
-    it('should not add Income if invalid empty title input', () => {
-        HomePageObject.visitHomePage();
-        HomePageObject.goToCashFlowManagerModule();
-        CashFlowManagerObject.addCostOrIncome('income', {
-            title: '{backspace}',
-            comment: generateFakeTextData(),
-            date: generateFakeDatatypeData(),
-            amount: generateFakeNumeicData(),
-            category: generateFakeTextData(),
-        });
+    it('should not add Cost if invalid empty title input', () => {
+        CashFlowManagerObject.addCostOrIncome(
+            'cost',
+            TestDataProvider.changeObjectValue('title', '{selectAll}{del}')
+        );
         CashFlowManagerObject.getTitle().then(($input) => {
             expect($input[0].validationMessage).to.eq(
                 CashFlowManagerObject.HTMLValidationErrorMessage
             );
         });
-        cy.get('input:invalid').should('have.length', 1);
+        CashFlowManagerObject.getInvalidElement('title').should(
+            'have.length',
+            1
+        );
+        CashFlowManagerObject.getSubmitionMessage()
+            .invoke('text')
+            .should(
+                'equal',
+                CashFlowManagerObject.addCostOrIncomeFailureMessage
+            );
+    });
+
+    it('should not add Income if invalid empty title input', () => {
+        CashFlowManagerObject.addCostOrIncome(
+            'income',
+            TestDataProvider.changeObjectValue('title', '{selectAll}{del}')
+        );
+        CashFlowManagerObject.getTitle().then(($input) => {
+            expect($input[0].validationMessage).to.eq(
+                CashFlowManagerObject.HTMLValidationErrorMessage
+            );
+        });
+        CashFlowManagerObject.getInvalidElement('title').should(
+            'have.length',
+            1
+        );
+        CashFlowManagerObject.getSubmitionMessage()
+            .invoke('text')
+            .should(
+                'equal',
+                CashFlowManagerObject.addCostOrIncomeFailureMessage
+            );
+    });
+
+    it('should not add Cost if invalid empty comment input', () => {
+        CashFlowManagerObject.addCostOrIncome(
+            'cost',
+            TestDataProvider.changeObjectValue('comment', '{selectAll}{del}')
+        );
+        CashFlowManagerObject.getComment().then(($input) => {
+            expect($input[0].validationMessage).to.eq(
+                CashFlowManagerObject.HTMLValidationErrorMessage
+            );
+        });
+        CashFlowManagerObject.getInvalidElement('comment').should(
+            'have.length',
+            1
+        );
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
             .should(
@@ -259,21 +127,41 @@ describe('cashFlowManager tests', () => {
     });
 
     it('should not add Income if invalid empty comment input', () => {
-        HomePageObject.visitHomePage();
-        HomePageObject.goToCashFlowManagerModule();
-        CashFlowManagerObject.addCostOrIncome('income', {
-            title: generateFakeTextData(),
-            comment: '{backspace}',
-            date: generateFakeDatatypeData(),
-            amount: generateFakeNumeicData(),
-            category: generateFakeTextData(),
-        });
+        CashFlowManagerObject.addCostOrIncome(
+            'income',
+            TestDataProvider.changeObjectValue('comment', '{selectAll}{del}')
+        );
         CashFlowManagerObject.getComment().then(($input) => {
             expect($input[0].validationMessage).to.eq(
                 CashFlowManagerObject.HTMLValidationErrorMessage
             );
         });
-        cy.get('input:invalid').should('have.length', 1);
+        CashFlowManagerObject.getInvalidElement('comment').should(
+            'have.length',
+            1
+        );
+        CashFlowManagerObject.getSubmitionMessage()
+            .invoke('text')
+            .should(
+                'equal',
+                CashFlowManagerObject.addCostOrIncomeFailureMessage
+            );
+    });
+
+    it('should not add Cost if invalid empty date input', () => {
+        CashFlowManagerObject.addCostOrIncome(
+            'cost',
+            TestDataProvider.changeObjectValue('date', '{selectAll}{del}')
+        );
+        CashFlowManagerObject.getDate().then(($input) => {
+            expect($input[0].validationMessage).to.eq(
+                CashFlowManagerObject.HTMLValidationErrorMessage
+            );
+        });
+        CashFlowManagerObject.getInvalidElement('date').should(
+            'have.length',
+            1
+        );
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
             .should(
@@ -283,21 +171,38 @@ describe('cashFlowManager tests', () => {
     });
 
     it('should not add Income if invalid empty date input', () => {
-        HomePageObject.visitHomePage();
-        HomePageObject.goToCashFlowManagerModule();
-        CashFlowManagerObject.addCostOrIncome('income', {
-            title: generateFakeTextData(),
-            comment: generateFakeTextData(),
-            date: '{selectAll}{del}',
-            amount: generateFakeNumeicData(),
-            category: generateFakeTextData(),
-        });
+        CashFlowManagerObject.addCostOrIncome(
+            'income',
+            TestDataProvider.changeObjectValue('date', '{selectAll}{del}')
+        );
         CashFlowManagerObject.getDate().then(($input) => {
             expect($input[0].validationMessage).to.eq(
                 CashFlowManagerObject.HTMLValidationErrorMessage
             );
         });
-        cy.get('input:invalid').should('have.length', 1);
+        CashFlowManagerObject.getInvalidElement('date').should(
+            'have.length',
+            1
+        );
+        CashFlowManagerObject.getSubmitionMessage()
+            .invoke('text')
+            .should(
+                'equal',
+                CashFlowManagerObject.addCostOrIncomeFailureMessage
+            );
+    });
+
+    it('should not add Cost if invalid empty amount input', () => {
+        CashFlowManagerObject.addCostOrIncome(
+            'cost',
+            TestDataProvider.changeObjectValue('amount', '{selectAll}{del}')
+        );
+        CashFlowManagerObject.getAmount().then(($input) => {
+            expect($input[0].validationMessage).to.eq(
+                CashFlowManagerObject.HTMLValidationErrorMessage
+            );
+        });
+        CashFlowManagerObject.getInvalidElement('amount').should;
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
             .should(
@@ -307,21 +212,41 @@ describe('cashFlowManager tests', () => {
     });
 
     it('should not add Income if invalid empty amount input', () => {
-        HomePageObject.visitHomePage();
-        HomePageObject.goToCashFlowManagerModule();
-        CashFlowManagerObject.addCostOrIncome('income', {
-            title: generateFakeTextData(),
-            comment: generateFakeTextData(),
-            date: generateFakeDatatypeData(),
-            amount: '{backspace}',
-            category: generateFakeTextData(),
-        });
+        CashFlowManagerObject.addCostOrIncome(
+            'income',
+            TestDataProvider.changeObjectValue('amount', '{selectAll}{del}')
+        );
         CashFlowManagerObject.getAmount().then(($input) => {
             expect($input[0].validationMessage).to.eq(
                 CashFlowManagerObject.HTMLValidationErrorMessage
             );
         });
-        cy.get('input:invalid').should('have.length', 1);
+        CashFlowManagerObject.getInvalidElement('amount').should(
+            'have.length',
+            1
+        );
+        CashFlowManagerObject.getSubmitionMessage()
+            .invoke('text')
+            .should(
+                'equal',
+                CashFlowManagerObject.addCostOrIncomeFailureMessage
+            );
+    });
+
+    it('should not add Cost if invalid empty category input', () => {
+        CashFlowManagerObject.addCostOrIncome(
+            'cost',
+            TestDataProvider.changeObjectValue('category', '{selectAll}{del}')
+        );
+        CashFlowManagerObject.getCategory().then(($input) => {
+            expect($input[0].validationMessage).to.eq(
+                CashFlowManagerObject.HTMLValidationErrorMessage
+            );
+        });
+        CashFlowManagerObject.getInvalidElement('category').should(
+            'have.length',
+            1
+        );
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
             .should(
@@ -331,21 +256,32 @@ describe('cashFlowManager tests', () => {
     });
 
     it('should not add Income if invalid empty category input', () => {
-        HomePageObject.visitHomePage();
-        HomePageObject.goToCashFlowManagerModule();
-        CashFlowManagerObject.addCostOrIncome('income', {
-            title: generateFakeTextData(),
-            comment: generateFakeTextData(),
-            date: generateFakeDatatypeData(),
-            amount: generateFakeNumeicData(),
-            category: '{backspace}',
-        });
+        CashFlowManagerObject.addCostOrIncome(
+            'income',
+            TestDataProvider.changeObjectValue('category', '{selectAll}{del}')
+        );
         CashFlowManagerObject.getCategory().then(($input) => {
             expect($input[0].validationMessage).to.eq(
                 CashFlowManagerObject.HTMLValidationErrorMessage
             );
         });
-        cy.get('input:invalid').should('have.length', 1);
+        CashFlowManagerObject.getInvalidElement('category').should(
+            'have.length',
+            1
+        );
+        CashFlowManagerObject.getSubmitionMessage()
+            .invoke('text')
+            .should(
+                'equal',
+                CashFlowManagerObject.addCostOrIncomeFailureMessage
+            );
+    });
+
+    it('should not add Cost if negative amount input', () => {
+        CashFlowManagerObject.addCostOrIncome(
+            'cost',
+            TestDataProvider.changeObjectValue('amount', -100)
+        );
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
             .should(
@@ -355,15 +291,23 @@ describe('cashFlowManager tests', () => {
     });
 
     it('should not add Income if negative amount input', () => {
-        HomePageObject.visitHomePage();
-        HomePageObject.goToCashFlowManagerModule();
-        CashFlowManagerObject.addCostOrIncome('income', {
-            title: generateFakeTextData(),
-            comment: generateFakeTextData(),
-            date: generateFakeDatatypeData(),
-            amount: -100,
-            category: generateFakeTextData(),
-        });
+        CashFlowManagerObject.addCostOrIncome(
+            'income',
+            TestDataProvider.changeObjectValue('amount', -100)
+        );
+        CashFlowManagerObject.getSubmitionMessage()
+            .invoke('text')
+            .should(
+                'equal',
+                CashFlowManagerObject.addCostOrIncomeFailureMessage
+            );
+    });
+
+    it('should not add Cost if 0 amount input', () => {
+        CashFlowManagerObject.addCostOrIncome(
+            'cost',
+            TestDataProvider.changeObjectValue('amount', 0)
+        );
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
             .should(
@@ -373,32 +317,10 @@ describe('cashFlowManager tests', () => {
     });
 
     it('should not add Income if 0 amount input', () => {
-        HomePageObject.visitHomePage();
-        HomePageObject.goToCashFlowManagerModule();
-        CashFlowManagerObject.addCostOrIncome('income', {
-            title: generateFakeTextData(),
-            comment: generateFakeTextData(),
-            date: generateFakeDatatypeData(),
-            amount: 0,
-            category: generateFakeTextData(),
-        });
-        CashFlowManagerObject.getSubmitionMessage()
-            .invoke('text')
-            .should(
-                'equal',
-                CashFlowManagerObject.addCostOrIncomeFailureMessage
-            );
-    });
-    it('should not add Income if -0.01 amount input', () => {
-        HomePageObject.visitHomePage();
-        HomePageObject.goToCashFlowManagerModule();
-        CashFlowManagerObject.addCostOrIncome('income', {
-            title: generateFakeTextData(),
-            comment: generateFakeTextData(),
-            date: generateFakeDatatypeData(),
-            amount: -0.01,
-            category: generateFakeTextData(),
-        });
+        CashFlowManagerObject.addCostOrIncome(
+            'income',
+            TestDataProvider.changeObjectValue('amount', 0)
+        );
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
             .should(
@@ -407,21 +329,29 @@ describe('cashFlowManager tests', () => {
             );
     });
 
-    it('should add Income if 0.01 amount input', () => {
-        HomePageObject.visitHomePage();
-        HomePageObject.goToCashFlowManagerModule();
-        CashFlowManagerObject.addCostOrIncome('income', {
-            title: generateFakeTextData(),
-            comment: generateFakeTextData(),
-            date: generateFakeDatatypeData(),
-            amount: 0.01,
-            category: generateFakeTextData(),
-        });
+    it('should not add Cost if -0.01 amount input', () => {
+        CashFlowManagerObject.addCostOrIncome(
+            'cost',
+            TestDataProvider.changeObjectValue('amount', -0.01)
+        );
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
             .should(
                 'equal',
-                CashFlowManagerObject.incomeAddedConfirmationMessage
+                CashFlowManagerObject.addCostOrIncomeFailureMessage
+            );
+    });
+
+    it('should not add Income if -0.01 amount input', () => {
+        CashFlowManagerObject.addCostOrIncome(
+            'income',
+            TestDataProvider.changeObjectValue('amount', -0.01)
+        );
+        CashFlowManagerObject.getSubmitionMessage()
+            .invoke('text')
+            .should(
+                'equal',
+                CashFlowManagerObject.addCostOrIncomeFailureMessage
             );
     });
 });

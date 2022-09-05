@@ -5,6 +5,7 @@ const {
     sendRequestToAddCostItem,
     sendRequestToAddIncomeItem,
 } = require('../../services/cashFlowManagerService');
+const { TestDataProvider } = require('../../utils/testDataProvider');
 
 describe('accountState test', () => {
     it('should initial accountState be a number value', () => {
@@ -14,38 +15,26 @@ describe('accountState test', () => {
         });
     });
 
-    it('should account state be decreased about 100', () => {
+    it('should account state be decreased about amount', () => {
         let accountState = getCurrentAccountState().then((response) => {
             accountState = response.body.accountStateValue;
-            sendRequestToAddCostItem({
-                title: 'jabadaba',
-                comment: 'mpk',
-                date: '2022-02-01',
-                amount: 100,
-                category: 'Food',
-            });
+            sendRequestToAddCostItem(TestDataProvider.setNewStaticObject());
             getCurrentAccountState().then((response) => {
                 expect(response.status).to.equal(200);
                 expect(response.body.accountStateValue).to.equal(
-                    accountState - 100
+                    accountState - TestDataProvider.requestParams.amount
                 );
             });
         });
     });
-    it('should account state be increased about 1500', () => {
+    it('should account state be increased about amount', () => {
         let accountState = getCurrentAccountState().then((response) => {
             accountState = response.body.accountStateValue;
-            sendRequestToAddIncomeItem({
-                title: 'work',
-                comment: 'comment',
-                date: '2022-02-01',
-                amount: 1500,
-                category: 'Food',
-            });
+            sendRequestToAddIncomeItem(TestDataProvider.setNewStaticObject());
             getCurrentAccountState().then((response) => {
                 expect(response.status).to.equal(200);
                 expect(response.body.accountStateValue).to.equal(
-                    accountState + 1500
+                    accountState + TestDataProvider.requestParams.amount
                 );
             });
         });

@@ -5,13 +5,7 @@ const {
     filterResults,
     convertToFilterReqParam,
 } = require('../../services/filtererService');
-const {
-    title,
-    comment,
-    date,
-    amount,
-    category,
-} = require('../../utils/testDataProvider');
+const { TestDataProvider } = require('../../utils/testDataProvider');
 
 describe('filterer test', () => {
     it('should return empty array', () => {
@@ -38,13 +32,7 @@ describe('filterer test', () => {
             let responseLength = response.body.length;
             expect(response.status).to.equal(200);
 
-            sendRequestToAddCostItem({
-                title: title,
-                comment: comment,
-                date: date,
-                amount: amount,
-                category: category,
-            });
+            sendRequestToAddCostItem(TestDataProvider.setNewStaticObject());
             filterResults(
                 undefined,
                 undefined,
@@ -59,69 +47,25 @@ describe('filterer test', () => {
     });
 
     it('should return one array element by valid exact title filter', () => {
-        sendRequestToAddCostItem({
-            title: title,
-            comment: comment,
-            date: date,
-            amount: amount,
-            category: category,
+        sendRequestToAddCostItem(TestDataProvider.setNewStaticObject());
+        filterResults(
+            TestDataProvider.requestParams.title.toUpperCase(),
+            undefined,
+            undefined,
+            undefined,
+            undefined
+        ).then((response) => {
+            expect(response.status).to.equal(200);
+            expect(response.body.length).to.not.equal(0);
         });
-        filterResults(title, undefined, undefined, undefined, undefined).then(
-            (response) => {
-                expect(response.status).to.equal(200);
-                expect(response.body.length).to.not.equal(0);
-            }
-        );
     });
 
     it('should return one array element by valid exact comment filter', () => {
-        sendRequestToAddCostItem({
-            title: title,
-            comment: comment,
-            date: date,
-            amount: amount,
-            category: category,
-        });
-        filterResults(undefined, comment, undefined, undefined, undefined).then(
-            (response) => {
-                expect(response.status).to.equal(200);
-                expect(response.body.length).to.not.equal(0);
-            }
-        );
-    });
-
-    it('should return one array element by valid exact category filter', () => {
-        sendRequestToAddCostItem({
-            title: title,
-            comment: comment,
-            date: date,
-            amount: amount,
-            category: category,
-        });
+        sendRequestToAddCostItem(TestDataProvider.setNewStaticObject());
         filterResults(
             undefined,
+            TestDataProvider.requestParams.comment,
             undefined,
-            undefined,
-            undefined,
-            category
-        ).then((response) => {
-            expect(response.status).to.equal(200);
-            expect(response.body.length).to.not.equal(0);
-        });
-    });
-
-    it('should return one array element by valid date range filter', () => {
-        sendRequestToAddCostItem({
-            title: title,
-            comment: comment,
-            date: date,
-            amount: amount,
-            category: category,
-        });
-        filterResults(
-            undefined,
-            undefined,
-            convertToFilterReqParam(date),
             undefined,
             undefined
         ).then((response) => {
@@ -130,19 +74,30 @@ describe('filterer test', () => {
         });
     });
 
-    it('should return one array element by valid amount range filter', () => {
-        sendRequestToAddCostItem({
-            title: title,
-            comment: comment,
-            date: date,
-            amount: amount,
-            category: category,
-        });
+    it('should return +one array element by valid exact category filter', () => {
+        sendRequestToAddCostItem(TestDataProvider.setNewStaticObject());
         filterResults(
             undefined,
             undefined,
             undefined,
-            convertToFilterReqParam(amount),
+            undefined,
+            TestDataProvider.requestParams.category
+        ).then((response) => {
+            expect(response.status).to.equal(200);
+            expect(response.body.length).to.not.equal(0);
+        });
+    });
+
+    it('should return +one array element by valid date range filter', () => {
+        sendRequestToAddCostItem(TestDataProvider.setNewStaticObject());
+        filterResults(
+            undefined,
+            undefined,
+            convertToFilterReqParam(
+                TestDataProvider.requestParams.date,
+                TestDataProvider.requestParams.date
+            ),
+            undefined,
             undefined
         ).then((response) => {
             expect(response.status).to.equal(200);
@@ -150,16 +105,27 @@ describe('filterer test', () => {
         });
     });
 
-    it('should return one array element by valid title uppercased filter', () => {
-        sendRequestToAddCostItem({
-            title: title,
-            comment: comment,
-            date: date,
-            amount: amount,
-            category: category,
-        });
+    it('should return +one array element by valid amount range filter', () => {
+        sendRequestToAddCostItem(TestDataProvider.setNewStaticObject());
         filterResults(
-            title.toUpperCase(),
+            undefined,
+            undefined,
+            undefined,
+            convertToFilterReqParam(
+                TestDataProvider.requestParams.amount,
+                TestDataProvider.requestParams.amount
+            ),
+            undefined
+        ).then((response) => {
+            expect(response.status).to.equal(200);
+            expect(response.body.length).to.not.equal(0);
+        });
+    });
+
+    it('should return +one array element by valid title uppercased filter', () => {
+        sendRequestToAddCostItem(TestDataProvider.setNewStaticObject());
+        filterResults(
+            TestDataProvider.requestParams.title.toUpperCase(),
             undefined,
             undefined,
             undefined,
@@ -170,17 +136,11 @@ describe('filterer test', () => {
         });
     });
 
-    it('should return one array element by valid comment uppercased filter', () => {
-        sendRequestToAddCostItem({
-            title: title,
-            comment: comment,
-            date: date,
-            amount: amount,
-            category: category,
-        });
+    it('should return +one array element by valid comment uppercased filter', () => {
+        sendRequestToAddCostItem(TestDataProvider.setNewStaticObject());
         filterResults(
             undefined,
-            comment.toUpperCase(),
+            TestDataProvider.requestParams.comment.toUpperCase(),
             undefined,
             undefined,
             undefined
@@ -190,47 +150,26 @@ describe('filterer test', () => {
         });
     });
 
-    it('should return one array element by valid category uppercased filter', () => {
+    it('should return +one array element by valid category uppercased filter', () => {
+        sendRequestToAddCostItem(TestDataProvider.setNewStaticObject());
         filterResults(
             undefined,
             undefined,
             undefined,
             undefined,
-            category.toUpperCase()
+            TestDataProvider.requestParams.category.toUpperCase()
         ).then((response) => {
             expect(response.status).to.equal(200);
             expect(response.body.length).to.not.equal(0);
         });
     });
 
-    it('should return one array element by 2 valid filter criteria (title, comment)', () => {
-        sendRequestToAddCostItem({
-            title: title,
-            comment: comment,
-            date: date,
-            amount: amount,
-            category: category,
-        });
-        filterResults(title, comment, undefined, undefined, undefined).then(
-            (response) => {
-                expect(response.status).to.equal(200);
-                expect(response.body.length).to.not.equal(0);
-            }
-        );
-    });
-
-    it('should return one array element by 2 valid filter criteria (title, date)', () => {
-        sendRequestToAddCostItem({
-            title: title,
-            comment: comment,
-            date: date,
-            amount: amount,
-            category: category,
-        });
+    it('should return +one array element by 2 valid filter criteria (title, comment)', () => {
+        sendRequestToAddCostItem(TestDataProvider.setNewStaticObject());
         filterResults(
-            title,
+            TestDataProvider.requestParams.title,
+            TestDataProvider.requestParams.comment,
             undefined,
-            convertToFilterReqParam(date),
             undefined,
             undefined
         ).then((response) => {
@@ -239,19 +178,33 @@ describe('filterer test', () => {
         });
     });
 
-    it('should return one array element by 2 valid filter criteria (title, amount)', () => {
-        sendRequestToAddCostItem({
-            title: title,
-            comment: comment,
-            date: date,
-            amount: amount,
-            category: category,
-        });
+    it('should return +one array element by 2 valid filter criteria (title, date)', () => {
+        sendRequestToAddCostItem(TestDataProvider.setNewStaticObject());
         filterResults(
-            title,
+            TestDataProvider.requestParams.title,
+            undefined,
+            convertToFilterReqParam(
+                TestDataProvider.requestParams.date,
+                TestDataProvider.requestParams.date
+            ),
+            undefined,
+            undefined
+        ).then((response) => {
+            expect(response.status).to.equal(200);
+            expect(response.body.length).to.not.equal(0);
+        });
+    });
+
+    it('should return +one array element by 2 valid filter criteria (title, amount)', () => {
+        sendRequestToAddCostItem(TestDataProvider.setNewStaticObject());
+        filterResults(
+            TestDataProvider.requestParams.title,
             undefined,
             undefined,
-            convertToFilterReqParam(amount),
+            convertToFilterReqParam(
+                TestDataProvider.requestParams.amount,
+                TestDataProvider.requestParams.amount
+            ),
             undefined
         ).then((response) => {
             expect(response.status).to.equal(200);
@@ -260,32 +213,24 @@ describe('filterer test', () => {
     });
 
     it('should return one array element by 2 valid filter criteria (title, category)', () => {
-        sendRequestToAddCostItem({
-            title: title,
-            comment: comment,
-            date: date,
-            amount: amount,
-            category: category,
+        sendRequestToAddCostItem(TestDataProvider.setNewStaticObject());
+        filterResults(
+            TestDataProvider.requestParams.title,
+            undefined,
+            undefined,
+            undefined,
+            TestDataProvider.requestParams.category
+        ).then((response) => {
+            expect(response.status).to.equal(200);
+            expect(response.body.length).to.not.equal(0);
         });
-        filterResults(title, undefined, undefined, undefined, category).then(
-            (response) => {
-                expect(response.status).to.equal(200);
-                expect(response.body.length).to.not.equal(0);
-            }
-        );
     });
 
-    it('should return one array element by 2 valid filter criteria (title, comment) to uppercase', () => {
-        sendRequestToAddCostItem({
-            title: title,
-            comment: comment,
-            date: date,
-            amount: amount,
-            category: category,
-        });
+    it('should return +one array element by 2 valid filter criteria (title, comment) to uppercase', () => {
+        sendRequestToAddCostItem(TestDataProvider.setNewStaticObject());
         filterResults(
-            title.toUpperCase(),
-            comment.toUpperCase(),
+            TestDataProvider.requestParams.title.toUpperCase(),
+            TestDataProvider.requestParams.comment.toUpperCase(),
             undefined,
             undefined,
             undefined
@@ -295,18 +240,15 @@ describe('filterer test', () => {
         });
     });
 
-    it('should return one array element by 2 valid filter criteria (title, date) to uppercase', () => {
-        sendRequestToAddCostItem({
-            title: title,
-            comment: comment,
-            date: date,
-            amount: amount,
-            category: category,
-        });
+    it('should return +one array element by 2 valid filter criteria (title, date) to uppercase', () => {
+        sendRequestToAddCostItem(TestDataProvider.setNewStaticObject());
         filterResults(
-            title.toUpperCase(),
+            TestDataProvider.requestParams.title.toUpperCase(),
             undefined,
-            convertToFilterReqParam(date),
+            convertToFilterReqParam(
+                TestDataProvider.requestParams.date,
+                TestDataProvider.requestParams.date
+            ),
             undefined,
             undefined
         ).then((response) => {
@@ -315,19 +257,16 @@ describe('filterer test', () => {
         });
     });
 
-    it('should return one array element by 2 valid filter criteria (title, amount) to uppercase', () => {
-        sendRequestToAddCostItem({
-            title: title,
-            comment: comment,
-            date: date,
-            amount: amount,
-            category: category,
-        });
+    it('should return +one array element by 2 valid filter criteria (title, amount) to uppercase', () => {
+        sendRequestToAddCostItem(TestDataProvider.setNewStaticObject());
         filterResults(
-            title.toUpperCase(),
+            TestDataProvider.requestParams.title.toUpperCase(),
             undefined,
             undefined,
-            convertToFilterReqParam(amount),
+            convertToFilterReqParam(
+                TestDataProvider.requestParams.amount,
+                TestDataProvider.requestParams.amount
+            ),
             undefined
         ).then((response) => {
             expect(response.status).to.equal(200);
@@ -335,39 +274,33 @@ describe('filterer test', () => {
         });
     });
 
-    it('should return one array element by 2 valid filter criteria (title, category) to uppercase', () => {
-        sendRequestToAddCostItem({
-            title: title,
-            comment: comment,
-            date: date,
-            amount: amount,
-            category: category,
-        });
+    it('should return +one array element by 2 valid filter criteria (title, category) to uppercase', () => {
+        sendRequestToAddCostItem(TestDataProvider.setNewStaticObject());
         filterResults(
-            title.toUpperCase(),
+            TestDataProvider.requestParams.title.toUpperCase(),
             undefined,
             undefined,
             undefined,
-            category.toUpperCase()
+            TestDataProvider.requestParams.category.toUpperCase()
         ).then((response) => {
             expect(response.status).to.equal(200);
             expect(response.body.length).to.not.equal(0);
         });
     });
-    it('should return one array element by all valid filter criteria', () => {
-        sendRequestToAddCostItem({
-            title: title,
-            comment: comment,
-            date: date,
-            amount: amount,
-            category: category,
-        });
+    it('should return +one array element by all valid filter criteria', () => {
+        sendRequestToAddCostItem(TestDataProvider.setNewStaticObject());
         filterResults(
-            title,
-            comment,
-            convertToFilterReqParam(date, date),
-            convertToFilterReqParam(amount, amount),
-            category
+            TestDataProvider.requestParams.title,
+            TestDataProvider.requestParams.comment,
+            convertToFilterReqParam(
+                TestDataProvider.requestParams.date,
+                TestDataProvider.requestParams.date
+            ),
+            convertToFilterReqParam(
+                TestDataProvider.requestParams.amount,
+                TestDataProvider.requestParams.amount
+            ),
+            TestDataProvider.requestParams.category
         ).then((response) => {
             expect(response.status).to.equal(200);
             expect(response.body.length).to.not.equal(0);

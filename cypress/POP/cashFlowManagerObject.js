@@ -92,6 +92,10 @@ class CashFlowManagerObject {
     static getSubmitionMessage() {
         return cy.get('[data-cy="submition_message"]');
     }
+
+    static getInvalidElement(element) {
+        return cy.get(`input#${element}:invalid`);
+    }
 }
 
 module.exports = { CashFlowManagerObject };
