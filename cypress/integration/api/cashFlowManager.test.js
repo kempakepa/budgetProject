@@ -1,3 +1,4 @@
+const { CashFlowManagerObject } = require('../../POP/cashFlowManagerObject');
 const {
     sendRequestToAddCostItem,
     sendRequestToAddIncomeItem,
@@ -9,7 +10,9 @@ describe('cashFlowManager test', () => {
         sendRequestToAddCostItem(TestDataProvider.setNewStaticObject()).then(
             (response) => {
                 expect(response.status).to.equal(200);
-                expect(response.body).to.equal('Cost added successfully');
+                expect(response.body).to.equal(
+                    CashFlowManagerObject.costAddedConfirmationMessage
+                );
             }
         );
     });
@@ -19,7 +22,9 @@ describe('cashFlowManager test', () => {
             TestDataProvider.changeObjectValue('amount', undefined)
         ).then((response) => {
             expect(response.status).to.equal(400);
-            expect(response.body).to.equal('Invalid input');
+            expect(response.body).to.equal(
+                CashFlowManagerObject.addCostOrIncomeFailureMessage
+            );
         });
     });
     it('should return 400 status code if no title in /addCostItem request body', () => {
@@ -27,7 +32,9 @@ describe('cashFlowManager test', () => {
             TestDataProvider.changeObjectValue('title', undefined)
         ).then((response) => {
             expect(response.status).to.equal(400);
-            expect(response.body).to.equal('Invalid input');
+            expect(response.body).to.equal(
+                CashFlowManagerObject.addCostOrIncomeFailureMessage
+            );
         });
     });
     it('should return 400 status code if no comment in /addCostItem request body', () => {
@@ -35,7 +42,9 @@ describe('cashFlowManager test', () => {
             TestDataProvider.changeObjectValue('comment', undefined)
         ).then((response) => {
             expect(response.status).to.equal(400);
-            expect(response.body).to.equal('Invalid input');
+            expect(response.body).to.equal(
+                CashFlowManagerObject.addCostOrIncomeFailureMessage
+            );
         });
     });
 
@@ -44,7 +53,9 @@ describe('cashFlowManager test', () => {
             TestDataProvider.changeObjectValue('date', undefined)
         ).then((response) => {
             expect(response.status).to.equal(400);
-            expect(response.body).to.equal('Invalid input');
+            expect(response.body).to.equal(
+                CashFlowManagerObject.addCostOrIncomeFailureMessage
+            );
         });
     });
 
@@ -53,7 +64,9 @@ describe('cashFlowManager test', () => {
             TestDataProvider.changeObjectValue('category', undefined)
         ).then((response) => {
             expect(response.status).to.equal(400);
-            expect(response.body).to.equal('Invalid input');
+            expect(response.body).to.equal(
+                CashFlowManagerObject.addCostOrIncomeFailureMessage
+            );
         });
     });
 
@@ -61,7 +74,9 @@ describe('cashFlowManager test', () => {
         sendRequestToAddIncomeItem(TestDataProvider.setNewStaticObject()).then(
             (response) => {
                 expect(response.status).to.equal(200);
-                expect(response.body).to.equal('Income added successfully');
+                expect(response.body).to.equal(
+                    CashFlowManagerObject.incomeAddedConfirmationMessage
+                );
             }
         );
     });
@@ -71,7 +86,9 @@ describe('cashFlowManager test', () => {
             TestDataProvider.changeObjectValue('amount', undefined)
         ).then((response) => {
             expect(response.status).to.equal(400);
-            expect(response.body).to.equal('Invalid input');
+            expect(response.body).to.equal(
+                CashFlowManagerObject.addCostOrIncomeFailureMessage
+            );
         });
     });
     it('should return 400 status code if no title in /addIncomeItem request body', () => {
@@ -79,7 +96,9 @@ describe('cashFlowManager test', () => {
             TestDataProvider.changeObjectValue('title', undefined)
         ).then((response) => {
             expect(response.status).to.equal(400);
-            expect(response.body).to.equal('Invalid input');
+            expect(response.body).to.equal(
+                CashFlowManagerObject.addCostOrIncomeFailureMessage
+            );
         });
     });
     it('should return 400 status code if no comment in /addIncomeItem request body', () => {
@@ -87,7 +106,9 @@ describe('cashFlowManager test', () => {
             TestDataProvider.changeObjectValue('comment', undefined)
         ).then((response) => {
             expect(response.status).to.equal(400);
-            expect(response.body).to.equal('Invalid input');
+            expect(response.body).to.equal(
+                CashFlowManagerObject.addCostOrIncomeFailureMessage
+            );
         });
     });
 
@@ -96,7 +117,9 @@ describe('cashFlowManager test', () => {
             TestDataProvider.changeObjectValue('date', undefined)
         ).then((response) => {
             expect(response.status).to.equal(400);
-            expect(response.body).to.equal('Invalid input');
+            expect(response.body).to.equal(
+                CashFlowManagerObject.addCostOrIncomeFailureMessage
+            );
         });
     });
 
@@ -105,7 +128,9 @@ describe('cashFlowManager test', () => {
             TestDataProvider.changeObjectValue('category', undefined)
         ).then((response) => {
             expect(response.status).to.equal(400);
-            expect(response.body).to.equal('Invalid input');
+            expect(response.body).to.equal(
+                CashFlowManagerObject.addCostOrIncomeFailureMessage
+            );
         });
     });
 });
