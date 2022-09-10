@@ -18,7 +18,7 @@ describe('accountState test', () => {
     it('should account state be decreased about amount', () => {
         let accountState = getCurrentAccountState().then((response) => {
             accountState = response.body.accountStateValue;
-            sendRequestToAddCostItem(TestDataProvider.setNewStaticObject());
+            sendRequestToAddCostItem(TestDataProvider.createReqParamObject());
             getCurrentAccountState().then((response) => {
                 expect(response.status).to.equal(200);
                 expect(response.body.accountStateValue).to.equal(
@@ -30,7 +30,7 @@ describe('accountState test', () => {
     it('should account state be increased about amount', () => {
         let accountState = getCurrentAccountState().then((response) => {
             accountState = response.body.accountStateValue;
-            sendRequestToAddIncomeItem(TestDataProvider.setNewStaticObject());
+            sendRequestToAddIncomeItem(TestDataProvider.createReqParamObject());
             getCurrentAccountState().then((response) => {
                 expect(response.status).to.equal(200);
                 expect(response.body.accountStateValue).to.equal(

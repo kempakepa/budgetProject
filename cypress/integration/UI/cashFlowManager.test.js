@@ -11,7 +11,7 @@ describe('cashFlowManager tests', () => {
     it('should add Cost if 0.01 amount input', () => {
         CashFlowManagerObject.addCostOrIncome(
             'cost',
-            TestDataProvider.changeObjectValue('amount', 0.01)
+            TestDataProvider.customizeReqParamObject('amount', 0.01)
         );
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
@@ -24,7 +24,7 @@ describe('cashFlowManager tests', () => {
     it('should add Income if 0.01 amount input', () => {
         CashFlowManagerObject.addCostOrIncome(
             'income',
-            TestDataProvider.changeObjectValue('amount', 0.01)
+            TestDataProvider.customizeReqParamObject('amount', 0.01)
         );
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
@@ -37,7 +37,7 @@ describe('cashFlowManager tests', () => {
     it('should add Cost if valid input', () => {
         CashFlowManagerObject.addCostOrIncome(
             'cost',
-            TestDataProvider.changeObjectValue()
+            TestDataProvider.customizeReqParamObject()
         );
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
@@ -50,7 +50,7 @@ describe('cashFlowManager tests', () => {
     it('should add Income if valid input', () => {
         CashFlowManagerObject.addCostOrIncome(
             'income',
-            TestDataProvider.changeObjectValue()
+            TestDataProvider.customizeReqParamObject()
         );
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
@@ -63,7 +63,10 @@ describe('cashFlowManager tests', () => {
     it('should not add Cost if invalid empty title input', () => {
         CashFlowManagerObject.addCostOrIncome(
             'cost',
-            TestDataProvider.changeObjectValue('title', '{selectAll}{del}')
+            TestDataProvider.customizeReqParamObject(
+                'title',
+                '{selectAll}{del}'
+            )
         );
         CashFlowManagerObject.getTitle().then(($input) => {
             expect($input[0].validationMessage).to.eq(
@@ -85,7 +88,10 @@ describe('cashFlowManager tests', () => {
     it('should not add Income if invalid empty title input', () => {
         CashFlowManagerObject.addCostOrIncome(
             'income',
-            TestDataProvider.changeObjectValue('title', '{selectAll}{del}')
+            TestDataProvider.customizeReqParamObject(
+                'title',
+                '{selectAll}{del}'
+            )
         );
         CashFlowManagerObject.getTitle().then(($input) => {
             expect($input[0].validationMessage).to.eq(
@@ -107,7 +113,10 @@ describe('cashFlowManager tests', () => {
     it('should not add Cost if invalid empty comment input', () => {
         CashFlowManagerObject.addCostOrIncome(
             'cost',
-            TestDataProvider.changeObjectValue('comment', '{selectAll}{del}')
+            TestDataProvider.customizeReqParamObject(
+                'comment',
+                '{selectAll}{del}'
+            )
         );
         CashFlowManagerObject.getComment().then(($input) => {
             expect($input[0].validationMessage).to.eq(
@@ -129,7 +138,10 @@ describe('cashFlowManager tests', () => {
     it('should not add Income if invalid empty comment input', () => {
         CashFlowManagerObject.addCostOrIncome(
             'income',
-            TestDataProvider.changeObjectValue('comment', '{selectAll}{del}')
+            TestDataProvider.customizeReqParamObject(
+                'comment',
+                '{selectAll}{del}'
+            )
         );
         CashFlowManagerObject.getComment().then(($input) => {
             expect($input[0].validationMessage).to.eq(
@@ -151,7 +163,7 @@ describe('cashFlowManager tests', () => {
     it('should not add Cost if invalid empty date input', () => {
         CashFlowManagerObject.addCostOrIncome(
             'cost',
-            TestDataProvider.changeObjectValue('date', '{selectAll}{del}')
+            TestDataProvider.customizeReqParamObject('date', '{selectAll}{del}')
         );
         CashFlowManagerObject.getDate().then(($input) => {
             expect($input[0].validationMessage).to.eq(
@@ -173,7 +185,7 @@ describe('cashFlowManager tests', () => {
     it('should not add Income if invalid empty date input', () => {
         CashFlowManagerObject.addCostOrIncome(
             'income',
-            TestDataProvider.changeObjectValue('date', '{selectAll}{del}')
+            TestDataProvider.customizeReqParamObject('date', '{selectAll}{del}')
         );
         CashFlowManagerObject.getDate().then(($input) => {
             expect($input[0].validationMessage).to.eq(
@@ -195,7 +207,10 @@ describe('cashFlowManager tests', () => {
     it('should not add Cost if invalid empty amount input', () => {
         CashFlowManagerObject.addCostOrIncome(
             'cost',
-            TestDataProvider.changeObjectValue('amount', '{selectAll}{del}')
+            TestDataProvider.customizeReqParamObject(
+                'amount',
+                '{selectAll}{del}'
+            )
         );
         CashFlowManagerObject.getAmount().then(($input) => {
             expect($input[0].validationMessage).to.eq(
@@ -214,7 +229,10 @@ describe('cashFlowManager tests', () => {
     it('should not add Income if invalid empty amount input', () => {
         CashFlowManagerObject.addCostOrIncome(
             'income',
-            TestDataProvider.changeObjectValue('amount', '{selectAll}{del}')
+            TestDataProvider.customizeReqParamObject(
+                'amount',
+                '{selectAll}{del}'
+            )
         );
         CashFlowManagerObject.getAmount().then(($input) => {
             expect($input[0].validationMessage).to.eq(
@@ -236,7 +254,10 @@ describe('cashFlowManager tests', () => {
     it('should not add Cost if invalid empty category input', () => {
         CashFlowManagerObject.addCostOrIncome(
             'cost',
-            TestDataProvider.changeObjectValue('category', '{selectAll}{del}')
+            TestDataProvider.customizeReqParamObject(
+                'category',
+                '{selectAll}{del}'
+            )
         );
         CashFlowManagerObject.getCategory().then(($input) => {
             expect($input[0].validationMessage).to.eq(
@@ -258,7 +279,10 @@ describe('cashFlowManager tests', () => {
     it('should not add Income if invalid empty category input', () => {
         CashFlowManagerObject.addCostOrIncome(
             'income',
-            TestDataProvider.changeObjectValue('category', '{selectAll}{del}')
+            TestDataProvider.customizeReqParamObject(
+                'category',
+                '{selectAll}{del}'
+            )
         );
         CashFlowManagerObject.getCategory().then(($input) => {
             expect($input[0].validationMessage).to.eq(
@@ -280,7 +304,7 @@ describe('cashFlowManager tests', () => {
     it('should not add Cost if negative amount input', () => {
         CashFlowManagerObject.addCostOrIncome(
             'cost',
-            TestDataProvider.changeObjectValue('amount', -100)
+            TestDataProvider.customizeReqParamObject('amount', -100)
         );
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
@@ -293,7 +317,7 @@ describe('cashFlowManager tests', () => {
     it('should not add Income if negative amount input', () => {
         CashFlowManagerObject.addCostOrIncome(
             'income',
-            TestDataProvider.changeObjectValue('amount', -100)
+            TestDataProvider.customizeReqParamObject('amount', -100)
         );
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
@@ -306,7 +330,7 @@ describe('cashFlowManager tests', () => {
     it('should not add Cost if 0 amount input', () => {
         CashFlowManagerObject.addCostOrIncome(
             'cost',
-            TestDataProvider.changeObjectValue('amount', 0)
+            TestDataProvider.customizeReqParamObject('amount', 0)
         );
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
@@ -319,7 +343,7 @@ describe('cashFlowManager tests', () => {
     it('should not add Income if 0 amount input', () => {
         CashFlowManagerObject.addCostOrIncome(
             'income',
-            TestDataProvider.changeObjectValue('amount', 0)
+            TestDataProvider.customizeReqParamObject('amount', 0)
         );
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
@@ -332,7 +356,7 @@ describe('cashFlowManager tests', () => {
     it('should not add Cost if -0.01 amount input', () => {
         CashFlowManagerObject.addCostOrIncome(
             'cost',
-            TestDataProvider.changeObjectValue('amount', -0.01)
+            TestDataProvider.customizeReqParamObject('amount', -0.01)
         );
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
@@ -345,7 +369,7 @@ describe('cashFlowManager tests', () => {
     it('should not add Income if -0.01 amount input', () => {
         CashFlowManagerObject.addCostOrIncome(
             'income',
-            TestDataProvider.changeObjectValue('amount', -0.01)
+            TestDataProvider.customizeReqParamObject('amount', -0.01)
         );
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')

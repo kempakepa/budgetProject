@@ -1,59 +1,31 @@
 const {
     sendRequestToAddCostItem,
 } = require('../../services/cashFlowManagerService');
-const {
-    filterResults,
-    convertToFilterReqParam,
-} = require('../../services/filtererService');
+const { filterResults } = require('../../services/filtererService');
 const { TestDataProvider } = require('../../utils/testDataProvider');
 
 describe('filterer test', () => {
     it('should return empty array', () => {
-        filterResults(
-            'dsefe',
-            'dsefe',
-            ['dsefe', 'dsefe'],
-            [0, 0],
-            'dsefe'
-        ).then((response) => {
-            expect(response.status).to.equal(200);
-            expect(response.body).to.to.deep.equal([]);
-        });
+        filterResults(TestDataProvider.createReqParamObject()).then(
+            (response) => {
+                expect(response.status).to.equal(200);
+                expect(response.body).to.to.deep.equal([]);
+            }
+        );
     });
 
     it('should return +one in count array element', () => {
-        filterResults(
-            undefined,
-            undefined,
-            undefined,
-            undefined,
-            undefined
-        ).then((response) => {
-            let responseLength = response.body.length;
+        sendRequestToAddCostItem(TestDataProvider.createReqParamObject());
+        filterResults({}).then((response) => {
             expect(response.status).to.equal(200);
-
-            sendRequestToAddCostItem(TestDataProvider.setNewStaticObject());
-            filterResults(
-                undefined,
-                undefined,
-                undefined,
-                undefined,
-                undefined
-            ).then((response) => {
-                expect(response.status).to.equal(200);
-                expect(response.body.length).to.equal(responseLength + 1);
-            });
+            expect(response.body.length).to.not.equal(0);
         });
     });
 
     it('should return one array element by valid exact title filter', () => {
-        sendRequestToAddCostItem(TestDataProvider.setNewStaticObject());
+        sendRequestToAddCostItem(TestDataProvider.createReqParamObject());
         filterResults(
-            TestDataProvider.requestParams.title.toUpperCase(),
-            undefined,
-            undefined,
-            undefined,
-            undefined
+            TestDataProvider.setCustomFilterParamObject(['title'])
         ).then((response) => {
             expect(response.status).to.equal(200);
             expect(response.body.length).to.not.equal(0);
@@ -61,13 +33,9 @@ describe('filterer test', () => {
     });
 
     it('should return one array element by valid exact comment filter', () => {
-        sendRequestToAddCostItem(TestDataProvider.setNewStaticObject());
+        sendRequestToAddCostItem(TestDataProvider.createReqParamObject());
         filterResults(
-            undefined,
-            TestDataProvider.requestParams.comment,
-            undefined,
-            undefined,
-            undefined
+            TestDataProvider.setCustomFilterParamObject(['comment'])
         ).then((response) => {
             expect(response.status).to.equal(200);
             expect(response.body.length).to.not.equal(0);
@@ -75,13 +43,9 @@ describe('filterer test', () => {
     });
 
     it('should return +one array element by valid exact category filter', () => {
-        sendRequestToAddCostItem(TestDataProvider.setNewStaticObject());
+        sendRequestToAddCostItem(TestDataProvider.createReqParamObject());
         filterResults(
-            undefined,
-            undefined,
-            undefined,
-            undefined,
-            TestDataProvider.requestParams.category
+            TestDataProvider.setCustomFilterParamObject(['category'])
         ).then((response) => {
             expect(response.status).to.equal(200);
             expect(response.body.length).to.not.equal(0);
@@ -89,16 +53,9 @@ describe('filterer test', () => {
     });
 
     it('should return +one array element by valid date range filter', () => {
-        sendRequestToAddCostItem(TestDataProvider.setNewStaticObject());
+        sendRequestToAddCostItem(TestDataProvider.createReqParamObject());
         filterResults(
-            undefined,
-            undefined,
-            convertToFilterReqParam(
-                TestDataProvider.requestParams.date,
-                TestDataProvider.requestParams.date
-            ),
-            undefined,
-            undefined
+            TestDataProvider.setCustomFilterParamObject(['date'])
         ).then((response) => {
             expect(response.status).to.equal(200);
             expect(response.body.length).to.not.equal(0);
@@ -106,16 +63,9 @@ describe('filterer test', () => {
     });
 
     it('should return +one array element by valid amount range filter', () => {
-        sendRequestToAddCostItem(TestDataProvider.setNewStaticObject());
+        sendRequestToAddCostItem(TestDataProvider.createReqParamObject());
         filterResults(
-            undefined,
-            undefined,
-            undefined,
-            convertToFilterReqParam(
-                TestDataProvider.requestParams.amount,
-                TestDataProvider.requestParams.amount
-            ),
-            undefined
+            TestDataProvider.setCustomFilterParamObject(['amount'])
         ).then((response) => {
             expect(response.status).to.equal(200);
             expect(response.body.length).to.not.equal(0);
@@ -123,13 +73,10 @@ describe('filterer test', () => {
     });
 
     it('should return +one array element by valid title uppercased filter', () => {
-        sendRequestToAddCostItem(TestDataProvider.setNewStaticObject());
+        sendRequestToAddCostItem(TestDataProvider.createReqParamObject());
+        TestDataProvider.setCustomFilterParamObject(['title']);
         filterResults(
-            TestDataProvider.requestParams.title.toUpperCase(),
-            undefined,
-            undefined,
-            undefined,
-            undefined
+            TestDataProvider.modifyFilterParamObjectToUpperCase()
         ).then((response) => {
             expect(response.status).to.equal(200);
             expect(response.body.length).to.not.equal(0);
@@ -137,13 +84,10 @@ describe('filterer test', () => {
     });
 
     it('should return +one array element by valid comment uppercased filter', () => {
-        sendRequestToAddCostItem(TestDataProvider.setNewStaticObject());
+        sendRequestToAddCostItem(TestDataProvider.createReqParamObject());
+        TestDataProvider.setCustomFilterParamObject(['comment']);
         filterResults(
-            undefined,
-            TestDataProvider.requestParams.comment.toUpperCase(),
-            undefined,
-            undefined,
-            undefined
+            TestDataProvider.modifyFilterParamObjectToUpperCase()
         ).then((response) => {
             expect(response.status).to.equal(200);
             expect(response.body.length).to.not.equal(0);
@@ -151,13 +95,10 @@ describe('filterer test', () => {
     });
 
     it('should return +one array element by valid category uppercased filter', () => {
-        sendRequestToAddCostItem(TestDataProvider.setNewStaticObject());
+        sendRequestToAddCostItem(TestDataProvider.createReqParamObject());
+        TestDataProvider.setCustomFilterParamObject(['category']);
         filterResults(
-            undefined,
-            undefined,
-            undefined,
-            undefined,
-            TestDataProvider.requestParams.category.toUpperCase()
+            TestDataProvider.modifyFilterParamObjectToUpperCase()
         ).then((response) => {
             expect(response.status).to.equal(200);
             expect(response.body.length).to.not.equal(0);
@@ -165,13 +106,9 @@ describe('filterer test', () => {
     });
 
     it('should return +one array element by 2 valid filter criteria (title, comment)', () => {
-        sendRequestToAddCostItem(TestDataProvider.setNewStaticObject());
+        sendRequestToAddCostItem(TestDataProvider.createReqParamObject());
         filterResults(
-            TestDataProvider.requestParams.title,
-            TestDataProvider.requestParams.comment,
-            undefined,
-            undefined,
-            undefined
+            TestDataProvider.setCustomFilterParamObject(['title', 'comment'])
         ).then((response) => {
             expect(response.status).to.equal(200);
             expect(response.body.length).to.not.equal(0);
@@ -179,16 +116,9 @@ describe('filterer test', () => {
     });
 
     it('should return +one array element by 2 valid filter criteria (title, date)', () => {
-        sendRequestToAddCostItem(TestDataProvider.setNewStaticObject());
+        sendRequestToAddCostItem(TestDataProvider.createReqParamObject());
         filterResults(
-            TestDataProvider.requestParams.title,
-            undefined,
-            convertToFilterReqParam(
-                TestDataProvider.requestParams.date,
-                TestDataProvider.requestParams.date
-            ),
-            undefined,
-            undefined
+            TestDataProvider.setCustomFilterParamObject(['title', 'date'])
         ).then((response) => {
             expect(response.status).to.equal(200);
             expect(response.body.length).to.not.equal(0);
@@ -196,16 +126,9 @@ describe('filterer test', () => {
     });
 
     it('should return +one array element by 2 valid filter criteria (title, amount)', () => {
-        sendRequestToAddCostItem(TestDataProvider.setNewStaticObject());
+        sendRequestToAddCostItem(TestDataProvider.createReqParamObject());
         filterResults(
-            TestDataProvider.requestParams.title,
-            undefined,
-            undefined,
-            convertToFilterReqParam(
-                TestDataProvider.requestParams.amount,
-                TestDataProvider.requestParams.amount
-            ),
-            undefined
+            TestDataProvider.setCustomFilterParamObject(['title', 'amount'])
         ).then((response) => {
             expect(response.status).to.equal(200);
             expect(response.body.length).to.not.equal(0);
@@ -213,13 +136,9 @@ describe('filterer test', () => {
     });
 
     it('should return one array element by 2 valid filter criteria (title, category)', () => {
-        sendRequestToAddCostItem(TestDataProvider.setNewStaticObject());
+        sendRequestToAddCostItem(TestDataProvider.createReqParamObject());
         filterResults(
-            TestDataProvider.requestParams.title,
-            undefined,
-            undefined,
-            undefined,
-            TestDataProvider.requestParams.category
+            TestDataProvider.setCustomFilterParamObject(['title', 'category'])
         ).then((response) => {
             expect(response.status).to.equal(200);
             expect(response.body.length).to.not.equal(0);
@@ -227,13 +146,10 @@ describe('filterer test', () => {
     });
 
     it('should return +one array element by 2 valid filter criteria (title, comment) to uppercase', () => {
-        sendRequestToAddCostItem(TestDataProvider.setNewStaticObject());
+        sendRequestToAddCostItem(TestDataProvider.createReqParamObject());
+        TestDataProvider.setCustomFilterParamObject(['title', 'comment']);
         filterResults(
-            TestDataProvider.requestParams.title.toUpperCase(),
-            TestDataProvider.requestParams.comment.toUpperCase(),
-            undefined,
-            undefined,
-            undefined
+            TestDataProvider.modifyFilterParamObjectToUpperCase()
         ).then((response) => {
             expect(response.status).to.equal(200);
             expect(response.body.length).to.not.equal(0);
@@ -241,16 +157,10 @@ describe('filterer test', () => {
     });
 
     it('should return +one array element by 2 valid filter criteria (title, date) to uppercase', () => {
-        sendRequestToAddCostItem(TestDataProvider.setNewStaticObject());
+        sendRequestToAddCostItem(TestDataProvider.createReqParamObject());
+        TestDataProvider.setCustomFilterParamObject(['title', 'date']);
         filterResults(
-            TestDataProvider.requestParams.title.toUpperCase(),
-            undefined,
-            convertToFilterReqParam(
-                TestDataProvider.requestParams.date,
-                TestDataProvider.requestParams.date
-            ),
-            undefined,
-            undefined
+            TestDataProvider.modifyFilterParamObjectToUpperCase()
         ).then((response) => {
             expect(response.status).to.equal(200);
             expect(response.body.length).to.not.equal(0);
@@ -258,16 +168,10 @@ describe('filterer test', () => {
     });
 
     it('should return +one array element by 2 valid filter criteria (title, amount) to uppercase', () => {
-        sendRequestToAddCostItem(TestDataProvider.setNewStaticObject());
+        sendRequestToAddCostItem(TestDataProvider.createReqParamObject());
+        TestDataProvider.setCustomFilterParamObject(['title', 'amount']);
         filterResults(
-            TestDataProvider.requestParams.title.toUpperCase(),
-            undefined,
-            undefined,
-            convertToFilterReqParam(
-                TestDataProvider.requestParams.amount,
-                TestDataProvider.requestParams.amount
-            ),
-            undefined
+            TestDataProvider.modifyFilterParamObjectToUpperCase()
         ).then((response) => {
             expect(response.status).to.equal(200);
             expect(response.body.length).to.not.equal(0);
@@ -275,32 +179,19 @@ describe('filterer test', () => {
     });
 
     it('should return +one array element by 2 valid filter criteria (title, category) to uppercase', () => {
-        sendRequestToAddCostItem(TestDataProvider.setNewStaticObject());
+        sendRequestToAddCostItem(TestDataProvider.createReqParamObject());
+        TestDataProvider.setCustomFilterParamObject(['title', 'category']);
         filterResults(
-            TestDataProvider.requestParams.title.toUpperCase(),
-            undefined,
-            undefined,
-            undefined,
-            TestDataProvider.requestParams.category.toUpperCase()
+            TestDataProvider.modifyFilterParamObjectToUpperCase()
         ).then((response) => {
             expect(response.status).to.equal(200);
             expect(response.body.length).to.not.equal(0);
         });
     });
     it('should return +one array element by all valid filter criteria', () => {
-        sendRequestToAddCostItem(TestDataProvider.setNewStaticObject());
+        sendRequestToAddCostItem(TestDataProvider.createReqParamObject());
         filterResults(
-            TestDataProvider.requestParams.title,
-            TestDataProvider.requestParams.comment,
-            convertToFilterReqParam(
-                TestDataProvider.requestParams.date,
-                TestDataProvider.requestParams.date
-            ),
-            convertToFilterReqParam(
-                TestDataProvider.requestParams.amount,
-                TestDataProvider.requestParams.amount
-            ),
-            TestDataProvider.requestParams.category
+            TestDataProvider.setCustomFilterParamObject(['date', 'amount'])
         ).then((response) => {
             expect(response.status).to.equal(200);
             expect(response.body.length).to.not.equal(0);

@@ -3,7 +3,7 @@ const {
     filterBudgetItemEndpoint,
 } = require('../utils/endpointsProvider');
 
-function defineQuerryParams(title, comment, date, amount, category) {
+function defineQuerryParams({ title, comment, date, amount, category }) {
     let querryParams = `title=${title}&comment=${comment}&date=${date}&amount=${amount}&category=${category}`;
     return querryParams;
 }
@@ -21,8 +21,8 @@ function filterResults(title, comment, date, amount, category) {
     });
 }
 
-function convertToFilterReqParam(reqParam0, reqParam1) {
+/* function convertToFilterReqParam(reqParam0, reqParam1) {
     return `[${reqParam0},${reqParam1}]`;
 }
-
-module.exports = { filterResults, convertToFilterReqParam };
+ */
+module.exports = { filterResults /* convertToFilterReqParam */ };
