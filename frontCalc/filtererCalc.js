@@ -67,7 +67,10 @@ const showFiltererBalancerData = (data) => {
     const incomesSum = incomes.reduce((acc, object) => acc + object[3], 0);
 
     const costs = data.filter((dataRow) => dataRow[3] < 0);
-    const costsSum = costs.reduce((acc, object) => acc + object[3], 0);
+    const costsSum = costs.reduce(
+        (acc, object) => acc + Math.abs(object[3]),
+        0
+    );
 
     const balance = incomesSum - costsSum;
 
