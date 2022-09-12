@@ -63,7 +63,7 @@ class CashFlowManagerController extends BaseController {
             const item = JSON.parse(reqBody);
 
             if (
-                new Validation(
+                new CashFlowValidator(
                     item.title,
                     item.comment,
                     item.date,
