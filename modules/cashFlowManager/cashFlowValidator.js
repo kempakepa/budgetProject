@@ -2,7 +2,7 @@
 
 const { BaseConstructor } = require('../../utils/baseConstructor');
 
-class Validation extends BaseConstructor {
+class CashFlowValidator extends BaseConstructor {
     constructor(title, comment, date, amount, category) {
         super(title, comment, date, amount, category);
     }
@@ -49,4 +49,4 @@ class Validation extends BaseConstructor {
     }
 }
 
-module.exports = { Validation };
+module.exports = { CashFlowValidator };

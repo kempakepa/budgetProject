@@ -1,5 +1,5 @@
 const { AccountState } = require('../accountState/accountState.js');
-const { Validation } = require('./validation.js');
+const { CashFlowValidator } = require('./cashFlowValidator');
 
 class CashFlowManager {
     static listAllCostsAndIncomes = [];
@@ -11,7 +11,7 @@ class CashFlowManager {
         this.amount = amount;
         this.category = category;
         if (
-            new Validation(
+            new CashFlowValidator(
                 this.title,
                 this.comment,
                 this.date,

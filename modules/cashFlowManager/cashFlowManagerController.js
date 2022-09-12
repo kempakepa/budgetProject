@@ -1,6 +1,6 @@
 const { BaseController } = require('../../utils/baseController');
 const { CashFlowManager } = require('./cashFlowManager');
-const { Validation } = require('./validation');
+const { CashFlowValidator } = require('./cashFlowValidator');
 
 class CashFlowManagerController extends BaseController {
     constructor(req, res) {
@@ -19,7 +19,7 @@ class CashFlowManagerController extends BaseController {
             const item = JSON.parse(reqBody);
 
             if (
-                new Validation(
+                new CashFlowValidator(
                     item.title,
                     item.comment,
                     item.date,
