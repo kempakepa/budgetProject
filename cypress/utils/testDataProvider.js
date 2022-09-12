@@ -22,18 +22,25 @@ class TestDataProvider {
     }
 
     static createReqParamObject() {
-        (this.requestParams.title = this.generateFakerData('text')),
-            (this.requestParams.comment = this.generateFakerData('text')),
-            (this.requestParams.date = this.generateFakerData('date')),
-            (this.requestParams.amount = this.generateFakerData('numeric')),
-            (this.requestParams.category = this.generateFakerData('text'));
-        return this.requestParams;
+        const requestParams = {
+            title: this.generateFakerData('text'),
+            comment: this.generateFakerData('text'),
+            date: this.generateFakerData('date'),
+            amount: this.generateFakerData('numeric'),
+            category: this.generateFakerData('text'),
+        };
+        return requestParams;
     }
 
     static customizeReqParamObject(property, value) {
-        this.createReqParamObject();
-        this.requestParams[property] = value;
-        return this.requestParams;
+        const result = this.createReqParamObject();
+
+        if (property === 'amount') {
+            result.amount = value;
+        } else {
+            result[property] = value; //todo: sprawdzic czy to w ogole dziala
+        }
+        return result;
     }
 
     static setDefaultFilterParamObject() {
