@@ -25,7 +25,7 @@ const defineQuerryParams = () => {
     if (title == '') {
         title = undefined;
     }
-    if ((comment = '')) {
+    if (comment == '') {
         comment = undefined;
     }
     if (date[0] == '' || date[1] == '') {
