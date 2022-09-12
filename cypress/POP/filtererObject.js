@@ -3,6 +3,10 @@ class FiltererObject {
         cy.get('#category').type(category);
     }
 
+    static fillComment(comment) {
+        cy.get('#comment').type(comment);
+    }
+
     static clickSend() {
         cy.get('[type="button"]').click();
     }
