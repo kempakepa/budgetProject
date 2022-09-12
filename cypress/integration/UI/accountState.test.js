@@ -20,11 +20,14 @@ describe('accountState test', () => {
         AccountStateObject.getAccountStateText().then((accountStateText) => {
             cy.log(accountStateText);
             let accountState = parseInt(accountStateText);
-            sendRequestToAddCostItem(TestDataProvider.createReqParamObject());
+
+            const requestBody = TestDataProvider.createReqParamObject();
+
+            sendRequestToAddCostItem(requestBody);
             cy.reload();
             cy.get('#accountState').should(
                 'contain',
-                `${accountState - TestDataProvider.requestParams.amount}`
+                `${accountState - requestBody.amount}`
             );
         });
     });

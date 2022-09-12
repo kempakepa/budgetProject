@@ -18,11 +18,14 @@ describe('accountState test', () => {
     it('should account state be decreased about amount', () => {
         let accountState = getCurrentAccountState().then((response) => {
             accountState = response.body.accountStateValue;
-            sendRequestToAddCostItem(TestDataProvider.createReqParamObject());
+
+            const requestBody = TestDataProvider.createReqParamObject();
+
+            sendRequestToAddCostItem(requestBody);
             getCurrentAccountState().then((response) => {
                 expect(response.status).to.equal(200);
                 expect(response.body.accountStateValue).to.equal(
-                    accountState - TestDataProvider.requestParams.amount
+                    accountState - requestBody.amount
                 );
             });
         });
@@ -30,11 +33,14 @@ describe('accountState test', () => {
     it('should account state be increased about amount', () => {
         let accountState = getCurrentAccountState().then((response) => {
             accountState = response.body.accountStateValue;
-            sendRequestToAddIncomeItem(TestDataProvider.createReqParamObject());
+
+            const requestBody = TestDataProvider.createReqParamObject();
+
+            sendRequestToAddIncomeItem(requestBody);
             getCurrentAccountState().then((response) => {
                 expect(response.status).to.equal(200);
                 expect(response.body.accountStateValue).to.equal(
-                    accountState + TestDataProvider.requestParams.amount
+                    accountState + requestBody.amount
                 );
             });
         });
