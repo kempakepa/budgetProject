@@ -41,7 +41,9 @@ describe('filtererBalancer tests', () => {
     });
 
     it('Should return balance = 0 when there is no data', () => {
-        FiltererObject.fillCategory('category');
+        const specifiedComment = generateSpecifiedComment();
+
+        FiltererObject.fillComment(specifiedComment);
         FiltererObject.clickSend();
 
         FiltererObject.incomeShouldBe(0);
@@ -63,7 +65,7 @@ describe('filtererBalancer tests', () => {
     });
 
     it('Should return negative balance when costs are larger than incomes', () => {
-        const specifiedComment = generateSpecifiedComment;
+        const specifiedComment = generateSpecifiedComment();
 
         generateCashFlowData(1000, 100, 3, specifiedComment);
 
