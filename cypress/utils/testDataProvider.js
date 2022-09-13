@@ -34,12 +34,7 @@ class TestDataProvider {
 
     static customizeReqParamObject(property, value) {
         const result = this.createReqParamObject();
-
-        if (property === 'amount') {
-            result.amount = value;
-        } else {
-            result[property] = value; //todo: sprawdzic czy to w ogole dziala
-        }
+        result[property] = value;
         return result;
     }
 
