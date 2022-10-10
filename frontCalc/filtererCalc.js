@@ -25,7 +25,7 @@ const defineQuerryParams = () => {
     if (title == '') {
         title = undefined;
     }
-    if ((comment = '')) {
+    if (comment == '') {
         comment = undefined;
     }
     if (date[0] == '' || date[1] == '') {
@@ -50,12 +50,35 @@ const defineQuerryParams = () => {
 };
 
 const showResultsFiltered = (value) => {
+    showIncomesAndCostsList(value);
+    showFiltererBalancerData(value);
+};
+
+const showIncomesAndCostsList = (data) => {
     let showValueElement = '';
-    for (const valueElement of value) {
+    for (const valueElement of data) {
         showValueElement += `<li>${valueElement}</li>`;
     }
     document.getElementById('showlist').innerHTML = showValueElement;
 };
+
+const showFiltererBalancerData = (data) => {
+    const incomes = data.filter((dataRow) => dataRow[3] > 0);
+    const incomesSum = incomes.reduce((acc, object) => acc + object[3], 0);
+
+    const costs = data.filter((dataRow) => dataRow[3] < 0);
+    const costsSum = costs.reduce(
+        (acc, object) => acc + Math.abs(object[3]),
+        0
+    );
+
+    const balance = incomesSum - costsSum;
+
+    document.querySelector('[data-cy="incomeSummary"]').innerText = incomesSum;
+    document.querySelector('[data-cy="costSummary"]').innerText = costsSum;
+    document.querySelector('[data-cy="balanceSummary"]').innerText = balance;
+};
+
 //odczytywanie parametrow requesta
 const readInputelementsAndValues = () => {
     return {

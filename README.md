@@ -27,4 +27,5 @@ sequenceDiagram
     cashFlowManager->>AccountState: changeAccountState
     User->>cashFlowManager: listCostAndIncome
     cashFlowManager->>Filterer: filterCostAndIncome
+    User->>FiltererBalancer: getFinanceBalance
 ```
