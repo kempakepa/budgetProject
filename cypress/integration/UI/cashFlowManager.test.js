@@ -254,10 +254,7 @@ describe('cashFlowManager tests', () => {
     it('should not add Cost if invalid empty category input', () => {
         CashFlowManagerObject.addCostOrIncome(
             'cost',
-            TestDataProvider.customizeReqParamObject(
-                'category',
-                '{selectAll}{del}'
-            )
+            TestDataProvider.customizeReqParamObject('category', '')
         );
         CashFlowManagerObject.getCategory().then(($input) => {
             expect($input[0].validationMessage).to.eq(
@@ -279,10 +276,7 @@ describe('cashFlowManager tests', () => {
     it('should not add Income if invalid empty category input', () => {
         CashFlowManagerObject.addCostOrIncome(
             'income',
-            TestDataProvider.customizeReqParamObject(
-                'category',
-                '{selectAll}{del}'
-            )
+            TestDataProvider.customizeReqParamObject('category', '')
         );
         CashFlowManagerObject.getCategory().then(($input) => {
             expect($input[0].validationMessage).to.eq(

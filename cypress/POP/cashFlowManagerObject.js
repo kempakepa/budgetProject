@@ -56,7 +56,7 @@ class CashFlowManagerObject {
     }
 
     static insertCategory(category) {
-        this.getCategory().type(category);
+        this.getCategory().select(category);
     }
 
     static submitCashFlowManagerForm() {
@@ -94,7 +94,11 @@ class CashFlowManagerObject {
     }
 
     static getInvalidElement(element) {
-        return cy.get(`input#${element}:invalid`);
+        if (element == 'category') {
+            return cy.get(`select#${element}:invalid`);
+        } else {
+            return cy.get(`input#${element}:invalid`);
+        }
     }
 }
 
