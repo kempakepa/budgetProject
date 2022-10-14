@@ -93,11 +93,11 @@ class CashFlowManagerObject {
         return cy.get('[data-cy="submition_message"]');
     }
 
-    static getInvalidElement(element) {
+    static inputShouldBeInvalid(element) {
         if (element == 'category') {
-            return cy.get(`select#${element}:invalid`);
+            return cy.get(`select#${element}:invalid`).should('have.length', 1);
         } else {
-            return cy.get(`input#${element}:invalid`);
+            return cy.get(`input#${element}:invalid`).should('have.length', 1);
         }
     }
 }

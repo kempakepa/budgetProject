@@ -73,10 +73,7 @@ describe('cashFlowManager tests', () => {
                 CashFlowManagerObject.HTMLValidationErrorMessage
             );
         });
-        CashFlowManagerObject.getInvalidElement('title').should(
-            'have.length',
-            1
-        );
+        CashFlowManagerObject.inputShouldBeInvalid('title');
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
             .should(
@@ -98,10 +95,8 @@ describe('cashFlowManager tests', () => {
                 CashFlowManagerObject.HTMLValidationErrorMessage
             );
         });
-        CashFlowManagerObject.getInvalidElement('title').should(
-            'have.length',
-            1
-        );
+        CashFlowManagerObject.inputShouldBeInvalid('title');
+
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
             .should(
@@ -123,10 +118,7 @@ describe('cashFlowManager tests', () => {
                 CashFlowManagerObject.HTMLValidationErrorMessage
             );
         });
-        CashFlowManagerObject.getInvalidElement('comment').should(
-            'have.length',
-            1
-        );
+        CashFlowManagerObject.inputShouldBeInvalid('comment');
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
             .should(
@@ -148,10 +140,7 @@ describe('cashFlowManager tests', () => {
                 CashFlowManagerObject.HTMLValidationErrorMessage
             );
         });
-        CashFlowManagerObject.getInvalidElement('comment').should(
-            'have.length',
-            1
-        );
+        CashFlowManagerObject.inputShouldBeInvalid('comment');
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
             .should(
@@ -170,10 +159,7 @@ describe('cashFlowManager tests', () => {
                 CashFlowManagerObject.HTMLValidationErrorMessage
             );
         });
-        CashFlowManagerObject.getInvalidElement('date').should(
-            'have.length',
-            1
-        );
+        CashFlowManagerObject.inputShouldBeInvalid('date');
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
             .should(
@@ -192,10 +178,7 @@ describe('cashFlowManager tests', () => {
                 CashFlowManagerObject.HTMLValidationErrorMessage
             );
         });
-        CashFlowManagerObject.getInvalidElement('date').should(
-            'have.length',
-            1
-        );
+        CashFlowManagerObject.inputShouldBeInvalid('date');
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
             .should(
@@ -217,7 +200,7 @@ describe('cashFlowManager tests', () => {
                 CashFlowManagerObject.HTMLValidationErrorMessage
             );
         });
-        CashFlowManagerObject.getInvalidElement('amount').should;
+        CashFlowManagerObject.inputShouldBeInvalid('amount');
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
             .should(
@@ -239,10 +222,7 @@ describe('cashFlowManager tests', () => {
                 CashFlowManagerObject.HTMLValidationErrorMessage
             );
         });
-        CashFlowManagerObject.getInvalidElement('amount').should(
-            'have.length',
-            1
-        );
+        CashFlowManagerObject.inputShouldBeInvalid('amount');
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
             .should(
@@ -261,10 +241,7 @@ describe('cashFlowManager tests', () => {
                 CashFlowManagerObject.HTMLValidationErrorMessage
             );
         });
-        CashFlowManagerObject.getInvalidElement('category').should(
-            'have.length',
-            1
-        );
+        CashFlowManagerObject.inputShouldBeInvalid('category');
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
             .should(
@@ -283,10 +260,7 @@ describe('cashFlowManager tests', () => {
                 CashFlowManagerObject.HTMLValidationErrorMessage
             );
         });
-        CashFlowManagerObject.getInvalidElement('category').should(
-            'have.length',
-            1
-        );
+        CashFlowManagerObject.inputShouldBeInvalid('category');
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
             .should(
@@ -300,6 +274,8 @@ describe('cashFlowManager tests', () => {
             'cost',
             TestDataProvider.customizeReqParamObject('amount', -100)
         );
+
+        //CashFlowManagerObject.inputShouldBeInvalid('amount');
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
             .should(
@@ -313,6 +289,8 @@ describe('cashFlowManager tests', () => {
             'income',
             TestDataProvider.customizeReqParamObject('amount', -100)
         );
+
+        //CashFlowManagerObject.inputShouldBeInvalid('amount');
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
             .should(
@@ -326,6 +304,8 @@ describe('cashFlowManager tests', () => {
             'cost',
             TestDataProvider.customizeReqParamObject('amount', 0)
         );
+
+        //CashFlowManagerObject.inputShouldBeInvalid('amount');
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
             .should(
@@ -339,6 +319,8 @@ describe('cashFlowManager tests', () => {
             'income',
             TestDataProvider.customizeReqParamObject('amount', 0)
         );
+
+        //CashFlowManagerObject.inputShouldBeInvalid('amount');
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
             .should(
@@ -352,6 +334,7 @@ describe('cashFlowManager tests', () => {
             'cost',
             TestDataProvider.customizeReqParamObject('amount', -0.01)
         );
+        CashFlowManagerObject.inputShouldBeInvalid('amount');
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
             .should(
@@ -365,6 +348,7 @@ describe('cashFlowManager tests', () => {
             'income',
             TestDataProvider.customizeReqParamObject('amount', -0.01)
         );
+        CashFlowManagerObject.inputShouldBeInvalid('amount');
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
             .should(
