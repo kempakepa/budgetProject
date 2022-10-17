@@ -13,6 +13,9 @@ describe('cashFlowManager tests', () => {
             'cost',
             TestDataProvider.customizeReqParamObject('amount', 0.01)
         );
+        CashFlowManagerObject.getAmount().then(($input) => {
+            expect($input[0].validationMessage).to.eq('');
+        });
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
             .should(
@@ -26,6 +29,9 @@ describe('cashFlowManager tests', () => {
             'income',
             TestDataProvider.customizeReqParamObject('amount', 0.01)
         );
+        CashFlowManagerObject.getAmount().then(($input) => {
+            expect($input[0].validationMessage).to.eq('');
+        });
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
             .should(
@@ -274,8 +280,13 @@ describe('cashFlowManager tests', () => {
             'cost',
             TestDataProvider.customizeReqParamObject('amount', -100)
         );
+        CashFlowManagerObject.getAmount().then(($input) => {
+            expect($input[0].validationMessage).to.eq(
+                CashFlowManagerObject.HTMLValidationErrorMessage
+            );
+        });
 
-        //CashFlowManagerObject.inputShouldBeInvalid('amount');
+        CashFlowManagerObject.inputShouldBeInvalid('amount');
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
             .should(
@@ -289,8 +300,13 @@ describe('cashFlowManager tests', () => {
             'income',
             TestDataProvider.customizeReqParamObject('amount', -100)
         );
+        CashFlowManagerObject.getAmount().then(($input) => {
+            expect($input[0].validationMessage).to.eq(
+                CashFlowManagerObject.HTMLValidationErrorMessage
+            );
+        });
 
-        //CashFlowManagerObject.inputShouldBeInvalid('amount');
+        CashFlowManagerObject.inputShouldBeInvalid('amount');
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
             .should(
@@ -304,8 +320,13 @@ describe('cashFlowManager tests', () => {
             'cost',
             TestDataProvider.customizeReqParamObject('amount', 0)
         );
+        CashFlowManagerObject.getAmount().then(($input) => {
+            expect($input[0].validationMessage).to.eq(
+                CashFlowManagerObject.HTMLValidationErrorMessage
+            );
+        });
 
-        //CashFlowManagerObject.inputShouldBeInvalid('amount');
+        CashFlowManagerObject.inputShouldBeInvalid('amount');
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
             .should(
@@ -319,8 +340,13 @@ describe('cashFlowManager tests', () => {
             'income',
             TestDataProvider.customizeReqParamObject('amount', 0)
         );
+        CashFlowManagerObject.getAmount().then(($input) => {
+            expect($input[0].validationMessage).to.eq(
+                CashFlowManagerObject.HTMLValidationErrorMessage
+            );
+        });
 
-        //CashFlowManagerObject.inputShouldBeInvalid('amount');
+        CashFlowManagerObject.inputShouldBeInvalid('amount');
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
             .should(
@@ -334,6 +360,11 @@ describe('cashFlowManager tests', () => {
             'cost',
             TestDataProvider.customizeReqParamObject('amount', -0.01)
         );
+        CashFlowManagerObject.getAmount().then(($input) => {
+            expect($input[0].validationMessage).to.eq(
+                CashFlowManagerObject.HTMLValidationErrorMessage
+            );
+        });
         CashFlowManagerObject.inputShouldBeInvalid('amount');
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')
@@ -348,6 +379,11 @@ describe('cashFlowManager tests', () => {
             'income',
             TestDataProvider.customizeReqParamObject('amount', -0.01)
         );
+        CashFlowManagerObject.getAmount().then(($input) => {
+            expect($input[0].validationMessage).to.eq(
+                CashFlowManagerObject.HTMLValidationErrorMessage
+            );
+        });
         CashFlowManagerObject.inputShouldBeInvalid('amount');
         CashFlowManagerObject.getSubmitionMessage()
             .invoke('text')

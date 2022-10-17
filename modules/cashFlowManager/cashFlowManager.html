@@ -21,10 +21,10 @@
         <label for="date"></label>
         <input type="date" placeholder="Date*" id="date" data-cy="date" required oninvalid="this.setCustomValidity('Please fill in this field.')"/></br>
         <label for="amount"></label>
-        <input type="number" placeholder="Amount*" id="amount" data-cy="amount" required oninvalid="this.setCustomValidity('Please fill in this field.')"/></br>
+        <input type="number" placeholder="Amount*" id="amount" data-cy="amount" min="0.01" required oninvalid="this.setCustomValidity('Please fill in this field.')"/></br>
         <label for="category"></label>
         <select name="category" id="category" placeholder="Category*" data-cy="category" required oninvalid="this.setCustomValidity('Please fill in this field.')">
-            <option value="" selected>Category*</option>
+            <option value="" selected disabled hidden>Category*</option>
             <option value="food">Food</option>
             <option value="salary">Salary</option>
             <option value="taxes">Taxes</option>

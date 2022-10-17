@@ -63,23 +63,24 @@ class CashFlowManagerObject {
         cy.get('[data-cy=sendButton]').click();
     }
 
-    static addCost(addInputs) {
-        this.selectCost();
+    static insertAllInputs(addInputs) {
         this.insertTitle(addInputs.title);
         this.insertComment(addInputs.comment);
         this.insertDate(addInputs.date);
         this.insertAmount(addInputs.amount);
-        this.insertCategory(addInputs.category);
+        if (addInputs.category) {
+            this.insertCategory(addInputs.category);
+        }
         this.submitCashFlowManagerForm();
+    }
+
+    static addCost(addInputs) {
+        this.selectCost();
+        this.insertAllInputs(addInputs);
     }
     static addIncome(addInputs) {
         this.selectIncome();
-        this.insertTitle(addInputs.title);
-        this.insertComment(addInputs.comment);
-        this.insertDate(addInputs.date);
-        this.insertAmount(addInputs.amount);
-        this.insertCategory(addInputs.category);
-        this.submitCashFlowManagerForm();
+        this.insertAllInputs(addInputs);
     }
     static addCostOrIncome(costOrIncome, addInputs) {
         if (costOrIncome == 'cost') {
