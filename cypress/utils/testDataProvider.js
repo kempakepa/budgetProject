@@ -22,14 +22,14 @@ class TestDataProvider {
     }
 
     static createReqParamObject() {
-        const requestParams = {
+        this.requestParams = {
             title: this.generateFakerData('text'),
             comment: this.generateFakerData('text'),
             date: this.generateFakerData('date'),
             amount: this.generateFakerData('numeric'),
             category: this.generateFakerData('text'),
         };
-        return requestParams;
+        return this.requestParams;
     }
 
     static customizeReqParamObject(property, value) {
@@ -38,34 +38,61 @@ class TestDataProvider {
         return result;
     }
 
-    static setDefaultFilterParamObject() {
-        (this.filtererReqParams.title = undefined),
-            (this.filtererReqParams.comment = undefined),
-            (this.filtererReqParams.date = undefined),
-            (this.filtererReqParams.amount = undefined),
-            (this.filtererReqParams.category = undefined);
+    static setDefaultFilterParamObject(testLevel) {
+        if (testLevel == 'api') {
+            (this.filtererReqParams.title = undefined),
+                (this.filtererReqParams.comment = undefined),
+                (this.filtererReqParams.date = undefined),
+                (this.filtererReqParams.amount = undefined),
+                (this.filtererReqParams.category = undefined);
+        } else if (testLevel == 'UI') {
+            (this.filtererReqParams.title = `{selectAll}{del}`),
+                (this.filtererReqParams.comment = `{selectAll}{del}`),
+                (this.filtererReqParams.minDate = `{selectAll}{del}`),
+                (this.filtererReqParams.maxDate = `{selectAll}{del}`),
+                (this.filtererReqParams.minAmount = `{selectAll}{del}`),
+                (this.filtererReqParams.maxAmount = `{selectAll}{del}`),
+                (this.filtererReqParams.category = `{selectAll}{del}`);
+        } else {
+            console.log('Error!');
+        }
         return this.filtererReqParams;
     }
 
-    static setCustomFilterParamObject(property) {
-        this.setDefaultFilterParamObject();
+    static setCustomFilterParamObject(property, testLevel) {
+        this.setDefaultFilterParamObject(testLevel);
         for (let prop of property) {
-            if (prop == 'date' || prop == 'amount') {
-                this.filtererReqParams[
-                    prop
-                ] = `[${this.requestParams[prop]},${this.requestParams[prop]}]`;
-            } else {
-                this.filtererReqParams[prop] = this.requestParams[prop];
+            if (testLevel == 'api') {
+                if (prop == 'date' || prop == 'amount') {
+                    this.filtererReqParams[
+                        prop
+                    ] = `[${this.requestParams[prop]},${this.requestParams[prop]}]`;
+                } else {
+                    this.filtererReqParams[prop] = this.requestParams[prop];
+                }
+            }
+            if (testLevel == 'UI') {
+                if (prop == 'date') {
+                    this.filtererReqParams.minDate = this.requestParams.date;
+                    this.filtererReqParams.maxDate = this.requestParams.date;
+                } else if (prop == 'amount') {
+                    this.filtererReqParams.minAmount =
+                        this.requestParams.amount;
+                    this.filtererReqParams.maxAmount =
+                        this.requestParams.amount;
+                } else {
+                    this.filtererReqParams[prop] = this.requestParams[prop];
+                }
             }
         }
+        console.log(this.filtererReqParams);
         return this.filtererReqParams;
     }
 
     static modifyFilterParamObjectToUpperCase() {
         for (let [key, value] of Object.entries(this.filtererReqParams)) {
             if (typeof value == 'string') {
-                key = value.toUpperCase();
-                this.filtererReqParams[key] = value;
+                this.filtererReqParams[key] = value.toUpperCase();
             }
         }
         return this.filtererReqParams;
