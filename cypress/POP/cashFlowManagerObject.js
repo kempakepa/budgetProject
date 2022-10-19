@@ -56,30 +56,31 @@ class CashFlowManagerObject {
     }
 
     static insertCategory(category) {
-        this.getCategory().type(category);
+        this.getCategory().select(category);
     }
 
     static submitCashFlowManagerForm() {
         cy.get('[data-cy=sendButton]').click();
     }
 
-    static addCost(addInputs) {
-        this.selectCost();
+    static insertAllInputs(addInputs) {
         this.insertTitle(addInputs.title);
         this.insertComment(addInputs.comment);
         this.insertDate(addInputs.date);
         this.insertAmount(addInputs.amount);
-        this.insertCategory(addInputs.category);
+        if (addInputs.category) {
+            this.insertCategory(addInputs.category);
+        }
         this.submitCashFlowManagerForm();
+    }
+
+    static addCost(addInputs) {
+        this.selectCost();
+        this.insertAllInputs(addInputs);
     }
     static addIncome(addInputs) {
         this.selectIncome();
-        this.insertTitle(addInputs.title);
-        this.insertComment(addInputs.comment);
-        this.insertDate(addInputs.date);
-        this.insertAmount(addInputs.amount);
-        this.insertCategory(addInputs.category);
-        this.submitCashFlowManagerForm();
+        this.insertAllInputs(addInputs);
     }
     static addCostOrIncome(costOrIncome, addInputs) {
         if (costOrIncome == 'cost') {
@@ -93,8 +94,12 @@ class CashFlowManagerObject {
         return cy.get('[data-cy="submition_message"]');
     }
 
-    static getInvalidElement(element) {
-        return cy.get(`input#${element}:invalid`);
+    static inputShouldBeInvalid(element) {
+        if (element == 'category') {
+            return cy.get(`select#${element}:invalid`).should('have.length', 1);
+        } else {
+            return cy.get(`input#${element}:invalid`).should('have.length', 1);
+        }
     }
 }
 

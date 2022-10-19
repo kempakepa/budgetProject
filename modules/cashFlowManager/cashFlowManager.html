@@ -21,9 +21,15 @@
         <label for="date"></label>
         <input type="date" placeholder="Date*" id="date" data-cy="date" required oninvalid="this.setCustomValidity('Please fill in this field.')"/></br>
         <label for="amount"></label>
-        <input type="number" placeholder="Amount*" id="amount" data-cy="amount" required oninvalid="this.setCustomValidity('Please fill in this field.')"/></br>
+        <input type="number" placeholder="Amount*" id="amount" data-cy="amount" min="0.01" required oninvalid="this.setCustomValidity('Please fill in this field.')"/></br>
         <label for="category"></label>
-        <input type="text" placeholder="Category*" id="category" data-cy="category" required oninvalid="this.setCustomValidity('Please fill in this field.')"/></br>
+        <select name="category" id="category" placeholder="Category*" data-cy="category" required oninvalid="this.setCustomValidity('Please fill in this field.')">
+            <option value="" selected disabled hidden>Category*</option>
+            <option value="food">Food</option>
+            <option value="salary">Salary</option>
+            <option value="taxes">Taxes</option>
+            <option value="car">Car</option>
+          </select></br>
         <input type="submit" value="Send!" onclick="requestSent()" data-cy="sendButton"/></br>
         <div id="submition_message" data-cy="submition_message"></div>
 </form>

@@ -24,7 +24,13 @@
         <span="max-date">Max Date</span><input type="date" placeholder="Max Date" id="max-date" /></div>
         <div><input type="number" placeholder="Min Amount" id="min-amount" />
         <input type="number" placeholder="Max Amount" id="max-amount" /></div>
-        <div><input type="text" placeholder="Category" id="category" /></div></br>
+        <select name="category" id="category" placeholder="Category*" data-cy="category" required oninvalid="this.setCustomValidity('Please fill in this field.')">
+            <option value="" selected>Category*</option>
+            <option value="food">Food</option>
+            <option value="salary">Salary</option>
+            <option value="taxes">Taxes</option>
+            <option value="car">Car</option>
+          </select></br>
         <div><input type="button" value="Send!" onclick="requestSent()"/></div></br>
         <div id="confirmation_message"><ul id="showlist">
             <li></li>
