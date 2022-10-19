@@ -17,7 +17,7 @@
  */
 // eslint-disable-next-line no-unused-vars
 module.exports = (on, config) => {
-    config.e2e.excludeSpecPattern = [
+    config.excludeSpecPattern = [
         '**/cypress/e2e/1-getting-started/*',
         '**/cypress/e2e/2-advanced-examples/*',
         '**/cypress/e2e/services/*',
