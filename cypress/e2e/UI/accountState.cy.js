@@ -14,7 +14,7 @@ describe('accountState test', () => {
         AccountStateObject.getAccountStateText()
             .then(parseInt)
             .then(cy.log)
-            .should('be.a', 'number');
+            .should('be.a', 'null');
     });
     it('should account state be decreased about addCost amount', () => {
         AccountStateObject.getAccountStateText().then((accountStateText) => {
