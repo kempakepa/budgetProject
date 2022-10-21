@@ -1,10 +1,8 @@
-const { CashFlowManagerObject } = require('../../POP/cashFlowManagerObject');
 const { FiltererObject } = require('../../POP/filtererObject');
 const { HomePageObject } = require('../../POP/homePageObject');
 const {
     sendRequestToAddCostItem,
 } = require('../../services/cashFlowManagerService');
-const { filterResults } = require('../../services/filtererService');
 const { TestDataProvider } = require('../../utils/testDataProvider');
 
 describe('filterer tests', () => {
