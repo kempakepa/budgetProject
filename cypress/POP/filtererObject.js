@@ -55,7 +55,7 @@ class FiltererObject {
     }
 
     static shouldFilterAtLeastOneItem() {
-        return cy.get('ul#showlist>li').its('length').should('not.equal', 0);
+        cy.get('ul#showlist>li').should('not.have.length', 0);
     }
 }
 
