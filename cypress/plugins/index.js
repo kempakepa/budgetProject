@@ -17,7 +17,7 @@
  */
 // eslint-disable-next-line no-unused-vars
 module.exports = (on, config) => {
-    config.ignoreTestFiles = [
+    config.e2e.excludeSpecPattern = [
         '**/cypress/integration/1-getting-started/*',
         '**/cypress/integration/2-advanced-examples/*',
         '**/cypress/integration/services/*',
