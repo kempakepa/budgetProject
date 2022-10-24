@@ -1,4 +1,4 @@
-const { Tests } = require('../../tests/tests.js');
+const { Tests } = require('../../../../tests/tests.js');
 const { CashFlowValidator } = require('./cashFlowValidator');
 
 Tests.setModuleName('validation cashflowManager Module Tests');

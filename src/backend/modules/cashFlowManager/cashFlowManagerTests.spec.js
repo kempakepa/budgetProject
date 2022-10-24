@@ -1,4 +1,4 @@
-const { Tests } = require('../../tests/tests.js');
+const { Tests } = require('../../../../tests/tests.js');
 const { CashFlowManager } = require('./cashFlowManager.js');
 
 Tests.setModuleName('cashFlowManager Tests');

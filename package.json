@@ -7,7 +7,11 @@
         "test": "tests"
     },
     "scripts": {
-        "startBackend": "node ./main.js"
+        "backend": "npm run clean:backend && npm run build:backend && npm run start:backend",
+        "start:backend": "node ./src/backend/dist/src/backend/main.js",
+        "build:backend": "tsc -b ./src/backend/tsconfig.json && cp ./src/backend/runTests.sh ./src/backend/dist/runTests.sh",
+        "clean:backend": "rm -rf ./src/backend/dist",
+        "unit:backend": "bash ./src/backend/dist/runTests.sh"
     },
     "repository": {
         "type": "git",

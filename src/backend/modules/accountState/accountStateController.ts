@@ -1,8 +1,8 @@
-const { BaseController } = require('../../utils/baseController');
-const { AccountState } = require('./accountState');
+import { BaseController } from '../../utils/baseController';
+import { AccountState } from './accountState';
 
-class AccountStateController extends BaseController {
-    constructor(req, res) {
+export class AccountStateController extends BaseController {
+    constructor(req: unknown, res: unknown) {
         super(req, res);
     }
     getAccountState() {
@@ -15,5 +15,3 @@ class AccountStateController extends BaseController {
         this.res.end(JSON.stringify(accountState));
     }
 }
-
-module.exports = { AccountStateController };
