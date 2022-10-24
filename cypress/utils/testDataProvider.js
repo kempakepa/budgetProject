@@ -38,54 +38,26 @@ class TestDataProvider {
         return result;
     }
 
-    static setDefaultFilterParamObject(testLevel) {
-        if (testLevel == 'api') {
-            (this.filtererReqParams.title = undefined),
-                (this.filtererReqParams.comment = undefined),
-                (this.filtererReqParams.date = undefined),
-                (this.filtererReqParams.amount = undefined),
-                (this.filtererReqParams.category = undefined);
-        } else if (testLevel == 'UI') {
-            (this.filtererReqParams.title = `{selectAll}{del}`),
-                (this.filtererReqParams.comment = `{selectAll}{del}`),
-                (this.filtererReqParams.minDate = `{selectAll}{del}`),
-                (this.filtererReqParams.maxDate = `{selectAll}{del}`),
-                (this.filtererReqParams.minAmount = `{selectAll}{del}`),
-                (this.filtererReqParams.maxAmount = `{selectAll}{del}`),
-                (this.filtererReqParams.category = `{selectAll}{del}`);
-        } else {
-            console.log('Error!');
-        }
+    static setDefaultFilterParamObject() {
+        (this.filtererReqParams.title = undefined),
+            (this.filtererReqParams.comment = undefined),
+            (this.filtererReqParams.date = undefined),
+            (this.filtererReqParams.amount = undefined),
+            (this.filtererReqParams.category = undefined);
         return this.filtererReqParams;
     }
 
     static setCustomFilterParamObject(property, testLevel) {
         this.setDefaultFilterParamObject(testLevel);
         for (let prop of property) {
-            if (testLevel == 'api') {
-                if (prop == 'date' || prop == 'amount') {
-                    this.filtererReqParams[
-                        prop
-                    ] = `[${this.requestParams[prop]},${this.requestParams[prop]}]`;
-                } else {
-                    this.filtererReqParams[prop] = this.requestParams[prop];
-                }
-            }
-            if (testLevel == 'UI') {
-                if (prop == 'date') {
-                    this.filtererReqParams.minDate = this.requestParams.date;
-                    this.filtererReqParams.maxDate = this.requestParams.date;
-                } else if (prop == 'amount') {
-                    this.filtererReqParams.minAmount =
-                        this.requestParams.amount;
-                    this.filtererReqParams.maxAmount =
-                        this.requestParams.amount;
-                } else {
-                    this.filtererReqParams[prop] = this.requestParams[prop];
-                }
+            if (prop == 'date' || prop == 'amount') {
+                this.filtererReqParams[
+                    prop
+                ] = `[${this.requestParams[prop]},${this.requestParams[prop]}]`;
+            } else {
+                this.filtererReqParams[prop] = this.requestParams[prop];
             }
         }
-        console.log(this.filtererReqParams);
         return this.filtererReqParams;
     }
 

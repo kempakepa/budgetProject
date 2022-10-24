@@ -27,17 +27,6 @@ class FiltererObject {
         cy.get('#max-amount').type(maxAmount, { force: true });
     }
 
-    static fillFiltererForm(filterInputs) {
-        this.fillTitle(filterInputs.title);
-        this.fillComment(filterInputs.comment);
-        this.fillMinDate(filterInputs.minDate);
-        this.fillMaxDate(filterInputs.maxDate);
-        this.fillMinAmount(filterInputs.minAmount);
-        this.fillMaxAmount(filterInputs.maxAmount);
-        this.fillCategory(filterInputs.category);
-        this.clickSend();
-    }
-
     static clickSend() {
         cy.get('[type="button"]').click();
     }
