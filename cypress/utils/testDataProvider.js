@@ -47,8 +47,8 @@ class TestDataProvider {
         return this.filtererReqParams;
     }
 
-    static setCustomFilterParamObject(property, testLevel) {
-        this.setDefaultFilterParamObject(testLevel);
+    static setCustomFilterParamObject(property) {
+        this.setDefaultFilterParamObject();
         for (let prop of property) {
             if (prop == 'date' || prop == 'amount') {
                 this.filtererReqParams[
