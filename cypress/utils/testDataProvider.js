@@ -27,7 +27,7 @@ class TestDataProvider {
             comment: this.generateFakerData('text'),
             date: this.generateFakerData('date'),
             amount: this.generateFakerData('numeric'),
-            category: this.generateFakerData('text'),
+            category: 'Food',
         };
         return this.requestParams;
     }
