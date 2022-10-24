@@ -22,14 +22,14 @@ class TestDataProvider {
     }
 
     static createReqParamObject() {
-        const requestParams = {
+        this.requestParams = {
             title: this.generateFakerData('text'),
             comment: this.generateFakerData('text'),
             date: this.generateFakerData('date'),
             amount: this.generateFakerData('numeric'),
             category: 'Food',
         };
-        return requestParams;
+        return this.requestParams;
     }
 
     static customizeReqParamObject(property, value) {
@@ -64,8 +64,7 @@ class TestDataProvider {
     static modifyFilterParamObjectToUpperCase() {
         for (let [key, value] of Object.entries(this.filtererReqParams)) {
             if (typeof value == 'string') {
-                key = value.toUpperCase();
-                this.filtererReqParams[key] = value;
+                this.filtererReqParams[key] = value.toUpperCase();
             }
         }
         return this.filtererReqParams;

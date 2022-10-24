@@ -25,7 +25,7 @@ class CashFlowManagerObject {
     }
 
     static insertTitle(title) {
-        this.getTitle().type(title);
+        this.getTitle().type(title, { force: true });
     }
 
     static getComment() {
@@ -33,7 +33,7 @@ class CashFlowManagerObject {
     }
 
     static insertComment(comment) {
-        this.getComment().type(comment);
+        this.getComment().type(comment, { force: true });
     }
 
     static getDate() {
@@ -41,14 +41,14 @@ class CashFlowManagerObject {
     }
 
     static insertDate(date) {
-        this.getDate().type(date);
+        this.getDate().type(date, { force: true });
     }
 
     static getAmount() {
         return cy.get(this.amount);
     }
     static insertAmount(amount) {
-        this.getAmount().type(amount);
+        this.getAmount().type(amount, { force: true });
     }
 
     static getCategory() {
