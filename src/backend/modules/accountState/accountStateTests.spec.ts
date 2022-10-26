@@ -1,6 +1,5 @@
-const { Tests } = require('../../tests/tests.js');
-const { AccountState } = require('./accountState.js');
-const { changeAccountStateErrorText } = require('./errorText.js');
+import { Tests } from '../../../../tests/tests';
+import { AccountState } from './accountState';
 
 Tests.setModuleName('accountState Module Tests');
 
@@ -34,11 +33,6 @@ Tests.verify(
     'accountState should equal ' + '15.0',
     15.0,
     AccountState.getAccountState()
-);
-Tests.verify(
-    `should throw an error if no param passed to changeAccountState`,
-    changeAccountStateErrorText,
-    AccountState.changeAccountState()
 );
 
 Tests.summaryTests();

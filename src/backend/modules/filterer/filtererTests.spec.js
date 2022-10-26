@@ -1,4 +1,4 @@
-const { Tests } = require('../../tests/tests.js');
+const { Tests } = require('../../../../tests/tests.js');
 const { CashFlowManager } = require('../cashFlowManager/cashFlowManager.js');
 const { Filterer } = require('./filterer.js');
 

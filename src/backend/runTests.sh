@@ -1,5 +1,5 @@
 #!/bin/bash
-
+cd ./src/backend/dist/
 files=(`find . -type f -name '*.spec.js'`)
 
 exitCode=0;
