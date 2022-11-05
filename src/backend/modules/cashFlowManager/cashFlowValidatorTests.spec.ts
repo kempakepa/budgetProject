@@ -1,9 +1,10 @@
-const { Tests } = require('../../../../tests/tests.js');
-const { CashFlowValidator } = require('./cashFlowValidator');
+import { Tests } from '../../../../tests/tests.js';
+import { CashFlowValidator } from './cashFlowValidator';
 
 Tests.setModuleName('validation cashflowManager Module Tests');
 
-Tests.verify(
+//mozna usunac - parametr typu number nie moze przyjmowac wartosci typu string
+/* Tests.verify(
     `should return false if ammount type is string`,
     false,
     new CashFlowValidator(
@@ -13,7 +14,7 @@ Tests.verify(
         'amount',
         'category'
     ).validateInput()
-);
+); */
 
 Tests.verify(
     `shourld return true if all params has correct format`,
@@ -57,7 +58,7 @@ Tests.verify(
         'title',
         'comment',
         '202201-01',
-        0,
+        10,
         'category'
     ).validateInput()
 );
@@ -69,7 +70,7 @@ Tests.verify(
         'title',
         'comment',
         '2022-11-31',
-        0,
+        10,
         'category'
     ).validateInput()
 );
@@ -81,7 +82,7 @@ Tests.verify(
         'title',
         'comment',
         'auć',
-        0,
+        10,
         'category'
     ).validateInput()
 );
@@ -93,7 +94,7 @@ Tests.verify(
         'title',
         'comment',
         '2022-11-32',
-        0,
+        10,
         'category'
     ).validateInput()
 );
@@ -105,7 +106,7 @@ Tests.verify(
         'title',
         'comment',
         '2022-1-1',
-        0,
+        10,
         'category'
     ).validateInput()
 );
@@ -117,7 +118,7 @@ Tests.verify(
         'title',
         'comment',
         '-2022-1-1',
-        0,
+        10,
         'category'
     ).validateInput()
 );
@@ -129,7 +130,7 @@ Tests.verify(
         'title',
         'comment',
         '2022-01-1',
-        0,
+        10,
         'category'
     ).validateInput()
 );
@@ -141,7 +142,7 @@ Tests.verify(
         'title',
         'comment',
         '2022-1-01',
-        0,
+        20,
         'category'
     ).validateInput()
 );
@@ -153,11 +154,61 @@ Tests.verify(
         'title',
         'comment',
         '2022-12-44',
-        0,
+        20,
         'category'
     ).validateInput()
 );
+
 Tests.verify(
+    `should return false if title is empty string`,
+    false,
+    new CashFlowValidator(
+        '',
+        'comment',
+        '2022-1-01',
+        20,
+        'category'
+    ).validateInput()
+);
+
+Tests.verify(
+    `should return false if comment is empty string`,
+    false,
+    new CashFlowValidator(
+        'title',
+        'comment',
+        '2022-1-01',
+        20,
+        'category'
+    ).validateInput()
+);
+
+Tests.verify(
+    `should return false if date is empty string`,
+    false,
+    new CashFlowValidator(
+        'title',
+        'comment',
+        '',
+        20,
+        'category'
+    ).validateInput()
+);
+
+Tests.verify(
+    `should return false if category is empty string`,
+    false,
+    new CashFlowValidator(
+        'title',
+        'comment',
+        '2022-02-02',
+        10,
+        ''
+    ).validateInput()
+);
+
+//mozna usunac - parametry typu string i number nie moga przyjmowac wartosci undefined
+/* Tests.verify(
     `should return false if all parameter incorrect format passed`,
     false,
     new CashFlowValidator(
@@ -167,8 +218,10 @@ Tests.verify(
         undefined,
         undefined
     ).validateInput()
-);
-Tests.verify(
+); */
+
+//mozna usunac - CashFlowValidator wymaga 5 parametrow o zdefiniowanych typach
+/* Tests.verify(
     `should return false if no parameter passed`,
     false,
     new CashFlowValidator().validateInput()
@@ -228,6 +281,6 @@ Tests.verify(
     `should return false if parameters incorrect format passed`,
     false,
     new CashFlowValidator('title', 'date', 'amount', 'category').validateInput()
-);
+); */
 
 Tests.summaryTests();
