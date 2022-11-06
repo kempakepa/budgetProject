@@ -1,5 +1,5 @@
-import { CashFlowItem } from '../../utils/baseInterface.js';
-import { AccountState } from '../accountState/accountState.js';
+import { CashFlowItem } from '../../utils/baseInterface';
+import { AccountState } from '../accountState/accountState';
 import { CashFlowValidator } from './cashFlowValidator';
 
 export class CashFlowManager {
