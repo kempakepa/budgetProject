@@ -1,4 +1,4 @@
-import { Tests } from '../../../../tests/tests.js';
+import { Tests } from '../../../../tests/tests';
 import { CashFlowValidator } from './cashFlowValidator';
 
 Tests.setModuleName('validation cashflowManager Module Tests');
@@ -17,7 +17,7 @@ Tests.setModuleName('validation cashflowManager Module Tests');
 ); */
 
 Tests.verify(
-    `shourld return true if all params has correct format`,
+    `should return true if all params has correct format`,
     true,
     new CashFlowValidator(
         'title',

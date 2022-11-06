@@ -13,12 +13,16 @@ export class CashFlowValidator extends BaseConstructor {
 
     validateInput() {
         const stringInput =
+            typeof this.title == 'string' &&
             this.title != '' &&
+            typeof this.comment == 'string' &&
             this.comment != '' &&
+            typeof this.date == 'string' &&
             this.date != '' &&
             this.isValidDate() &&
+            typeof this.category == 'string' &&
             this.category != '';
-        const numberInput = this.amount > 0;
+        const numberInput = typeof this.amount == 'number' && this.amount > 0;
 
         return stringInput && numberInput;
     }
