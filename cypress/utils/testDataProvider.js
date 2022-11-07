@@ -28,6 +28,7 @@ class TestDataProvider {
             date: this.generateFakerData('date'),
             amount: this.generateFakerData('numeric'),
             category: 'Food',
+            subcategory: 'Biedronka',
         };
         return this.requestParams;
     }

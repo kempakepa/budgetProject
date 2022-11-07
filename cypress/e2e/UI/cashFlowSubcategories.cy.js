@@ -9,6 +9,28 @@ describe('cashFlowManagerSubcategories tests', () => {
     });
 
     it('should show subcategories disabled by default', () => {
-        cy.get('#subcategories').should('be.disabled');
+        getSubcategoryList().should('be.disabled');
+    });
+
+    it('should subcategories input enable when user choose category', () => {
+        //When
+        CashFlowManagerObject.insertCategory('Food');
+
+        //Then
+        CashFlowManagerObject.getSubcategoryList().should('be.enabled');
+        CashFlowManagerObject.insertSubcategory('Biedronka');
+    });
+
+    it('should subcategories reset when user choose another category', () => {
+        //Given
+        CashFlowManagerObject.insertCategory('Food');
+        CashFlowManagerObject.insertSubcategory('Biedronka');
+
+        //When
+        CashFlowManagerObject.insertCategory('Salary');
+
+        //Then
+        CashFlowManagerObject.getSubcategoryList().should('have.value', null);
+        CashFlowManagerObject.insertSubcategory('Job1');
     });
 });
