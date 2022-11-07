@@ -1,9 +1,13 @@
-//const { AccountState } = require('../accountState/accountState');
+import { BaseConstructor } from '../../utils/baseConstructor';
 
-const { BaseConstructor } = require('../../utils/baseConstructor');
-
-class CashFlowValidator extends BaseConstructor {
-    constructor(title, comment, date, amount, category) {
+export class CashFlowValidator extends BaseConstructor {
+    constructor(
+        title: string,
+        comment: string,
+        date: string,
+        amount: number,
+        category: string
+    ) {
         super(title, comment, date, amount, category);
     }
 
@@ -15,7 +19,7 @@ class CashFlowValidator extends BaseConstructor {
             this.comment != '' &&
             typeof this.date == 'string' &&
             this.date != '' &&
-            this.isValidDate(this.date) &&
+            this.isValidDate() &&
             typeof this.category == 'string' &&
             this.category != '';
         const numberInput = typeof this.amount == 'number' && this.amount > 0;
@@ -30,23 +34,14 @@ class CashFlowValidator extends BaseConstructor {
             return false;
         }
 
-        //let now = new Date();
-        //let now2MonthsBefore = now.setMonth(now.getMonth() - 2);
-        //now2MonthsBefore = now.toISOString().slice(0, 10);
-
         let dateStandarizedFormat = new Date(this.date)
             .toISOString()
             .slice(0, 10);
 
-        if (
-            this.date == dateStandarizedFormat
-            //&& this.date >= now2MonthsBefore
-        ) {
+        if (this.date == dateStandarizedFormat) {
             return true;
         } else {
             return false;
         }
     }
 }
-
-module.exports = { CashFlowValidator };

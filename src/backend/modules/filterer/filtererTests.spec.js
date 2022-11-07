@@ -11,16 +11,28 @@ const category = 'category';
 Tests.setModuleName('filterer Tests');
 
 //generated test data
-new CashFlowManager().addIncome(
-    'wynagrodzenie',
-    'luty',
-    '2022-03-04',
-    3500,
-    'Praca'
-);
+new CashFlowManager().addIncome({
+    title: 'wynagrodzenie',
+    comment: 'luty',
+    date: '2022-03-04',
+    amount: 3500,
+    category: 'Praca',
+});
 
-new CashFlowManager().addCost('zakupy', 'luty', '2022-03-04', 201.98, 'Food');
-new CashFlowManager().addCost('zakupy', 'luty', '2022-03-04', 3598.02, 'Food');
+new CashFlowManager().addCost({
+    title: 'zakupy',
+    comment: 'luty',
+    date: '2022-03-04',
+    amount: 201.98,
+    category: 'Food',
+});
+new CashFlowManager().addCost({
+    title: 'zakupy',
+    comment: 'luty',
+    date: '2022-03-04',
+    amount: 3598.02,
+    category: 'Food',
+});
 
 Tests.verify(
     `should return 1 array if data meet filter criteria '${comment}, ${date}, ${category}'`,
