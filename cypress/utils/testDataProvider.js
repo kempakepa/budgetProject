@@ -28,14 +28,36 @@ class TestDataProvider {
             date: this.generateFakerData('date'),
             amount: this.generateFakerData('numeric'),
             category: 'Food',
-            subcategory: 'Biedronka',
+            subcategory: this.subCategorySelection(),
         };
         return this.requestParams;
     }
 
+    static subCategorySelection() {
+        switch (this.requestParams.category) {
+            case '':
+                return (this.requestParams.subcategory = '');
+            case 'Food':
+                return (this.requestParams.subcategory = 'Biedronka');
+            case 'Salary':
+                return (this.requestParams.subcategory = 'Job1');
+            case 'Taxes':
+                return (this.requestParams.subcategory = 'Water');
+            case 'Car':
+                return (this.requestParams.subcategory = 'Fuel');
+            default:
+                break;
+        }
+    }
+
     static customizeReqParamObject(property, value) {
         const result = this.createReqParamObject();
-        result[property] = value;
+        if (property == 'category') {
+            result[property] = value;
+            result[this.subcategory] = this.subCategorySelection();
+        } else {
+            result[property] = value;
+        }
         return result;
     }
 
