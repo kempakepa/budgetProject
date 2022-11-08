@@ -73,5 +73,7 @@ describe('filterer tests', () => {
         FiltererObject.fillSubcategory('Lidl');
         FiltererObject.clickSend();
         FiltererObject.shouldFilterAtLeastOneItem();
+
+        //
     }); */
 });
