@@ -3,19 +3,6 @@ import { CashFlowValidator } from './cashFlowValidator';
 
 Tests.setModuleName('validation cashflowManager Module Tests');
 
-//mozna usunac - parametr typu number nie moze przyjmowac wartosci typu string
-/* Tests.verify(
-    `should return false if ammount type is string`,
-    false,
-    new CashFlowValidator(
-        'title',
-        'comment',
-        '2022-01-01',
-        'amount',
-        'category'
-    ).validateInput()
-); */
-
 Tests.verify(
     `should return true if all params has correct format`,
     true,
@@ -206,81 +193,5 @@ Tests.verify(
         ''
     ).validateInput()
 );
-
-//mozna usunac - parametry typu string i number nie moga przyjmowac wartosci undefined
-/* Tests.verify(
-    `should return false if all parameter incorrect format passed`,
-    false,
-    new CashFlowValidator(
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined
-    ).validateInput()
-); */
-
-//mozna usunac - CashFlowValidator wymaga 5 parametrow o zdefiniowanych typach
-/* Tests.verify(
-    `should return false if no parameter passed`,
-    false,
-    new CashFlowValidator().validateInput()
-);
-Tests.verify(
-    `should return false if not all parameters passed`,
-    false,
-    new CashFlowValidator('title').validateInput()
-);
-Tests.verify(
-    `should return false if not all parameters passed`,
-    false,
-    new CashFlowValidator(undefined, 'comment').validateInput()
-);
-Tests.verify(
-    `should return false if not all parameters passed`,
-    false,
-    new CashFlowValidator(undefined, undefined, '2022-02-01').validateInput()
-);
-Tests.verify(
-    `should return false if not all parameters passed`,
-    false,
-    new CashFlowValidator(
-        undefined,
-        undefined,
-        undefined,
-        11.11
-    ).validateInput()
-);
-Tests.verify(
-    `should return false if not all parameters passed`,
-    false,
-    new CashFlowValidator(
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        'category'
-    ).validateInput()
-);
-Tests.verify(
-    `should return false if not all parameters passed`,
-    false,
-    new CashFlowValidator('title', 'comment').validateInput()
-);
-Tests.verify(
-    `should return false if not all parameters passed`,
-    false,
-    new CashFlowValidator('title', 'comment', 'date').validateInput()
-);
-Tests.verify(
-    `should return false if not all parameters passed`,
-    false,
-    new CashFlowValidator('title', 'comment', 'date', 11.1).validateInput()
-);
-Tests.verify(
-    `should return false if parameters incorrect format passed`,
-    false,
-    new CashFlowValidator('title', 'date', 'amount', 'category').validateInput()
-); */
 
 Tests.summaryTests();
