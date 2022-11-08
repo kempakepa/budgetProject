@@ -54,7 +54,7 @@ class TestDataProvider {
         const result = this.createReqParamObject();
         if (property == 'category') {
             result[property] = value;
-            result[this.subcategory] = this.subCategorySelection();
+            this.subCategorySelection();
         } else {
             result[property] = value;
         }
@@ -66,7 +66,8 @@ class TestDataProvider {
             (this.filtererReqParams.comment = undefined),
             (this.filtererReqParams.date = undefined),
             (this.filtererReqParams.amount = undefined),
-            (this.filtererReqParams.category = undefined);
+            (this.filtererReqParams.category = undefined),
+            (this.filtererReqParams.subcategory = undefined);
         return this.filtererReqParams;
     }
 

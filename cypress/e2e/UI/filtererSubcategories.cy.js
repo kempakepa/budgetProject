@@ -5,7 +5,7 @@ const {
 } = require('../../services/cashFlowManagerService');
 const { TestDataProvider } = require('../../utils/testDataProvider');
 
-describe('filterer tests', () => {
+describe('filtererSubcategories tests', () => {
     let randomCostData;
     beforeEach(() => {
         HomePageObject.visitHomePage();
@@ -43,6 +43,14 @@ describe('filterer tests', () => {
         FiltererObject.fillSubcategory('Job1');
     });
 
+    it('should return at least one array element by 3 valid filter criteria (title, category, subcategory', () => {
+        FiltererObject.fillTitle(randomCostData.title);
+        FiltererObject.fillCategory(randomCostData.category);
+        FiltererObject.fillSubcategory(randomCostData.subcategory);
+        FiltererObject.clickSend();
+        FiltererObject.shouldFilterAtLeastOneItem();
+    });
+
     it('should return at least one array element by valid exact subcategory filter', () => {
         FiltererObject.fillCategory(randomCostData.category);
         FiltererObject.fillSubcategory(randomCostData.subcategory);
@@ -56,24 +64,5 @@ describe('filterer tests', () => {
         FiltererObject.fillSubcategory('Lidl');
         FiltererObject.clickSend();
         FiltererObject.shouldFilterAtLeastOneItem();
-    }); */
-
-    it('should return at least one array element by 3 valid filter criteria (title, category, subcategory)', () => {
-        FiltererObject.fillTitle(randomCostData.title);
-        FiltererObject.fillCategory(randomCostData.category);
-        FiltererObject.fillSubcategory(randomCostData.subcategory);
-        FiltererObject.clickSend();
-        FiltererObject.shouldFilterAtLeastOneItem();
-    });
-
-    //to add also in filterer
-    /*     it('should return no array if subcategory no match', () => {
-        FiltererObject.fillTitle(randomCostData.title);
-        FiltererObject.fillCategory(randomCostData.category);
-        FiltererObject.fillSubcategory('Lidl');
-        FiltererObject.clickSend();
-        FiltererObject.shouldFilterAtLeastOneItem();
-
-        //
     }); */
 });

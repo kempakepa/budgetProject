@@ -80,7 +80,7 @@ const defineQuerryParams = () => {
     }
 
     const urlFilterer = `/api/filterBudgetItem?title=${title}&comment=${comment}&date=${date}&amount=${amount}&category=${category}&subcategory=${subcategory}`;
-    console.log(readInputelementsAndValues());
+    //console.log(readInputelementsAndValues());
     //console.log(title, comment, date, amount, category, urlFilterer);
     return urlFilterer;
 };
