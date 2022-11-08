@@ -26,6 +26,7 @@ sequenceDiagram
     User->>cashFlowEditor: editCostOrIncome
     User->>AccountState: getAccountState
     cashFlowManager->>AccountState: changeAccountState
+    cashFlowEditor->>AccountState: changeAccountState
     User->>cashFlowManager: listCostAndIncome
     cashFlowManager->>Filterer: filterCostAndIncome
     User->>FiltererBalancer: getFinanceBalance
