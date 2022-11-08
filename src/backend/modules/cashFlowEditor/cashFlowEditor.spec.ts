@@ -81,3 +81,5 @@ for (const testData of incomeTestsData) {
         result
     );
 }
+
+Tests.summaryTests();
