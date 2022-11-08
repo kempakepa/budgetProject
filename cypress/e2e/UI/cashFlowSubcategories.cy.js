@@ -9,7 +9,7 @@ describe('cashFlowManagerSubcategories tests', () => {
     });
 
     it('should show subcategories disabled by default', () => {
-        getSubcategoryList().should('be.disabled');
+        CashFlowManagerObject.getSubcategoryList().should('be.disabled');
     });
 
     it('should subcategories input enable when user choose category', () => {
