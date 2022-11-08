@@ -1,21 +1,9 @@
 import { Tests } from '../../../../tests/tests';
 import { CashFlowManager } from '../cashFlowManager/cashFlowManager';
 import { CashFlowEditor } from './cashFlowEditor';
+import { CashFlowItem, ChangedCashFlowItem } from './cashFlowTypes';
 
-Tests.setModuleName('Edit cost and incomes Module Tests');
-
-interface CashFlowItem {
-    title: string;
-    amount: number;
-    category: 'Food' | 'Salary';
-    date: Date;
-    comment: string;
-}
-
-interface ChangedCashFlowItem extends CashFlowItem {
-    cashFlowType: 'COST' | 'INCOME';
-    id?: number;
-}
+Tests.setModuleName('Cash Flow Editor Module Tests');
 
 interface EditCashFlowItemResult {
     result: 'UPDATED' | 'WRONG VALUES';
