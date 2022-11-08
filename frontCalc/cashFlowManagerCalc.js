@@ -20,19 +20,19 @@ const onCategoryChange = () => {
     switch (option) {
         case 'food':
             document.getElementById('subcategories').innerHTML =
-                '<option value="" selected disabled hidden>Subcategory*</option><option value="biedronka">Biedronka</option><option value="lidl">Lidl</option><option value="auchan">Auchan</option>';
+                '<option value="" selected disabled hidden>Subcategory</option><option value="biedronka">Biedronka</option><option value="lidl">Lidl</option><option value="auchan">Auchan</option>';
             break;
         case 'salary':
             document.getElementById('subcategories').innerHTML =
-                '<option value="" selected disabled hidden>Subcategory*</option><option value="job1">Job1</option><option value="job1">Job2</option><option value="job1">Job3</option>';
+                '<option value="" selected disabled hidden>Subcategory</option><option value="job1">Job1</option><option value="job1">Job2</option><option value="job1">Job3</option>';
             break;
         case 'taxes':
             document.getElementById('subcategories').innerHTML =
-                '<option value="" selected disabled hidden>Subcategory*</option><option value="water">Water</option><option value="power">Power</option><option value="gas">Gas</option>';
+                '<option value="" selected disabled hidden>Subcategory</option><option value="water">Water</option><option value="power">Power</option><option value="gas">Gas</option>';
             break;
         case 'car':
             document.getElementById('subcategories').innerHTML =
-                '<option value="" selected disabled hidden>Subcategory*</option><option value="fuel">Fuel</option><option value="service">Service</option><option value="parts">Parts</option>';
+                '<option value="" selected disabled hidden>Subcategory</option><option value="fuel">Fuel</option><option value="service">Service</option><option value="parts">Parts</option>';
             break;
         default:
             break;

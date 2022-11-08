@@ -7,12 +7,45 @@ const requestSent = () => {
     getResultsFiltered(showResultsFiltered);
 };
 
+const onCategoryChange = () => {
+    document.getElementById('subcategories').removeAttribute('disabled');
+    let option = document.getElementById('category').value;
+    switch (option) {
+        case '':
+            document.getElementById('subcategories').innerHTML =
+                '<option value="" selected disabled hidden>Subcategory</option>';
+            document
+                .getElementById('subcategories')
+                .setAttribute('disabled', '');
+            break;
+        case 'food':
+            document.getElementById('subcategories').innerHTML =
+                '<option value="" selected disabled hidden>Subcategory</option><option value="biedronka">Biedronka</option><option value="lidl">Lidl</option><option value="auchan">Auchan</option>';
+            break;
+        case 'salary':
+            document.getElementById('subcategories').innerHTML =
+                '<option value="" selected disabled hidden>Subcategory</option><option value="job1">Job1</option><option value="job1">Job2</option><option value="job1">Job3</option>';
+            break;
+        case 'taxes':
+            document.getElementById('subcategories').innerHTML =
+                '<option value="" selected disabled hidden>Subcategory</option><option value="water">Water</option><option value="power">Power</option><option value="gas">Gas</option>';
+            break;
+        case 'car':
+            document.getElementById('subcategories').innerHTML =
+                '<option value="" selected disabled hidden>Subcategory*</option><option value="fuel">Fuel</option><option value="service">Service</option><option value="parts">Parts</option>';
+            break;
+        default:
+            break;
+    }
+};
+
 const defineQuerryParams = () => {
     let title = readInputelementsAndValues().title;
     let comment = readInputelementsAndValues().comment;
     let date = readInputelementsAndValues().date;
     let amount = readInputelementsAndValues().amount;
     let category = readInputelementsAndValues().category;
+    let subcategory = readInputelementsAndValues().subcategory;
     /* const urlFilterer = `/api/filterBudgetItem?title=${
                 readInputelementsAndValues().title
             }&comment=${readInputelementsAndValues().comment}&date=[${
@@ -42,8 +75,11 @@ const defineQuerryParams = () => {
     if (category == '') {
         category = undefined;
     }
+    if (subcategory == '') {
+        subcategory = undefined;
+    }
 
-    const urlFilterer = `/api/filterBudgetItem?title=${title}&comment=${comment}&date=${date}&amount=${amount}&category=${category}`;
+    const urlFilterer = `/api/filterBudgetItem?title=${title}&comment=${comment}&date=${date}&amount=${amount}&category=${category}&subcategory=${subcategory}`;
     console.log(readInputelementsAndValues());
     //console.log(title, comment, date, amount, category, urlFilterer);
     return urlFilterer;
@@ -93,6 +129,7 @@ const readInputelementsAndValues = () => {
             Number(document.getElementById('max-amount').value),
         ],
         category: document.getElementById('category').value,
+        subcategory: document.getElementById('subcategories').value,
     };
 };
 
@@ -105,7 +142,6 @@ const getResultsFiltered = (onResponse) => {
     };
 
     const url = `${baseUrl}${port}${defineQuerryParams()}`;
-    console.log(url);
     reqObject.open('GET', url);
     reqObject.send();
 };

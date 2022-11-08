@@ -26,6 +26,7 @@ class FiltererController extends BaseController {
             date: paramsToPassInRequest[2],
             amount: paramsToPassInRequest[3],
             category: paramsToPassInRequest[4],
+            subcategory: paramsToPassInRequest[5],
         };
 
         this.res.setHeader('Access-Control-Allow-Origin', '*');
@@ -39,7 +40,8 @@ class FiltererController extends BaseController {
                     reqParams.comment,
                     reqParams.date,
                     reqParams.amount,
-                    reqParams.category
+                    reqParams.category,
+                    reqParams.subcategory
                 )
             )
         );

@@ -9,7 +9,8 @@ class Filterer {
         comment,
         date,
         amount,
-        category
+        category,
+        subcategory
     ) {
         CashFlowManager.listAllCostsAndIncomes = listAllCostsAndIncomes;
         this.title = title;
@@ -17,6 +18,7 @@ class Filterer {
         this.date = date;
         this.amount = amount;
         this.category = category;
+        this.subcategory = subcategory;
         {
             const filteredItems = listAllCostsAndIncomes.filter(
                 (CostsAndIncome) => this.areAllConditionsMet(CostsAndIncome)
@@ -62,7 +64,14 @@ class Filterer {
                 this.amount,
                 Math.abs(arrayElement[3])
             ) &&
-            this.isUndefinedOrTextIncludesPart(this.category, arrayElement[4])
+            this.isUndefinedOrTextIncludesPart(
+                this.category,
+                arrayElement[4]
+            ) &&
+            this.isUndefinedOrTextIncludesPart(
+                this.subcategory,
+                arrayElement[5]
+            )
         ) {
             return true;
         }

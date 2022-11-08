@@ -6,17 +6,20 @@ export class BaseConstructor implements CashFlowItem {
     date;
     amount;
     category;
+    subcategory;
     constructor(
         title: string,
         comment: string,
         date: string,
         amount: number,
-        category: string
+        category: string,
+        subcategory: string
     ) {
         this.title = title;
         this.comment = comment;
         this.date = date;
         this.amount = amount;
         this.category = category;
+        this.subcategory = subcategory;
     }
 }

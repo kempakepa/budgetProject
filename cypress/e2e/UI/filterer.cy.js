@@ -66,11 +66,12 @@ describe('filterer tests', () => {
         FiltererObject.shouldFilterAtLeastOneItem();
     });
 
-    it('should return at least one array element by valid category uppercased filter', () => {
+    //not valid UI case
+    /* it('should return at least one array element by valid category uppercased filter', () => {
         FiltererObject.fillCategory(randomCostData.category.toUpperCase());
         FiltererObject.clickSend();
         FiltererObject.shouldFilterAtLeastOneItem();
-    });
+    }); */
 
     it('should return at least one array element by 2 valid filter criteria (title, comment)', () => {
         FiltererObject.fillTitle(randomCostData.title);
@@ -121,10 +122,11 @@ describe('filterer tests', () => {
         FiltererObject.shouldFilterAtLeastOneItem();
     });
 
-    it('should return at least one array element by 2 valid filter criteria (title, category) to uppercase', () => {
+    //not valid UI case
+    /* it('should return at least one array element by 2 valid filter criteria (title, category) to uppercase', () => {
         FiltererObject.fillTitle(randomCostData.title.toUpperCase());
         FiltererObject.fillCategory(randomCostData.category.toUpperCase());
         FiltererObject.clickSend();
         FiltererObject.shouldFilterAtLeastOneItem();
-    });
+    }); */
 });
