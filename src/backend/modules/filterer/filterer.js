@@ -57,20 +57,20 @@ class Filterer {
 
     areAllConditionsMet(arrayElement) {
         if (
-            this.isUndefinedOrTextIncludesPart(this.title, arrayElement[0]) &&
-            this.isUndefinedOrTextIncludesPart(this.comment, arrayElement[1]) &&
-            this.isUndefinedOrIsBetween(this.date, arrayElement[2]) &&
+            this.isUndefinedOrTextIncludesPart(this.title, arrayElement[1]) &&
+            this.isUndefinedOrTextIncludesPart(this.comment, arrayElement[2]) &&
+            this.isUndefinedOrIsBetween(this.date, arrayElement[3]) &&
             this.isUndefinedOrIsBetween(
                 this.amount,
-                Math.abs(arrayElement[3])
+                Math.abs(arrayElement[4])
             ) &&
             this.isUndefinedOrTextIncludesPart(
                 this.category,
-                arrayElement[4]
+                arrayElement[5]
             ) &&
             this.isUndefinedOrTextIncludesPart(
                 this.subcategory,
-                arrayElement[5]
+                arrayElement[6]
             )
         ) {
             return true;

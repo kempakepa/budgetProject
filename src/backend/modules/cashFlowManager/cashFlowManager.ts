@@ -8,7 +8,7 @@ interface CashFlowManagerResult {
 }
 
 export class CashFlowManager {
-    static listAllCostsAndIncomes: any = [];
+    static listAllCostsAndIncomes: any[] = [];
     static cashFlowItem: CashFlowItem;
 
     addCost(cashFlowItem: CashFlowItem): CashFlowManagerResult {
@@ -22,7 +22,10 @@ export class CashFlowManager {
                 cashFlowItem.subcategory
             ).validateInput()
         ) {
+            const newId = this.generateNewId();
+
             let cost: unknown = [
+                newId,
                 cashFlowItem.title,
                 cashFlowItem.comment,
                 cashFlowItem.date,
@@ -33,7 +36,7 @@ export class CashFlowManager {
             CashFlowManager.listAllCostsAndIncomes.push(cost);
             AccountState.changeAccountState(-cashFlowItem.amount);
             return {
-                id: undefined,
+                id: newId,
                 message: 'Cost added successfully',
             };
         } else {
@@ -55,7 +58,9 @@ export class CashFlowManager {
                 cashFlowItem.subcategory
             ).validateInput()
         ) {
+            const newId = this.generateNewId();
             let income: unknown = [
+                newId,
                 cashFlowItem.title,
                 cashFlowItem.comment,
                 cashFlowItem.date,
@@ -66,7 +71,7 @@ export class CashFlowManager {
             CashFlowManager.listAllCostsAndIncomes.push(income);
             AccountState.changeAccountState(cashFlowItem.amount);
             return {
-                id: undefined,
+                id: newId,
                 message: 'Income added successfully',
             };
         } else {
@@ -80,4 +85,12 @@ export class CashFlowManager {
     listAllCostAndIncome() {
         return CashFlowManager.listAllCostsAndIncomes;
     }
+
+    private generateNewId = () => {
+        const list = CashFlowManager.listAllCostsAndIncomes;
+        if (list.length === 0) {
+            return 1;
+        }
+        return list[list.length - 1][0] + 1;
+    };
 }

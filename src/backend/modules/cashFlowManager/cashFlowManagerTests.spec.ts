@@ -19,11 +19,7 @@ Tests.setModuleName('cashFlowManager Tests');
         addCostResult.message
     );
 
-    Tests.verify(
-        `1 function addCost should return id`,
-        !null, //TODO: check if its working
-        addCostResult.id
-    );
+    Tests.verify(`1 function addCost should return id`, 1, addCostResult.id);
 }
 
 Tests.verify(
