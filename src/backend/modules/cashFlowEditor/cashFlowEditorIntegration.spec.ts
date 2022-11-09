@@ -3,6 +3,7 @@ import { AccountState } from '../accountState/accountState';
 import { CashFlowManager } from '../cashFlowManager/cashFlowManager';
 import { Filterer } from '../filterer/filterer';
 import { CashFlowEditor } from './cashFlowEditor';
+import { convertCashFlowItemToStringDate } from './cashFlowEditorConverter';
 import { CashFlowItem, ChangedCashFlowItem } from './cashFlowTypes';
 
 Tests.setModuleName('Cash Flow Editor Integration Module Tests');
@@ -23,8 +24,12 @@ const cost: CashFlowItem = {
     comment: 'some comment',
     date: new Date('2022-01-01'),
 };
-const addedIncome = new CashFlowManager().addIncome(income);
-const addedCost = new CashFlowManager().addCost(cost);
+const addedIncome = new CashFlowManager().addIncome(
+    convertCashFlowItemToStringDate(income)
+);
+const addedCost = new CashFlowManager().addCost(
+    convertCashFlowItemToStringDate(cost)
+);
 
 //When
 const changedCost: ChangedCashFlowItem = {
