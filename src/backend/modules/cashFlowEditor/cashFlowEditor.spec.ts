@@ -1,6 +1,7 @@
 import { Tests } from '../../../../tests/tests';
 import { CashFlowManager } from '../cashFlowManager/cashFlowManager';
 import { CashFlowEditor } from './cashFlowEditor';
+import { convertCashFlowItemToStringDate } from './cashFlowEditorConverter';
 import { CashFlowItem, ChangedCashFlowItem } from './cashFlowTypes';
 
 Tests.setModuleName('Cash Flow Editor Module Tests');
@@ -234,7 +235,9 @@ const incomeTestsData: TestData[] = [
 
 for (const testData of costTestsData) {
     //Given
-    const addedItem = new CashFlowManager().addCost(testData.existingItem);
+    const addedItem = new CashFlowManager().addCost(
+        convertCashFlowItemToStringDate(testData.existingItem)
+    );
     testData.changedItem.id = addedItem.id;
 
     //When
@@ -250,7 +253,9 @@ for (const testData of costTestsData) {
 
 for (const testData of incomeTestsData) {
     //Given
-    const addedItem = new CashFlowManager().addIncome(testData.existingItem);
+    const addedItem = new CashFlowManager().addIncome(
+        convertCashFlowItemToStringDate(testData.existingItem)
+    );
     testData.changedItem.id = addedItem.id;
 
     //When
