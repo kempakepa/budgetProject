@@ -41,8 +41,16 @@ const changedCost: ChangedCashFlowItem = {
 changedCost.amount = 1000;
 cashFlowEditor.editCashFlowItem(changedCost);
 
+Tests.verify('Account state should be = 0', 0, AccountState.getAccountState());
+
 changedCost.cashFlowType = 'INCOME';
 cashFlowEditor.editCashFlowItem(changedCost);
+
+Tests.verify(
+    'Account state should be = 2000',
+    2000,
+    AccountState.getAccountState()
+);
 
 //Then
 const costAndIncomes = new CashFlowManager().listAllCostAndIncome();
@@ -61,9 +69,21 @@ Tests.verify(
     filteredIncomes[0]
 );
 
+changedCost.amount = 500;
+cashFlowEditor.editCashFlowItem(changedCost);
+
 Tests.verify(
-    'Account state should be = 2000',
-    2000,
+    'Account state should be = 1500',
+    1500,
+    AccountState.getAccountState()
+);
+
+changedCost.cashFlowType = 'COST';
+cashFlowEditor.editCashFlowItem(changedCost);
+
+Tests.verify(
+    'Account state should be = 500',
+    500,
     AccountState.getAccountState()
 );
 
