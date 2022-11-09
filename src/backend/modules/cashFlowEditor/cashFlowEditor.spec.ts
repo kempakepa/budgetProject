@@ -269,4 +269,22 @@ for (const testData of incomeTestsData) {
     );
 }
 
+{
+    Tests.verify(
+        'Cash Flow Editor - return error if id doesnt exist',
+        {
+            result: 'CASH FLOW ITEM DOESNT EXIST',
+        },
+        new CashFlowEditor().editCashFlowItem({
+            amount: 5000,
+            cashFlowType: 'COST',
+            category: 'Food',
+            comment: 'this item doesnt exist',
+            date: new Date('2022-03-01'),
+            title: 'doesnt exist',
+            id: 1500100900,
+        })
+    );
+}
+
 Tests.summaryTests();

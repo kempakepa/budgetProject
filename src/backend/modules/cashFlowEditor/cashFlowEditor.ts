@@ -18,7 +18,11 @@ export class CashFlowEditor {
         const indexOfElement = CashFlowManager.listAllCostsAndIncomes.findIndex(
             (cashFlowItem: any[]) => cashFlowItem[0] === updatedElement.id
         );
-        //TODO: add test if indexOfElement = -1
+        if (indexOfElement === -1) {
+            return {
+                result: 'CASH FLOW ITEM DOESNT EXIST',
+            };
+        }
 
         const oldAmount =
             CashFlowManager.listAllCostsAndIncomes[indexOfElement][4];
