@@ -47,6 +47,7 @@ cashFlowEditor.editCashFlowItem(changedCost);
 //Then
 const costAndIncomes = new CashFlowManager().listAllCostAndIncome();
 const filteredIncomes = new Filterer().filterCostAndIncome(
+    //TODO: filterer error?
     costAndIncomes,
     'someCost',
     undefined,
@@ -66,6 +67,9 @@ Tests.verify(
     },
     filteredIncomes[0]
 );
+
+console.log(costAndIncomes); //TODO: to remove
+console.log(filteredIncomes); //TODO: to remove
 
 Tests.verify(
     'Account state should be = 2000',
