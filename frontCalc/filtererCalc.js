@@ -7,32 +7,55 @@ const requestSent = () => {
     getResultsFiltered(showResultsFiltered);
 };
 
-const onCategoryChange = () => {
+const onCategoryChange = (category) => {
+    let subcategoriesToShow = [
+        ['Subcategory'],
+        ['Biedronka', 'Lidl', 'Auchan'],
+        ['Job1', 'Job2', 'Job3'],
+        ['Water', 'Power', 'Gas'],
+        ['Fuel', 'Service', 'Parts'],
+    ];
+    let optionPatternOppening = '<option value=';
+    let optionPatternClosing = '</option>';
     document.getElementById('subcategories').removeAttribute('disabled');
     let option = document.getElementById('category').value;
+    let subcategories = '';
+
     switch (option) {
         case '':
-            document.getElementById('subcategories').innerHTML =
-                '<option value="" selected disabled hidden>Subcategory</option>';
             document
                 .getElementById('subcategories')
                 .setAttribute('disabled', '');
+            subcategories = `${optionPatternOppening}"" selected disabled hidden>${subcategoriesToShow[0]}${optionPatternClosing}`;
+            document.getElementById('subcategories').innerHTML = subcategories;
             break;
         case 'food':
-            document.getElementById('subcategories').innerHTML =
-                '<option value="" selected disabled hidden>Subcategory</option><option value="biedronka">Biedronka</option><option value="lidl">Lidl</option><option value="auchan">Auchan</option>';
+            subcategories = `${optionPatternOppening}"" selected>${subcategoriesToShow[0]}`;
+            for (const valueElement of subcategoriesToShow[1]) {
+                subcategories += `${optionPatternOppening}${valueElement.toLowerCase()}>${valueElement}${optionPatternClosing}`;
+            }
+            document.getElementById('subcategories').innerHTML = subcategories;
             break;
         case 'salary':
-            document.getElementById('subcategories').innerHTML =
-                '<option value="" selected disabled hidden>Subcategory</option><option value="job1">Job1</option><option value="job1">Job2</option><option value="job1">Job3</option>';
+            subcategories = `${optionPatternOppening}"" selected>${subcategoriesToShow[0]}`;
+            for (const valueElement of subcategoriesToShow[2]) {
+                subcategories += `${optionPatternOppening}${valueElement.toLowerCase()}>${valueElement}${optionPatternClosing}`;
+            }
+            document.getElementById('subcategories').innerHTML = subcategories;
             break;
         case 'taxes':
-            document.getElementById('subcategories').innerHTML =
-                '<option value="" selected disabled hidden>Subcategory</option><option value="water">Water</option><option value="power">Power</option><option value="gas">Gas</option>';
+            subcategories = `${optionPatternOppening}"" selected>${subcategoriesToShow[0]}`;
+            for (const valueElement of subcategoriesToShow[3]) {
+                subcategories += `${optionPatternOppening}${valueElement.toLowerCase()}>${valueElement}${optionPatternClosing}`;
+            }
+            document.getElementById('subcategories').innerHTML = subcategories;
             break;
         case 'car':
-            document.getElementById('subcategories').innerHTML =
-                '<option value="" selected disabled hidden>Subcategory*</option><option value="fuel">Fuel</option><option value="service">Service</option><option value="parts">Parts</option>';
+            subcategories = `${optionPatternOppening}"" selected>${subcategoriesToShow[0]}`;
+            for (const valueElement of subcategoriesToShow[4]) {
+                subcategories += `${optionPatternOppening}${valueElement.toLowerCase()}>${valueElement}${optionPatternClosing}`;
+            }
+            document.getElementById('subcategories').innerHTML = subcategories;
             break;
         default:
             break;

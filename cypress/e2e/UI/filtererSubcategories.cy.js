@@ -22,24 +22,16 @@ describe('filtererSubcategories tests', () => {
     });
 
     it('should subcategories input enable when user choose category', () => {
-        //When
         FiltererObject.fillCategory('Food');
-
-        //Then
         FiltererObject.getSubcategoryList().should('be.enabled');
         FiltererObject.fillSubcategory('Biedronka');
     });
 
     it('should subcategories reset when user choose another category', () => {
-        //Given
         FiltererObject.fillCategory('Food');
         FiltererObject.fillSubcategory('Biedronka');
-
-        //When
         FiltererObject.fillCategory('Salary');
-
-        //Then
-        FiltererObject.getSubcategoryList().should('have.value', null);
+        FiltererObject.getSubcategoryList().should('have.value', '');
         FiltererObject.fillSubcategory('Job1');
     });
 
