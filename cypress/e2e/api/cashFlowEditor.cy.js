@@ -35,6 +35,9 @@ describe('cashFlowEditor test', () => {
     });
 
     it('should return 404 status code if cost or income not exist', () => {
+        //Given
+        const requestBody = TestDataProvider.createReqParamObject();
+
         //When
         sendCashFlowEditorPut({
             amount: requestBody.amount,
