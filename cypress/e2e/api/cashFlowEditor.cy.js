@@ -1,9 +1,11 @@
 const { TestDataProvider } = require('../../utils/testDataProvider');
 const {
     sendRequestToAddCostItem,
-    sendRequestToAddIncomeItem,
 } = require('../../services/cashFlowManagerService');
 const { filterResults } = require('../../services/filtererService');
+const {
+    sendCashFlowEditorPut,
+} = require('../../services/cashFlowEditorService');
 
 describe('cashFlowEditor test', () => {
     it('should return 200 status code if edit cost or income valid', () => {
