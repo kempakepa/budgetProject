@@ -47,29 +47,19 @@ cashFlowEditor.editCashFlowItem(changedCost);
 //Then
 const costAndIncomes = new CashFlowManager().listAllCostAndIncome();
 const filteredIncomes = new Filterer().filterCostAndIncome(
-    //TODO: filterer error?
     costAndIncomes,
     'someCost',
     undefined,
     undefined,
-    1000,
+    [1000, 1000],
     'Food'
 );
 
 Tests.verify(
     'Should filterer return income with 1000 amount',
-    {
-        title: 'someCost',
-        amount: 1000,
-        category: 'Food',
-        comment: 'some comment',
-        date: '2022-01-01',
-    },
+    [2, 'someCost', 'some comment', '2022-01-01', 1000, 'Food'],
     filteredIncomes[0]
 );
-
-console.log(costAndIncomes); //TODO: to remove
-console.log(filteredIncomes); //TODO: to remove
 
 Tests.verify(
     'Account state should be = 2000',

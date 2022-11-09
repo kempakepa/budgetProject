@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { CashFlowManager } from '../cashFlowManager/cashFlowManager';
 import { ChangedCashFlowItem } from './cashFlowTypes';
 
@@ -28,8 +29,9 @@ export class CashFlowEditor {
             updatedElement.title;
         CashFlowManager.listAllCostsAndIncomes[indexOfElement][2] =
             updatedElement.comment;
-        CashFlowManager.listAllCostsAndIncomes[indexOfElement][3] =
-            updatedElement.date;
+        CashFlowManager.listAllCostsAndIncomes[indexOfElement][3] = dayjs(
+            updatedElement.date
+        ).format('YYYY-MM-DD');
         CashFlowManager.listAllCostsAndIncomes[indexOfElement][4] =
             updatedElement.amount;
         CashFlowManager.listAllCostsAndIncomes[indexOfElement][5] =
