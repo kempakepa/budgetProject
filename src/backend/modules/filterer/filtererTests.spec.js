@@ -266,7 +266,7 @@ Tests.verify(
 );
 Tests.verify(
     `should return 2 arrays if data meet filter criteria: '${category}'`,
-    [[3, 'wynagrodzenie', 'luty', '2022-03-04', 3500, 'Praca']],
+    [[1, 'wynagrodzenie', 'luty', '2022-03-04', 3500, 'Praca']],
     new Filterer().filterCostAndIncome(
         CashFlowManager.listAllCostsAndIncomes,
         undefined,
@@ -295,7 +295,7 @@ Tests.verify(
 
 Tests.verify(
     `should return 2 arrays if data meet partial filter upper case criteria: '${title}, ${comment}'`,
-    [[3, 'wynagrodzenie', 'luty', '2022-03-04', 3500, 'Praca']],
+    [[1, 'wynagrodzenie', 'luty', '2022-03-04', 3500, 'Praca']],
     new Filterer().filterCostAndIncome(
         CashFlowManager.listAllCostsAndIncomes,
         'Wy',
