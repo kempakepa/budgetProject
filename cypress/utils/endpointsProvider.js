@@ -3,6 +3,7 @@ const accountStateEndpoint = '/accountState';
 const addCostItemEndpoint = '/addCostItem';
 const addIncomeItemEndpoint = '/addIncomeItem';
 const filterBudgetItemEndpoint = '/filterBudgetItem?';
+const editCashFlowEndpoint = '/editCashFlow';
 
 module.exports = {
     hostname,
