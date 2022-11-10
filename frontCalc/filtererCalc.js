@@ -7,7 +7,7 @@ const requestSent = () => {
     getResultsFiltered(showResultsFiltered);
 };
 
-const onCategoryChange = (category) => {
+const onCategoryChange = () => {
     let subcategoriesToShow = [
         ['Subcategory'],
         ['Biedronka', 'Lidl', 'Auchan'],
@@ -19,47 +19,37 @@ const onCategoryChange = (category) => {
     let optionPatternClosing = '</option>';
     document.getElementById('subcategories').removeAttribute('disabled');
     let option = document.getElementById('category').value;
-    let subcategories = '';
+    let takeIndex = 0;
 
     switch (option) {
         case '':
             document
                 .getElementById('subcategories')
                 .setAttribute('disabled', '');
-            subcategories = `${optionPatternOppening}"" selected disabled hidden>${subcategoriesToShow[0]}${optionPatternClosing}`;
-            document.getElementById('subcategories').innerHTML = subcategories;
+            takeIndex = 0;
+
             break;
         case 'food':
-            subcategories = `${optionPatternOppening}"" selected>${subcategoriesToShow[0]}`;
-            for (const valueElement of subcategoriesToShow[1]) {
-                subcategories += `${optionPatternOppening}${valueElement.toLowerCase()}>${valueElement}${optionPatternClosing}`;
-            }
-            document.getElementById('subcategories').innerHTML = subcategories;
+            takeIndex = 1;
             break;
         case 'salary':
-            subcategories = `${optionPatternOppening}"" selected>${subcategoriesToShow[0]}`;
-            for (const valueElement of subcategoriesToShow[2]) {
-                subcategories += `${optionPatternOppening}${valueElement.toLowerCase()}>${valueElement}${optionPatternClosing}`;
-            }
-            document.getElementById('subcategories').innerHTML = subcategories;
+            takeIndex = 2;
             break;
         case 'taxes':
-            subcategories = `${optionPatternOppening}"" selected>${subcategoriesToShow[0]}`;
-            for (const valueElement of subcategoriesToShow[3]) {
-                subcategories += `${optionPatternOppening}${valueElement.toLowerCase()}>${valueElement}${optionPatternClosing}`;
-            }
-            document.getElementById('subcategories').innerHTML = subcategories;
+            takeIndex = 3;
+
             break;
         case 'car':
-            subcategories = `${optionPatternOppening}"" selected>${subcategoriesToShow[0]}`;
-            for (const valueElement of subcategoriesToShow[4]) {
-                subcategories += `${optionPatternOppening}${valueElement.toLowerCase()}>${valueElement}${optionPatternClosing}`;
-            }
-            document.getElementById('subcategories').innerHTML = subcategories;
+            takeIndex = 4;
             break;
         default:
             break;
     }
+    let subcategories = `${optionPatternOppening}"" selected>Subcategory${optionPatternClosing}`;
+    for (const valueElement of subcategoriesToShow[takeIndex]) {
+        subcategories += `${optionPatternOppening}${valueElement.toLowerCase()}>${valueElement}${optionPatternClosing}`;
+    }
+    document.getElementById('subcategories').innerHTML = subcategories;
 };
 
 const defineQuerryParams = () => {

@@ -30,7 +30,7 @@ describe('cashFlowManagerSubcategories tests', () => {
         CashFlowManagerObject.insertCategory('Salary');
 
         //Then
-        CashFlowManagerObject.getSubcategoryList().should('have.value', null);
+        CashFlowManagerObject.getSubcategoryList().should('have.value', '');
         CashFlowManagerObject.insertSubcategory('Job1');
     });
 });

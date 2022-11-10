@@ -22,9 +22,8 @@ export class CashFlowValidator extends BaseConstructor {
             this.date != '' &&
             this.isValidDate() &&
             typeof this.category == 'string' &&
-            this.category != ''; /* &&
-            typeof this.subcategory == 'string' &&
-            this.subcategory != ''; */
+            this.category != '' &&
+            typeof this.subcategory == 'string';
         const numberInput = typeof this.amount == 'number' && this.amount > 0;
 
         return stringInput && numberInput;

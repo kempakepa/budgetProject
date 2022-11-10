@@ -15,28 +15,46 @@ const requestSent = () => {
 };
 
 const onCategoryChange = () => {
+    let subcategoriesToShow = [
+        ['Subcategory'],
+        ['Biedronka', 'Lidl', 'Auchan'],
+        ['Job1', 'Job2', 'Job3'],
+        ['Water', 'Power', 'Gas'],
+        ['Fuel', 'Service', 'Parts'],
+    ];
+    let optionPatternOppening = '<option value=';
+    let optionPatternClosing = '</option>';
     document.getElementById('subcategories').removeAttribute('disabled');
     let option = document.getElementById('category').value;
+    let takeIndex = 0;
+
     switch (option) {
+        case '':
+            document
+                .getElementById('subcategories')
+                .setAttribute('disabled', '');
+            takeIndex = 0;
+            break;
         case 'food':
-            document.getElementById('subcategories').innerHTML =
-                '<option value="" selected disabled hidden>Subcategory</option><option value="biedronka">Biedronka</option><option value="lidl">Lidl</option><option value="auchan">Auchan</option>';
+            takeIndex = 1;
             break;
         case 'salary':
-            document.getElementById('subcategories').innerHTML =
-                '<option value="" selected disabled hidden>Subcategory</option><option value="job1">Job1</option><option value="job1">Job2</option><option value="job1">Job3</option>';
+            takeIndex = 2;
             break;
         case 'taxes':
-            document.getElementById('subcategories').innerHTML =
-                '<option value="" selected disabled hidden>Subcategory</option><option value="water">Water</option><option value="power">Power</option><option value="gas">Gas</option>';
+            takeIndex = 3;
             break;
         case 'car':
-            document.getElementById('subcategories').innerHTML =
-                '<option value="" selected disabled hidden>Subcategory</option><option value="fuel">Fuel</option><option value="service">Service</option><option value="parts">Parts</option>';
+            takeIndex = 4;
             break;
         default:
             break;
     }
+    let subcategories = `${optionPatternOppening}"" selected>Subcategory${optionPatternClosing}`;
+    for (const valueElement of subcategoriesToShow[takeIndex]) {
+        subcategories += `${optionPatternOppening}${valueElement.toLowerCase()}>${valueElement}${optionPatternClosing}`;
+    }
+    document.getElementById('subcategories').innerHTML = subcategories;
 };
 //wysylanie requesta, zlapanie response
 const addCost = (param, onResponse) => {
@@ -101,5 +119,6 @@ const readInputelementsAndValues = () => {
         date: document.getElementById('date').value,
         amount: Number(document.getElementById('amount').value),
         category: document.getElementById('category').value,
+        subcategory: document.getElementById('subcategories').value,
     };
 };
