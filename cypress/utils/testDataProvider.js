@@ -27,33 +27,52 @@ class TestDataProvider {
             comment: this.generateFakerData('text'),
             date: this.generateFakerData('date'),
             amount: this.generateFakerData('numeric'),
-            category: 'Food',
-            subcategory: this.subCategorySelection(this.category),
+            category: this.categoryRandomSelect(),
+            subcategory: this.subCategoryRandomSelect(),
         };
         return this.requestParams;
     }
 
-    static subCategorySelection(category) {
-        this.requestParams.subcategory = '';
-        switch (category) {
+    static categoryRandomSelect() {
+        this.requestParams.category = '';
+        let categories = ['Food', 'Salary', 'Taxes', 'Car'];
+        this.requestParams.category =
+            categories[Math.floor(categories.length * Math.random())];
+        return this.requestParams.category;
+    }
+
+    static subCategoryRandomSelect() {
+        let subcategories = [
+            [''],
+            ['Biedronka', 'Lidl', 'Auchan'],
+            ['Job1', 'Job2', 'Job3'],
+            ['Water', 'Power', 'Gas'],
+            ['Fuel', 'Service', 'Parts'],
+        ];
+        let takeIndex = 0;
+        switch (this.requestParams.category) {
             case '':
-                this.requestParams.subcategory = '';
+                takeIndex = 0;
                 break;
             case 'Food':
-                this.requestParams.subcategory = 'Biedronka';
+                takeIndex = 1;
                 break;
             case 'Salary':
-                this.requestParams.subcategory = 'Job1';
+                takeIndex = 2;
                 break;
             case 'Taxes':
-                this.requestParams.subcategory = 'Water';
+                takeIndex = 3;
                 break;
             case 'Car':
-                this.requestParams.subcategory = 'Fuel';
+                takeIndex = 4;
                 break;
             default:
                 break;
         }
+        this.requestParams.subcategory =
+            subcategories[takeIndex][
+                Math.floor(subcategories[takeIndex].length * Math.random())
+            ];
         return this.requestParams.subcategory;
     }
 
@@ -61,7 +80,7 @@ class TestDataProvider {
         const result = this.createReqParamObject();
         if (property == 'category') {
             result[property] = value;
-            this.subCategorySelection();
+            this.subCategoryRandomSelect();
         } else {
             result[property] = value;
         }

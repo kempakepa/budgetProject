@@ -10,10 +10,7 @@ describe('filterer tests', () => {
     beforeEach(() => {
         HomePageObject.visitHomePage();
         HomePageObject.goToFiltererModule();
-        randomCostData = TestDataProvider.customizeReqParamObject(
-            'category',
-            'Food'
-        );
+        randomCostData = TestDataProvider.createReqParamObject();
         sendRequestToAddCostItem(randomCostData);
     });
 
@@ -76,6 +73,7 @@ describe('filterer tests', () => {
     it('should return at least one array element by 2 valid filter criteria (title, mindate)', () => {
         FiltererObject.fillTitle(randomCostData.title);
         FiltererObject.fillMinDate(randomCostData.date);
+        FiltererObject.fillMaxDate(randomCostData.date);
         FiltererObject.clickSend();
         FiltererObject.shouldFilterAtLeastOneItem();
     });
@@ -83,6 +81,7 @@ describe('filterer tests', () => {
     it('should return at least one array element by 2 valid filter criteria (title, minamount)', () => {
         FiltererObject.fillTitle(randomCostData.title);
         FiltererObject.fillMinAmount(randomCostData.amount);
+        FiltererObject.fillMaxAmount(randomCostData.amount);
         FiltererObject.clickSend();
         FiltererObject.shouldFilterAtLeastOneItem();
     });

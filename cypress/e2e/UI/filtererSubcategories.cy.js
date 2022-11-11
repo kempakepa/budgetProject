@@ -10,10 +10,7 @@ describe('filtererSubcategories tests', () => {
     beforeEach(() => {
         HomePageObject.visitHomePage();
         HomePageObject.goToFiltererModule();
-        randomCostData = TestDataProvider.customizeReqParamObject(
-            'category',
-            'Food'
-        );
+        randomCostData = TestDataProvider.createReqParamObject();
         sendRequestToAddCostItem(randomCostData);
     });
 
@@ -22,9 +19,9 @@ describe('filtererSubcategories tests', () => {
     });
 
     it('should subcategories input enable when user choose category', () => {
-        FiltererObject.fillCategory('Food');
+        FiltererObject.fillCategory(randomCostData.category);
         FiltererObject.getSubcategoryList().should('be.enabled');
-        FiltererObject.fillSubcategory('Biedronka');
+        FiltererObject.fillSubcategory(randomCostData.subcategory);
     });
 
     it('should subcategories reset when user choose another category', () => {
@@ -49,12 +46,4 @@ describe('filtererSubcategories tests', () => {
         FiltererObject.clickSend();
         FiltererObject.shouldFilterAtLeastOneItem();
     });
-
-    //to add also in filterer
-    /*     it('should return no array element by invalid subcategory filter', () => {
-        FiltererObject.fillCategory(randomCostData.category);
-        FiltererObject.fillSubcategory('Lidl');
-        FiltererObject.clickSend();
-        FiltererObject.shouldFilterAtLeastOneItem();
-    }); */
 });
