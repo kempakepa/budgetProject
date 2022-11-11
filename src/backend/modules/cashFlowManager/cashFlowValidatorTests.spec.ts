@@ -38,7 +38,7 @@ Tests.verify(
         '2022-01-01',
         0,
         'category',
-        ''
+        'Parts'
     ).validateInput()
 );
 Tests.verify(

@@ -17,7 +17,7 @@ new CashFlowManager().addIncome({
     date: '2022-03-04',
     amount: 3500,
     category: 'Praca',
-    subcategory: '',
+    subcategory: 'Praca1',
 });
 
 new CashFlowManager().addCost({
@@ -26,7 +26,7 @@ new CashFlowManager().addCost({
     date: '2022-03-04',
     amount: 201.98,
     category: 'Food',
-    subcategory: '',
+    subcategory: 'Auchan',
 });
 new CashFlowManager().addCost({
     title: 'zakupy',
@@ -39,7 +39,7 @@ new CashFlowManager().addCost({
 
 Tests.verify(
     `should return 1 array if data meet filter criteria '${comment}, ${date}, ${category}'`,
-    [['zakupy', 'luty', '2022-03-04', -201.98, 'Food', '']],
+    [['zakupy', 'luty', '2022-03-04', -201.98, 'Food', 'Auchan']],
     new Filterer().filterCostAndIncome(
         CashFlowManager.listAllCostsAndIncomes,
         undefined,
@@ -80,7 +80,7 @@ Tests.verify(
 
 Tests.verify(
     `should return 1 array if data meet filter criteria: '${comment}, ${date}, ${amount}'`,
-    [['wynagrodzenie', 'luty', '2022-03-04', 3500, 'Praca', '']],
+    [['wynagrodzenie', 'luty', '2022-03-04', 3500, 'Praca', 'Praca1']],
     new Filterer().filterCostAndIncome(
         CashFlowManager.listAllCostsAndIncomes,
         undefined,
@@ -122,7 +122,7 @@ Tests.verify(
 
 Tests.verify(
     `should return 1 array if data meet filter criteria: '${comment}, ${date}, ${amount}' edge case`,
-    [['zakupy', 'luty', '2022-03-04', -201.98, 'Food', '']],
+    [['zakupy', 'luty', '2022-03-04', -201.98, 'Food', 'Auchan']],
     new Filterer().filterCostAndIncome(
         CashFlowManager.listAllCostsAndIncomes,
         undefined,
@@ -137,8 +137,8 @@ Tests.verify(
 Tests.verify(
     `should return 3 arrays if data meet filter criteria: '${date}, ${amount}'`,
     [
-        ['wynagrodzenie', 'luty', '2022-03-04', 3500, 'Praca', ''],
-        ['zakupy', 'luty', '2022-03-04', -201.98, 'Food', ''],
+        ['wynagrodzenie', 'luty', '2022-03-04', 3500, 'Praca', 'Praca1'],
+        ['zakupy', 'luty', '2022-03-04', -201.98, 'Food', 'Auchan'],
         ['zakupy', 'luty', '2022-03-04', -3598.02, 'Food', ''],
     ],
     new Filterer().filterCostAndIncome(
@@ -155,7 +155,7 @@ Tests.verify(
 Tests.verify(
     `should return 2 arrays if data meet filter criteria: '${comment}, ${date}, ${amount}'`,
     [
-        ['wynagrodzenie', 'luty', '2022-03-04', 3500, 'Praca', ''],
+        ['wynagrodzenie', 'luty', '2022-03-04', 3500, 'Praca', 'Praca1'],
         ['zakupy', 'luty', '2022-03-04', -3598.02, 'Food', ''],
     ],
     new Filterer().filterCostAndIncome(
@@ -172,7 +172,7 @@ Tests.verify(
 Tests.verify(
     `should return 2 arrays if data meet partial filter criteria: '${title}, ${comment}, ${date}, ${amount}'`,
     [
-        ['zakupy', 'luty', '2022-03-04', -201.98, 'Food', ''],
+        ['zakupy', 'luty', '2022-03-04', -201.98, 'Food', 'Auchan'],
         ['zakupy', 'luty', '2022-03-04', -3598.02, 'Food', ''],
     ],
     new Filterer().filterCostAndIncome(
@@ -203,7 +203,7 @@ Tests.verify(
 Tests.verify(
     `should return 2 arrays if data meet filter criteria: '${title}, ${comment}, ${date}, ${category}'`,
     [
-        ['zakupy', 'luty', '2022-03-04', -201.98, 'Food', ''],
+        ['zakupy', 'luty', '2022-03-04', -201.98, 'Food', 'Auchan'],
         ['zakupy', 'luty', '2022-03-04', -3598.02, 'Food', ''],
     ],
     new Filterer().filterCostAndIncome(
@@ -220,8 +220,8 @@ Tests.verify(
 Tests.verify(
     `should return 3 arrays if data meet filter criteria: '${date}, ${amount}'`,
     [
-        ['wynagrodzenie', 'luty', '2022-03-04', 3500, 'Praca', ''],
-        ['zakupy', 'luty', '2022-03-04', -201.98, 'Food', ''],
+        ['wynagrodzenie', 'luty', '2022-03-04', 3500, 'Praca', 'Praca1'],
+        ['zakupy', 'luty', '2022-03-04', -201.98, 'Food', 'Auchan'],
         ['zakupy', 'luty', '2022-03-04', -3598.02, 'Food', ''],
     ],
     new Filterer().filterCostAndIncome(
@@ -237,7 +237,7 @@ Tests.verify(
 
 Tests.verify(
     `should return 1 array if data meet filter criteria: '${amount}'`,
-    [['zakupy', 'luty', '2022-03-04', -201.98, 'Food', '']],
+    [['zakupy', 'luty', '2022-03-04', -201.98, 'Food', 'Auchan']],
     new Filterer().filterCostAndIncome(
         CashFlowManager.listAllCostsAndIncomes,
         undefined,
@@ -252,8 +252,8 @@ Tests.verify(
 Tests.verify(
     `should return all arrays if data meet filter criteria: 'undefined'`,
     [
-        ['wynagrodzenie', 'luty', '2022-03-04', 3500, 'Praca', ''],
-        ['zakupy', 'luty', '2022-03-04', -201.98, 'Food', ''],
+        ['wynagrodzenie', 'luty', '2022-03-04', 3500, 'Praca', 'Praca1'],
+        ['zakupy', 'luty', '2022-03-04', -201.98, 'Food', 'Auchan'],
         ['zakupy', 'luty', '2022-03-04', -3598.02, 'Food', ''],
     ],
     new Filterer().filterCostAndIncome(
@@ -269,8 +269,8 @@ Tests.verify(
 Tests.verify(
     `should return 3 arrays if data meet filter criteria: '${comment}'`,
     [
-        ['wynagrodzenie', 'luty', '2022-03-04', 3500, 'Praca', ''],
-        ['zakupy', 'luty', '2022-03-04', -201.98, 'Food', ''],
+        ['wynagrodzenie', 'luty', '2022-03-04', 3500, 'Praca', 'Praca1'],
+        ['zakupy', 'luty', '2022-03-04', -201.98, 'Food', 'Auchan'],
         ['zakupy', 'luty', '2022-03-04', -3598.02, 'Food', ''],
     ],
     new Filterer().filterCostAndIncome(
@@ -285,7 +285,7 @@ Tests.verify(
 );
 Tests.verify(
     `should return 2 arrays if data meet filter criteria: '${category}'`,
-    [['wynagrodzenie', 'luty', '2022-03-04', 3500, 'Praca', '']],
+    [['wynagrodzenie', 'luty', '2022-03-04', 3500, 'Praca', 'Praca1']],
     new Filterer().filterCostAndIncome(
         CashFlowManager.listAllCostsAndIncomes,
         undefined,
@@ -300,7 +300,7 @@ Tests.verify(
 Tests.verify(
     `should return 3 arrays if data meet filter criteria: '${date}, ${amount}'`,
     [
-        ['zakupy', 'luty', '2022-03-04', -201.98, 'Food', ''],
+        ['zakupy', 'luty', '2022-03-04', -201.98, 'Food', 'Auchan'],
         ['zakupy', 'luty', '2022-03-04', -3598.02, 'Food', ''],
     ],
     new Filterer().filterCostAndIncome(
@@ -316,7 +316,7 @@ Tests.verify(
 
 Tests.verify(
     `should return 2 arrays if data meet partial filter upper case criteria: '${title}, ${comment}'`,
-    [['wynagrodzenie', 'luty', '2022-03-04', 3500, 'Praca', '']],
+    [['wynagrodzenie', 'luty', '2022-03-04', 3500, 'Praca', 'Praca1']],
     new Filterer().filterCostAndIncome(
         CashFlowManager.listAllCostsAndIncomes,
         'Wy',
@@ -331,8 +331,8 @@ Tests.verify(
 Tests.verify(
     `should return 3 arrays if data meet partial filter criteria: '${comment}'`,
     [
-        ['wynagrodzenie', 'luty', '2022-03-04', 3500, 'Praca', ''],
-        ['zakupy', 'luty', '2022-03-04', -201.98, 'Food', ''],
+        ['wynagrodzenie', 'luty', '2022-03-04', 3500, 'Praca', 'Praca1'],
+        ['zakupy', 'luty', '2022-03-04', -201.98, 'Food', 'Auchan'],
         ['zakupy', 'luty', '2022-03-04', -3598.02, 'Food', ''],
     ],
     new Filterer().filterCostAndIncome(
@@ -348,7 +348,7 @@ Tests.verify(
 
 Tests.verify(
     `should return 1 arrays if data meet partial filter to upper case criteria: '${title}'`,
-    [['wynagrodzenie', 'luty', '2022-03-04', 3500, 'Praca', '']],
+    [['wynagrodzenie', 'luty', '2022-03-04', 3500, 'Praca', 'Praca1']],
     new Filterer().filterCostAndIncome(
         CashFlowManager.listAllCostsAndIncomes,
         'Wyna',
@@ -362,7 +362,7 @@ Tests.verify(
 
 Tests.verify(
     `should return 1 arrays if data meet filter to lower case criteria: '${category}'`,
-    [['wynagrodzenie', 'luty', '2022-03-04', 3500, 'Praca', '']],
+    [['wynagrodzenie', 'luty', '2022-03-04', 3500, 'Praca', 'Praca1']],
     new Filterer().filterCostAndIncome(
         CashFlowManager.listAllCostsAndIncomes,
         undefined,
@@ -375,7 +375,7 @@ Tests.verify(
 );
 Tests.verify(
     `should return 1 arrays if data meet partial filter to lower case criteria: '${category}'`,
-    [['wynagrodzenie', 'luty', '2022-03-04', 3500, 'Praca', '']],
+    [['wynagrodzenie', 'luty', '2022-03-04', 3500, 'Praca', 'Praca1']],
     new Filterer().filterCostAndIncome(
         CashFlowManager.listAllCostsAndIncomes,
         undefined,
@@ -390,8 +390,8 @@ Tests.verify(
 Tests.verify(
     `should return 3 arrays if data meet filter to upper case criteria: '${comment}'`,
     [
-        ['wynagrodzenie', 'luty', '2022-03-04', 3500, 'Praca', ''],
-        ['zakupy', 'luty', '2022-03-04', -201.98, 'Food', ''],
+        ['wynagrodzenie', 'luty', '2022-03-04', 3500, 'Praca', 'Praca1'],
+        ['zakupy', 'luty', '2022-03-04', -201.98, 'Food', 'Auchan'],
         ['zakupy', 'luty', '2022-03-04', -3598.02, 'Food', ''],
     ],
     new Filterer().filterCostAndIncome(
@@ -408,8 +408,8 @@ Tests.verify(
 Tests.verify(
     `should return 3 arrays if data meet filter min = max date range criteria: '${comment}'`,
     [
-        ['wynagrodzenie', 'luty', '2022-03-04', 3500, 'Praca', ''],
-        ['zakupy', 'luty', '2022-03-04', -201.98, 'Food', ''],
+        ['wynagrodzenie', 'luty', '2022-03-04', 3500, 'Praca', 'Praca1'],
+        ['zakupy', 'luty', '2022-03-04', -201.98, 'Food', 'Auchan'],
         ['zakupy', 'luty', '2022-03-04', -3598.02, 'Food', ''],
     ],
     new Filterer().filterCostAndIncome(
@@ -425,7 +425,7 @@ Tests.verify(
 
 Tests.verify(
     `should return 1 arrays if data meet filter min = max amount range criteria: '${comment}'`,
-    [['wynagrodzenie', 'luty', '2022-03-04', 3500, 'Praca', '']],
+    [['wynagrodzenie', 'luty', '2022-03-04', 3500, 'Praca', 'Praca1']],
     new Filterer().filterCostAndIncome(
         CashFlowManager.listAllCostsAndIncomes,
         undefined,
