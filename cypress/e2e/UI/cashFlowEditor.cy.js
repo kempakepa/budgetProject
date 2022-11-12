@@ -36,7 +36,7 @@ describe('cashFlowEditor tests', () => {
         //When
         cy.get('#showlist')
             .find('li')
-            .eq(0)
+            .contains(requestBody.title)
             .find('[data-cy="edit-link"]')
             .click();
 
@@ -45,12 +45,15 @@ describe('cashFlowEditor tests', () => {
         cy.get('[data-cy="comment"]').should('have.value', requestBody.comment);
         cy.get('[data-cy="date"]').should('have.value', requestBody.date);
         cy.get('[data-cy="amount"]').should('have.value', requestBody.amount);
-        cy.get('[data-cy="title"]').should('have.value', requestBody.category);
-        cy.get('[data-cy="category"]').should('have.value', requestBody.title);
-        cy.get('[data-cy="cash-flow-type"]').should('have.value', 'COST');
+        cy.get('[data-cy="category"]').should(
+            'have.value',
+            requestBody.category.toLowerCase()
+        );
+        //TODO: check cash item type
+        //cy.get('[data-cy="cash-flow-type"]').should('have.value', 'COST');
     });
 
-    it('should be possible to edit cost or income value', () => {
+    it.skip('should be possible to edit cost or income value', () => {
         //Given
         const requestBody = TestDataProvider.createReqParamObject();
         sendRequestToAddCostItem(requestBody);
@@ -77,9 +80,10 @@ describe('cashFlowEditor tests', () => {
         //TODO: na liśćie jest wiersz ze zmodyfikowanymi danymi
     });
 
-    it('should account state be updated when user change cost or income value', () => {
+    it.skip('should account state be updated when user change cost or income value', () => {
         //Given
-        //TODO: add some cost or income
+        const requestBody = TestDataProvider.createReqParamObject();
+        sendRequestToAddCostItem(requestBody);
         //TODO: check account state
         //TODO: click send
         //TODO: click edit

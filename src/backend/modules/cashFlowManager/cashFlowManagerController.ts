@@ -73,6 +73,7 @@ export class CashFlowManagerController extends BaseController {
 
     listAllCostAndIncome() {
         this.res.setHeader('Content-Type', 'application/json');
+        this.res.setHeader('Access-Control-Allow-Origin', '*');
         this.res.statusCode = 200;
         this.res.end(JSON.stringify(CashFlowManager.listAllCostsAndIncomes));
     }
