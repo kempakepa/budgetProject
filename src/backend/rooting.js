@@ -45,6 +45,13 @@ const endpoints = [
         },
     },
     {
+        url: '/api/costAndIncomes',
+        method: 'GET',
+        controller: (req, res) => {
+            new CashFlowManagerController(req, res).listAllCostAndIncome();
+        },
+    },
+    {
         url: '/api/filterBudgetItem',
         method: 'GET',
         controller: (req, res) => {
