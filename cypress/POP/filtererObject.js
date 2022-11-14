@@ -58,6 +58,18 @@ class FiltererObject {
     static getRow(title) {
         return cy.get('li').contains(title);
     }
+
+    static rowContainEditButton(cashFlowItemRow) {
+        cashFlowItemRow.find('[data-cy="edit-link"]').should('exist');
+    }
+
+    static clickEditButton(title) {
+        FiltererObject.getRow(title).find('[data-cy="edit-link"]').click();
+    }
+
+    static rowContainText(cashFlowItemRow, value) {
+        cashFlowItemRow.should('contain.text', value);
+    }
 }
 
 module.exports = { FiltererObject };
