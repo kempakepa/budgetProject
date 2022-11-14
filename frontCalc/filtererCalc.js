@@ -63,12 +63,12 @@ const showIncomesAndCostsList = (data) => {
 };
 
 const showFiltererBalancerData = (data) => {
-    const incomes = data.filter((dataRow) => dataRow[3] > 0);
-    const incomesSum = incomes.reduce((acc, object) => acc + object[3], 0);
+    const incomes = data.filter((dataRow) => dataRow[4] > 0);
+    const incomesSum = incomes.reduce((acc, object) => acc + object[4], 0);
 
-    const costs = data.filter((dataRow) => dataRow[3] < 0);
+    const costs = data.filter((dataRow) => dataRow[4] < 0);
     const costsSum = costs.reduce(
-        (acc, object) => acc + Math.abs(object[3]),
+        (acc, object) => acc + Math.abs(object[4]),
         0
     );
 
