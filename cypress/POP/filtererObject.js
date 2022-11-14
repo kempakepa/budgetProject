@@ -54,6 +54,10 @@ class FiltererObject {
     static getSubcategoryList() {
         return cy.get('#subcategories');
     }
+
+    static getRow(title) {
+        return cy.get('li').contains(title);
+    }
 }
 
 module.exports = { FiltererObject };

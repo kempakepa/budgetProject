@@ -13,7 +13,10 @@ const cashFlowEditorOnLoad = () => {
     });
 };
 
-const cashFlowEditorOnEdit = () => {};
+const cashFlowEditorOnEdit = () => {
+    const body = readInputValues();
+    sendEditFlowPutRequeset(body, redirectToFilteringView);
+};
 
 //VIEW
 const readCashFlowItemId = () => {
@@ -42,13 +45,72 @@ const readCashFlowItemId = () => {
 };
 
 const setFormInitValues = (values) => {
-    document.getElementById('title').value = values[1];
-    document.getElementById('comment').value = values[2];
-    document.getElementById('date').value = values[3];
-    document.getElementById('amount').value = Math.abs(values[4]);
-    document.getElementById('category').options[
-        getCategoryInputIndex(values[5])
-    ].selected = 'selected';
+    const isCost = values[4] < 0;
+
+    if (isCost) {
+        document.getElementById('cost').setAttribute('checked', '');
+    } else {
+        document.getElementById('income').setAttribute('checked', '');
+    }
+
+    getHiddenIdElement().value = values[0];
+    getTitleElement().value = values[1];
+    getCommentElement().value = values[2];
+    getDateElement().value = values[3];
+    getAmountElement().value = Math.abs(values[4]);
+    getCategoryElement().options[getCategoryInputIndex(values[5])].selected =
+        'selected';
+};
+
+const readInputValues = () => {
+    return {
+        amount: getAmountElement().value,
+        cashFlowType: getCostTypeElement().enabled ? 'COST' : 'INCOME',
+        category: getCategoryElement().value,
+        comment: getCommentElement().value,
+        date: getDateElement().value,
+        title: getTitleElement().value,
+        id: getHiddenIdElement().value,
+    };
+};
+
+const redirectToFilteringView = () => {
+    const currentUrl = window.location.href;
+    const splitUrl = currentUrl.split('/modules/');
+    const newUrl = `${splitUrl[0]}/modules/filterer/filterer.html`;
+    window.location.replace(newUrl);
+};
+
+const getTitleElement = () => {
+    return document.getElementById('title');
+};
+
+const getCommentElement = () => {
+    return document.getElementById('comment');
+};
+
+const getDateElement = () => {
+    return document.getElementById('date');
+};
+
+const getAmountElement = () => {
+    return document.getElementById('amount');
+};
+
+const getCategoryElement = () => {
+    return document.getElementById('category');
+};
+
+const getCostTypeElement = () => {
+    return document.getElementById('cost');
+};
+
+const getIncomeTypeElement = () => {
+    return document.getElementById('income');
+};
+
+const getHiddenIdElement = () => {
+    return document.getElementById('id');
 };
 
 //LOGIC
@@ -76,4 +138,18 @@ const loadCashFlowItem = (onResponse) => {
     const url = `${baseUrl}${port}/api/costAndIncomes`;
     reqObject.open('GET', url);
     reqObject.send();
+};
+
+const sendEditFlowPutRequeset = (body, onResponse) => {
+    const reqObject = new XMLHttpRequest();
+
+    const url = `${baseUrl}${port}/api/editCashFlow`;
+    reqObject.open('POST', url);
+    reqObject.responseType = 'text';
+
+    reqObject.onload = () => {
+        onResponse();
+    };
+
+    reqObject.send(JSON.stringify(body));
 };
