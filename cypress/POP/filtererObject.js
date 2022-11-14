@@ -46,6 +46,10 @@ class FiltererObject {
     static shouldFilterAtLeastOneItem() {
         cy.get('ul#showlist>li').should('not.have.length', 0);
     }
+
+    static getRow(title) {
+        return cy.get('li').contains(title);
+    }
 }
 
 module.exports = { FiltererObject };

@@ -10,6 +10,7 @@
             Welcome to Cash Flow editor module, please fill in form below:
 </div></br>
 <form>
+    <input type="text" id="id" hidden/></br>
         <input type="radio" name="budgetType" id="cost" data-cy="cost" value="cost" required/>
         <label for="cost">Cost</label>
         <input type="radio" name= "budgetType" id="income" data-cy="income" value="income"/>
@@ -30,7 +31,7 @@
             <option value="taxes">Taxes</option>
             <option value="car">Car</option>
           </select></br>
-        <input type="submit" value="Send!" onclick="requestSent()" data-cy="sendButton"/></br>
+        <input type="submit" value="Send!" onclick="cashFlowEditorOnEdit()" data-cy="update-button"/></br>
         <div id="submition_message" data-cy="submition_message"></div>
 </form>
         <div>

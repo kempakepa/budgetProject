@@ -13,10 +13,16 @@ export class CashFlowEditor {
             return {
                 result: 'WRONG VALUES',
             };
+        } else if (!Number(updatedElement.id)) {
+            return {
+                result: 'WRONG VALUES',
+            };
         }
 
+        const itemId = Number(updatedElement.id);
+
         const indexOfElement = CashFlowManager.listAllCostsAndIncomes.findIndex(
-            (cashFlowItem: any[]) => cashFlowItem[0] === updatedElement.id
+            (cashFlowItem: any[]) => cashFlowItem[0] === itemId
         );
         if (indexOfElement === -1) {
             return {

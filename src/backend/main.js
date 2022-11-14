@@ -4,6 +4,8 @@ const { endpoints } = require('./rooting');
 const port = 8081;
 
 const routing = (req, res) => {
+    console.log(req.url);
+    console.log(req.method);
     if (
         endpoints.find(
             (endpoint) =>

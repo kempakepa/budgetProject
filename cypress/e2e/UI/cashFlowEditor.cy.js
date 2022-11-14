@@ -49,48 +49,36 @@ describe('cashFlowEditor tests', () => {
             'have.value',
             requestBody.category.toLowerCase()
         );
-        //TODO: check cash item type
-        //cy.get('[data-cy="cash-flow-type"]').should('have.value', 'COST');
+        cy.get('[data-cy="cost"]').should('be.checked');
     });
 
-    it.skip('should be possible to edit cost or income value', () => {
+    it.only('should be possible to edit cost or income value', () => {
         //Given
         const requestBody = TestDataProvider.createReqParamObject();
         sendRequestToAddCostItem(requestBody);
         FiltererObject.clickSend();
         cy.get('#showlist')
             .find('li')
-            .eq(0)
+            .contains(requestBody.title)
             .find('[data-cy="edit-link"]')
             .click();
 
         //When
         const newCostData = TestDataProvider.createReqParamObject();
-        cy.get('[data-cy="title"]').type(newCostData.title);
-        cy.get('[data-cy="comment"]').type(newCostData.comment);
-        cy.get('[data-cy="date"]').type(newCostData.date);
-        cy.get('[data-cy="amount"]').type(newCostData.amount);
-        cy.get('[data-cy="title"]').type(newCostData.category);
-        cy.get('[data-cy="category"]').type(newCostData.title);
-        cy.get('[data-cy="cash-flow-type"]').type('INCOME');
-        cy.get('[data-cy="update-button"').click();
+        cy.get('[data-cy="title"]').clear().type(newCostData.title);
+        cy.get('[data-cy="comment"]').clear().type(newCostData.comment);
+        cy.get('[data-cy="date"]').clear().type(newCostData.date);
+        cy.get('[data-cy="amount"]').clear().type(newCostData.amount);
+        cy.get('[data-cy="category"]').type(newCostData.category);
+        cy.get('[data-cy="income"]').click();
+        cy.get('[data-cy="update-button"]').click();
 
         //Then
-        cy.get('[data-cy="filterer-header"]').should('be.visible');
-        //TODO: na liśćie jest wiersz ze zmodyfikowanymi danymi
-    });
-
-    it.skip('should account state be updated when user change cost or income value', () => {
-        //Given
-        const requestBody = TestDataProvider.createReqParamObject();
-        sendRequestToAddCostItem(requestBody);
-        //TODO: check account state
-        //TODO: click send
-        //TODO: click edit
-        //When
-        //TODO: edit cash flow type and amount
-        //TODO: go to account state
-        //Then
-        //TODO: assert account state
+        FiltererObject.clickSend();
+        const cashItemRow = FiltererObject.getRow(newCostData.title);
+        cashItemRow.should('contain.text', newCostData.comment);
+        cashItemRow.should('contain.text', newCostData.date);
+        cashItemRow.should('contain.text', newCostData.amount);
+        cashItemRow.should('contain.text', newCostData.category.toLowerCase());
     });
 });

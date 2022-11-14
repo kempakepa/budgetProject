@@ -66,7 +66,7 @@ const endpoints = [
     },
     {
         url: '/api/editCashFlow',
-        method: 'PUT',
+        method: 'POST',
         controller: (req, res) => {
             new CashFlowEditorController(req, res).editCashFlowItem();
         },

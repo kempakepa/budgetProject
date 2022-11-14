@@ -3,13 +3,13 @@ const {
     editCashFlowEndpoint,
 } = require('../utils/endpointsProvider');
 
-const sendCashFlowEditorPut = (body) => {
+const sendCashFlowEditorPost = (body) => {
     return cy.request({
         url: `${hostname}${editCashFlowEndpoint}`,
-        method: 'PUT',
+        method: 'POST',
         body,
         failOnStatusCode: false,
     });
 };
 
-module.exports = { sendCashFlowEditorPut };
+module.exports = { sendCashFlowEditorPut: sendCashFlowEditorPost };
