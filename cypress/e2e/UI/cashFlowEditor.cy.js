@@ -52,7 +52,7 @@ describe('cashFlowEditor tests', () => {
         cy.get('[data-cy="cost"]').should('be.checked');
     });
 
-    it.only('should be possible to edit cost or income value', () => {
+    it('should be possible to edit cost or income value', () => {
         //Given
         const requestBody = TestDataProvider.createReqParamObject();
         sendRequestToAddCostItem(requestBody);
