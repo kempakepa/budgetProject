@@ -8,48 +8,42 @@ const requestSent = () => {
 };
 
 const onCategoryChange = () => {
-    let subcategoriesToShow = [
-        ['Subcategory'],
-        ['Biedronka', 'Lidl', 'Auchan'],
-        ['Job1', 'Job2', 'Job3'],
-        ['Water', 'Power', 'Gas'],
-        ['Fuel', 'Service', 'Parts'],
+    const subcategoriesOfCategories = [
+        {
+            category: 'food',
+            subcategories: ['Biedronka', 'Lidl', 'Auchan'],
+        },
+        {
+            category: 'salary',
+            subcategories: ['Job1', 'Job2', 'Job3'],
+        },
+        {
+            category: 'taxes',
+            subcategories: ['Water', 'Power', 'Gas'],
+        },
+        {
+            category: 'car',
+            subcategories: ['Fuel', 'Service', 'Parts'],
+        },
     ];
-    let optionPatternOppening = '<option value=';
-    let optionPatternClosing = '</option>';
+    const category = document.getElementById('category').value;
+    let subcategoriesToShow = subcategoriesOfCategories.find(
+        (item) => item.category == category
+    ).subcategories;
+
+    const optionPatternOppening = '<option value=';
+    const optionPatternClosing = '</option>';
     document.getElementById('subcategories').removeAttribute('disabled');
-    let option = document.getElementById('category').value;
-    let takeIndex = 0;
 
-    switch (option) {
-        case '':
-            document
-                .getElementById('subcategories')
-                .setAttribute('disabled', '');
-            takeIndex = 0;
-
-            break;
-        case 'food':
-            takeIndex = 1;
-            break;
-        case 'salary':
-            takeIndex = 2;
-            break;
-        case 'taxes':
-            takeIndex = 3;
-
-            break;
-        case 'car':
-            takeIndex = 4;
-            break;
-        default:
-            break;
-    }
     let subcategories = `${optionPatternOppening}"" selected>Subcategory${optionPatternClosing}`;
-    for (const valueElement of subcategoriesToShow[takeIndex]) {
-        subcategories += `${optionPatternOppening}${valueElement.toLowerCase()}>${valueElement}${optionPatternClosing}`;
+    if (category == '') {
+        document.getElementById('subcategories').setAttribute('disabled', '');
+    } else {
+        for (const valueElement of subcategoriesToShow) {
+            subcategories += `${optionPatternOppening}${valueElement.toLowerCase()}>${valueElement}${optionPatternClosing}`;
+            document.getElementById('subcategories').innerHTML = subcategories;
+        }
     }
-    document.getElementById('subcategories').innerHTML = subcategories;
 };
 
 const defineQuerryParams = () => {

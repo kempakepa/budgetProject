@@ -35,44 +35,46 @@ class TestDataProvider {
 
     static categoryRandomSelect() {
         this.requestParams.category = '';
-        let categories = ['Food', 'Salary', 'Taxes', 'Car'];
+        const categories = ['food', 'salary', 'taxes', 'car'];
         this.requestParams.category =
             categories[Math.floor(categories.length * Math.random())];
         return this.requestParams.category;
     }
 
     static subCategoryRandomSelect() {
-        let subcategories = [
-            [''],
-            ['Biedronka', 'Lidl', 'Auchan'],
-            ['Job1', 'Job2', 'Job3'],
-            ['Water', 'Power', 'Gas'],
-            ['Fuel', 'Service', 'Parts'],
+        const subcategoriesOfCategories = [
+            {
+                category: 'food',
+                subcategories: ['Biedronka', 'Lidl', 'Auchan'],
+            },
+            {
+                category: 'salary',
+                subcategories: ['Job1', 'Job2', 'Job3'],
+            },
+            {
+                category: 'taxes',
+                subcategories: ['Water', 'Power', 'Gas'],
+            },
+            {
+                category: 'car',
+                subcategories: ['Fuel', 'Service', 'Parts'],
+            },
         ];
-        let takeIndex = 0;
-        switch (this.requestParams.category) {
-            case '':
-                takeIndex = 0;
-                break;
-            case 'Food':
-                takeIndex = 1;
-                break;
-            case 'Salary':
-                takeIndex = 2;
-                break;
-            case 'Taxes':
-                takeIndex = 3;
-                break;
-            case 'Car':
-                takeIndex = 4;
-                break;
-            default:
-                break;
+
+        let subcategories;
+        if (
+            this.requestParams.category == '' ||
+            this.requestParams.category == undefined
+        ) {
+            this.requestParams.subcategory = '';
+        } else {
+            subcategories = subcategoriesOfCategories.find(
+                (item) => item.category == this.requestParams.category
+            ).subcategories;
+            this.requestParams.subcategory =
+                subcategories[Math.floor(subcategories.length * Math.random())];
         }
-        this.requestParams.subcategory =
-            subcategories[takeIndex][
-                Math.floor(subcategories[takeIndex].length * Math.random())
-            ];
+
         return this.requestParams.subcategory;
     }
 
