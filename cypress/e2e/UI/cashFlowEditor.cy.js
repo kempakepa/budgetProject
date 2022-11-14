@@ -1,5 +1,6 @@
 const { HomePageObject } = require('../../POP/homePageObject');
 const { FiltererObject } = require('../../POP/filtererObject');
+const { CashFlowEditorObject } = require('../../POP/cashFlowEditorObject');
 const { TestDataProvider } = require('../../utils/testDataProvider');
 const {
     sendRequestToAddCostItem,
@@ -11,7 +12,7 @@ describe('cashFlowEditor tests', () => {
         HomePageObject.goToFiltererModule();
     });
 
-    it('should edit option should be visible and enable next in filterer list', () => {
+    it('should edit option should be visible and enable next to every in filterer list', () => {
         //Given
         const requestBody = TestDataProvider.createReqParamObject();
         sendRequestToAddCostItem(requestBody);
@@ -20,36 +21,29 @@ describe('cashFlowEditor tests', () => {
         FiltererObject.clickSend();
 
         //Then
-        cy.get('#showlist')
-            .find('li')
-            .eq(0)
-            .find('[data-cy="edit-link"]')
-            .should('exist');
+        FiltererObject.rowContainEditButton(
+            FiltererObject.getRow(requestBody.title)
+        );
     });
 
-    it('should edit form be fill by saved values', () => {
+    it('should edit form be filled by saved values', () => {
         //Given
         const requestBody = TestDataProvider.createReqParamObject();
         sendRequestToAddCostItem(requestBody);
         FiltererObject.clickSend();
 
         //When
-        cy.get('#showlist')
-            .find('li')
-            .contains(requestBody.title)
-            .find('[data-cy="edit-link"]')
-            .click();
+        FiltererObject.clickEditButton(requestBody.title);
 
         //Then
-        cy.get('[data-cy="title"]').should('have.value', requestBody.title);
-        cy.get('[data-cy="comment"]').should('have.value', requestBody.comment);
-        cy.get('[data-cy="date"]').should('have.value', requestBody.date);
-        cy.get('[data-cy="amount"]').should('have.value', requestBody.amount);
-        cy.get('[data-cy="category"]').should(
-            'have.value',
+        CashFlowEditorObject.titleShouldHaveValue(requestBody.title);
+        CashFlowEditorObject.commentShouldHaveValue(requestBody.comment);
+        CashFlowEditorObject.dateShouldHaveValue(requestBody.date);
+        CashFlowEditorObject.amountShouldHaveValue(requestBody.amount);
+        CashFlowEditorObject.categoryShouldHaveValue(
             requestBody.category.toLowerCase()
         );
-        cy.get('[data-cy="cost"]').should('be.checked');
+        CashFlowEditorObject.costRadioButtonShouldBeChecked();
     });
 
     it('should be possible to edit cost or income value', () => {
@@ -57,28 +51,27 @@ describe('cashFlowEditor tests', () => {
         const requestBody = TestDataProvider.createReqParamObject();
         sendRequestToAddCostItem(requestBody);
         FiltererObject.clickSend();
-        cy.get('#showlist')
-            .find('li')
-            .contains(requestBody.title)
-            .find('[data-cy="edit-link"]')
-            .click();
+        FiltererObject.clickEditButton(requestBody.title);
 
         //When
         const newCostData = TestDataProvider.createReqParamObject();
-        cy.get('[data-cy="title"]').clear().type(newCostData.title);
-        cy.get('[data-cy="comment"]').clear().type(newCostData.comment);
-        cy.get('[data-cy="date"]').clear().type(newCostData.date);
-        cy.get('[data-cy="amount"]').clear().type(newCostData.amount);
-        cy.get('[data-cy="category"]').type(newCostData.category);
-        cy.get('[data-cy="income"]').click();
-        cy.get('[data-cy="update-button"]').click();
+        CashFlowEditorObject.typeTitle(newCostData.title);
+        CashFlowEditorObject.typeComment(newCostData.comment);
+        CashFlowEditorObject.typeDate(newCostData.date);
+        CashFlowEditorObject.typeAmount(newCostData.amount);
+        CashFlowEditorObject.selectCategory(newCostData.category);
+        CashFlowEditorObject.clickIncomeButton();
+        CashFlowEditorObject.clickUpdateButton();
 
         //Then
         FiltererObject.clickSend();
         const cashItemRow = FiltererObject.getRow(newCostData.title);
-        cashItemRow.should('contain.text', newCostData.comment);
-        cashItemRow.should('contain.text', newCostData.date);
-        cashItemRow.should('contain.text', newCostData.amount);
-        cashItemRow.should('contain.text', newCostData.category.toLowerCase());
+        FiltererObject.rowContainText(cashItemRow, newCostData.comment);
+        FiltererObject.rowContainText(cashItemRow, newCostData.date);
+        FiltererObject.rowContainText(cashItemRow, newCostData.amount);
+        FiltererObject.rowContainText(
+            cashItemRow,
+            newCostData.category.toLowerCase()
+        );
     });
 });
