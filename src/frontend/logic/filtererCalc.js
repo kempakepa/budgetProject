@@ -2,12 +2,12 @@
 const baseUrl = 'http://localhost:';
 const port = '8081';
 
-const requestSent = () => {
+const filtererOnClick = () => {
     //defineQuerryParams();
     getResultsFiltered(showResultsFiltered);
 };
 
-const onCategoryChange = () => {
+const filtererOnCategoryChange = () => {
     const subcategoriesOfCategories = [
         {
             category: 'food',
@@ -152,3 +152,5 @@ const getResultsFiltered = (onResponse) => {
     reqObject.open('GET', url);
     reqObject.send();
 };
+
+module.exports = { filtererOnClick, filtererOnCategoryChange };

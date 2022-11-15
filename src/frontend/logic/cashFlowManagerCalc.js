@@ -4,7 +4,7 @@ const port = '8081';
 const urlEndpointCost = '/api/addCostItem';
 const urlEndpointIncome = '/api/addIncomeItem';
 
-const requestSent = () => {
+const addCostOrIncomeOnClick = () => {
     const reqBody = readInputelementsAndValues();
     let costOrIncome = checkIfCostOrIncome();
     if (costOrIncome) {
@@ -14,7 +14,7 @@ const requestSent = () => {
     }
 };
 
-const onCategoryChange = () => {
+const cashFlowManagerOnCategoryChange = () => {
     const subcategoriesOfCategories = [
         {
             category: 'food',
@@ -114,3 +114,5 @@ const readInputelementsAndValues = () => {
         subcategory: document.getElementById('subcategories').value,
     };
 };
+
+module.exports = { addCostOrIncomeOnClick, cashFlowManagerOnCategoryChange };

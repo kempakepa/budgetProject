@@ -3,7 +3,7 @@
     <head>
         <title>Search Budget Module</title>
         <meta charset="UTF-8" />
-        <script src = '../../frontCalc/filtererCalc.js'></script>
+        <script src="../main-bundle.js"></script>
     </head>
     <body>
         <div>
@@ -24,7 +24,7 @@
         <span="max-date">Max Date</span><input type="date" placeholder="Max Date" id="max-date" /></div>
         <div><input type="number" placeholder="Min Amount" id="min-amount" />
         <input type="number" placeholder="Max Amount" id="max-amount" /></div>
-        <select name="category" id="category" placeholder="Category*" data-cy="category" onchange="onCategoryChange()" required oninvalid="this.setCustomValidity('Please fill in this field.')">
+        <select name="category" id="category" placeholder="Category*" data-cy="category" onchange="filtererOnCategoryChange()" required oninvalid="this.setCustomValidity('Please fill in this field.')">
             <option value="" selected>Category*</option>
             <option value="food">Food</option> 
             <option value="salary">Salary</option>
@@ -34,7 +34,7 @@
           <select id="subcategories" disabled>
             <option value="" selected disabled hidden>Subcategory</option>
         </select><br/>
-        <div><input type="button" value="Send!" onclick="requestSent()"/></div></br>
+        <div><input type="button" value="Send!" onclick="filtererOnClick()"/></div></br>
         <div id="confirmation_message"><ul id="showlist"><li></li>
         </ul></div>
         <div id="error_message"></div>
@@ -49,10 +49,10 @@
         <br /><br />
 
         <div>
-            Go to <a href="../../index.html">the Home Page </a>or navigate to
-            <a href="../accountState/accountState.html">Account State module</a>
+            Go to <a href="../index.html">the Home Page </a>or navigate to
+            <a href="./accountState.html">Account State module</a>
             or
-            <a href="../cashFlowManager/cashFlowManager.html">Manage Budget module.</a>
+            <a href="./cashFlowManager.html">Manage Budget module.</a>
         </div>
     </body>
 </html>
