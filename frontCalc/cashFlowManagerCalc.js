@@ -13,6 +13,41 @@ const requestSent = () => {
         addIncome(reqBody, catchSubmitionMessage);
     }
 };
+
+const onCategoryChange = () => {
+    const subcategoriesOfCategories = [
+        {
+            category: 'food',
+            subcategories: ['Biedronka', 'Lidl', 'Auchan'],
+        },
+        {
+            category: 'salary',
+            subcategories: ['Job1', 'Job2', 'Job3'],
+        },
+        {
+            category: 'taxes',
+            subcategories: ['Water', 'Power', 'Gas'],
+        },
+        {
+            category: 'car',
+            subcategories: ['Fuel', 'Service', 'Parts'],
+        },
+    ];
+    const category = document.getElementById('category').value;
+    let subcategoriesToShow = subcategoriesOfCategories.find(
+        (item) => item.category == category
+    ).subcategories;
+
+    const optionPatternOppening = '<option value=';
+    const optionPatternClosing = '</option>';
+    document.getElementById('subcategories').removeAttribute('disabled');
+
+    let subcategories = `${optionPatternOppening}"" selected>Subcategory${optionPatternClosing}`;
+    for (const valueElement of subcategoriesToShow) {
+        subcategories += `${optionPatternOppening}${valueElement.toLowerCase()}>${valueElement}${optionPatternClosing}`;
+    }
+    document.getElementById('subcategories').innerHTML = subcategories;
+};
 //wysylanie requesta, zlapanie response
 const addCost = (param, onResponse) => {
     let request = new XMLHttpRequest();
@@ -76,5 +111,6 @@ const readInputelementsAndValues = () => {
         date: document.getElementById('date').value,
         amount: Number(document.getElementById('amount').value),
         category: document.getElementById('category').value,
+        subcategory: document.getElementById('subcategories').value,
     };
 };

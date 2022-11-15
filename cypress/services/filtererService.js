@@ -3,19 +3,27 @@ const {
     filterBudgetItemEndpoint,
 } = require('../utils/endpointsProvider');
 
-function defineQuerryParams({ title, comment, date, amount, category }) {
-    let querryParams = `title=${title}&comment=${comment}&date=${date}&amount=${amount}&category=${category}`;
+function defineQuerryParams({
+    title,
+    comment,
+    date,
+    amount,
+    category,
+    subcategory,
+}) {
+    let querryParams = `title=${title}&comment=${comment}&date=${date}&amount=${amount}&category=${category}&subcategory=${subcategory}`;
     return querryParams;
 }
 
-function filterResults(title, comment, date, amount, category) {
+function filterResults(title, comment, date, amount, category, subcategory) {
     return cy.request({
         url: `${hostname}${filterBudgetItemEndpoint}${defineQuerryParams(
             title,
             comment,
             date,
             amount,
-            category
+            category,
+            subcategory
         )}`,
         method: 'GET',
     });

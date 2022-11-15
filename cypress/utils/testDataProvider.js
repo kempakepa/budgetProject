@@ -27,14 +27,65 @@ class TestDataProvider {
             comment: this.generateFakerData('text'),
             date: this.generateFakerData('date'),
             amount: this.generateFakerData('numeric'),
-            category: 'Food',
+            category: this.categoryRandomSelect(),
+            subcategory: this.subCategoryRandomSelect(),
         };
         return this.requestParams;
     }
 
+    static categoryRandomSelect() {
+        this.requestParams.category = '';
+        const categories = ['food', 'salary', 'taxes', 'car'];
+        this.requestParams.category =
+            categories[Math.floor(categories.length * Math.random())];
+        return this.requestParams.category;
+    }
+
+    static subCategoryRandomSelect() {
+        const subcategoriesOfCategories = [
+            {
+                category: 'food',
+                subcategories: ['Biedronka', 'Lidl', 'Auchan'],
+            },
+            {
+                category: 'salary',
+                subcategories: ['Job1', 'Job2', 'Job3'],
+            },
+            {
+                category: 'taxes',
+                subcategories: ['Water', 'Power', 'Gas'],
+            },
+            {
+                category: 'car',
+                subcategories: ['Fuel', 'Service', 'Parts'],
+            },
+        ];
+
+        let subcategories;
+        if (
+            this.requestParams.category == '' ||
+            this.requestParams.category == undefined
+        ) {
+            this.requestParams.subcategory = '';
+        } else {
+            subcategories = subcategoriesOfCategories.find(
+                (item) => item.category == this.requestParams.category
+            ).subcategories;
+            this.requestParams.subcategory =
+                subcategories[Math.floor(subcategories.length * Math.random())];
+        }
+
+        return this.requestParams.subcategory;
+    }
+
     static customizeReqParamObject(property, value) {
         const result = this.createReqParamObject();
-        result[property] = value;
+        if (property == 'category') {
+            result[property] = value;
+            this.subCategoryRandomSelect();
+        } else {
+            result[property] = value;
+        }
         return result;
     }
 
@@ -43,7 +94,8 @@ class TestDataProvider {
             (this.filtererReqParams.comment = undefined),
             (this.filtererReqParams.date = undefined),
             (this.filtererReqParams.amount = undefined),
-            (this.filtererReqParams.category = undefined);
+            (this.filtererReqParams.category = undefined),
+            (this.filtererReqParams.subcategory = undefined);
         return this.filtererReqParams;
     }
 
