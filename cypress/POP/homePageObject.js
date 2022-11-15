@@ -1,6 +1,6 @@
 class HomePageObject {
     static visitHomePage() {
-        cy.visit('./index.html');
+        cy.visit('http://localhost:8080');
     }
 
     static welcomeMessageIsVisible() {

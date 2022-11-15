@@ -11,7 +11,11 @@
         "start:backend": "node ./src/backend/dist/src/backend/main.js",
         "build:backend": "tsc -b ./src/backend/tsconfig.json && cp ./src/backend/runTests.sh ./src/backend/dist/runTests.sh",
         "clean:backend": "rm -rf ./src/backend/dist",
-        "unit:backend": "bash ./src/backend/dist/runTests.sh"
+        "unit:backend": "bash ./src/backend/dist/runTests.sh",
+        "frontend": "npm run clean:frontend && npm run build:frontend && npm run start:frontend",
+        "start:frontend": "npx http-server ./src/frontend/dist/ -c-1",
+        "build:frontend": "npx webpack --config ./src/frontend/webpack.config.js && mkdir ./src/frontend/dist/views && cp ./src/frontend/views/*.* ./src/frontend/dist/views/ && cp ./src/frontend/index.html ./src/frontend/dist/index.html",
+        "clean:frontend": "rm -rf ./src/frontend/dist"
     },
     "repository": {
         "type": "git",
@@ -27,5 +31,12 @@
     "devDependencies": {
         "@faker-js/faker": "^7.3.0",
         "cypress": "^10.10.0"
+    },
+    "dependencies": {
+        "http-server": "^14.1.1",
+        "ts-loader": "^9.4.1",
+        "typescript": "^4.9.3",
+        "webpack": "^5.75.0",
+        "webpack-cli": "^4.10.0"
     }
 }
