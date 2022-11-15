@@ -100,7 +100,7 @@ const showResultsFiltered = (value) => {
 const showIncomesAndCostsList = (data) => {
     let showValueElement = '';
     for (const valueElement of data) {
-        const editButtonHtml = `<a href="../cashFlowEditor/cashFlowEditor.html?id=${valueElement[0]}" data-cy="edit-link">Edit</a>`;
+        const editButtonHtml = `<a href="./cashFlowEditor.html?id=${valueElement[0]}" data-cy="edit-link">Edit</a>`;
         showValueElement += `<li>${valueElement} ${editButtonHtml}</li>`;
     }
     document.getElementById('showlist').innerHTML = showValueElement;

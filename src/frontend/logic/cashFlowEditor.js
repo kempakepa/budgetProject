@@ -1,5 +1,4 @@
 //MAIN
-
 const baseUrl = 'http://localhost:';
 const port = '8081';
 
@@ -76,8 +75,8 @@ const readInputValues = () => {
 
 const redirectToFilteringView = () => {
     const currentUrl = window.location.href;
-    const splitUrl = currentUrl.split('/modules/');
-    const newUrl = `${splitUrl[0]}/modules/filterer/filterer.html`;
+    const splitUrl = currentUrl.split('/views/');
+    const newUrl = `${splitUrl[0]}/views/filterer.html`;
     window.location.replace(newUrl);
 };
 
@@ -153,3 +152,5 @@ const sendEditFlowPutRequeset = (body, onResponse) => {
 
     reqObject.send(JSON.stringify(body));
 };
+
+module.exports = { cashFlowEditorOnLoad, cashFlowEditorOnEdit };
