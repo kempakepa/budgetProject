@@ -65,7 +65,7 @@ const filteredIncomes = new Filterer().filterCostAndIncome(
 
 Tests.verify(
     'Should filterer return income with 1000 amount',
-    [2, 'someCost', 'some comment', '2022-01-01', 1000, 'Food'],
+    [2, 'someCost', 'some comment', '2022-01-01', 1000, 'Food', undefined],
     filteredIncomes[0]
 );
 

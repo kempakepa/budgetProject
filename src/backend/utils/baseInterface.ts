@@ -4,5 +4,5 @@ export interface CashFlowItem {
     date: string; //albo string, not sure
     amount: number;
     category: string;
-    subcategory: string;
+    subcategory?: string;
 }
