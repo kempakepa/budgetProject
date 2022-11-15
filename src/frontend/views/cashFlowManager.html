@@ -3,7 +3,7 @@
     <head>
         <title>Manage Budget Module</title>
         <meta charset="UTF-8" />
-        <script src = '../../frontCalc/cashFlowManagerCalc.js'></script>
+        <script src="../main-bundle.js"></script>
     </head>
     <body>
         <div>
@@ -23,7 +23,7 @@
         <label for="amount"></label>
         <input type="number" placeholder="Amount*" id="amount" data-cy="amount" min="0.01" required oninvalid="this.setCustomValidity('Please fill in this field.')"/></br>
         <label for="category"></label>
-        <select name="category" id="category" placeholder="Category*" data-cy="category" onchange="onCategoryChange()" required oninvalid="this.setCustomValidity('Please fill in this field.')">
+        <select name="category" id="category" placeholder="Category*" data-cy="category" onchange="cashFlowManagerOnCategoryChange()" required oninvalid="this.setCustomValidity('Please fill in this field.')">
             <option value="" selected disabled hidden>Category*</option>
             <option value="food">Food</option>
             <option value="salary">Salary</option>
@@ -33,14 +33,14 @@
         <select id="subcategories" disabled>
             <option value="" selected disabled hidden>Subcategory</option>
         </select><br/>
-        <input type="submit" value="Send!" onclick="requestSent()" data-cy="sendButton"/></br>
+        <input type="submit" value="Send!" onclick="addCostOrIncomeOnClick()" data-cy="sendButton"/></br>
         <div id="submition_message" data-cy="submition_message"></div>
 </form>
         <div>
-            Go to <a href="../../index.html">the Home Page </a>or navigate to
-            <a href="../accountState/accountState.html">Account State module</a>
+            Go to <a href="../index.html">the Home Page </a>or navigate to
+            <a href="./accountState.html">Account State module</a>
             or
-            <a href="../filterer/filterer.html">Search Budget module.</a>
+            <a href="./filterer.html">Search Budget module.</a>
         </div>
     </body>
 </html>

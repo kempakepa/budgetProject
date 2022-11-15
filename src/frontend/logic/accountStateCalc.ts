@@ -1,9 +1,9 @@
+import { baseUrl, port } from './serverConfig';
+
 //main
-const baseUrl = 'http://localhost:';
-const port = '8081';
 const urlEndpoint = '/api/accountState';
 
-const showAccountState = () => {
+export const showAccountState = () => {
     //console.log('wez cos pokaz');
     //showResponse();
     getAccountState(showResponse);
