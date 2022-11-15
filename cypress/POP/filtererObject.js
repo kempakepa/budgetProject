@@ -1,6 +1,10 @@
 class FiltererObject {
     static fillCategory(category) {
-        cy.get('#category').type(category, { force: true });
+        cy.get('#category').select(category, { force: true });
+    }
+
+    static fillSubcategory(subcategory) {
+        this.getSubcategoryList().select(subcategory);
     }
 
     static fillComment(comment) {
@@ -46,7 +50,7 @@ class FiltererObject {
     static shouldFilterAtLeastOneItem() {
         cy.get('ul#showlist>li').should('not.have.length', 0);
     }
-
+    
     static getRow(title) {
         return cy.get('li').contains(title);
     }
@@ -58,9 +62,13 @@ class FiltererObject {
     static clickEditButton(title) {
         FiltererObject.getRow(title).find('[data-cy="edit-link"]').click();
     }
-
+    
     static rowContainText(cashFlowItemRow, value) {
         cashFlowItemRow.should('contain.text', value);
+    }
+    
+     static getSubcategoryList() {
+        return cy.get('#subcategories');
     }
 }
 

@@ -18,7 +18,8 @@ export class CashFlowManager {
                 cashFlowItem.comment,
                 cashFlowItem.date,
                 cashFlowItem.amount,
-                cashFlowItem.category
+                cashFlowItem.category,
+                cashFlowItem.subcategory
             ).validateInput()
         ) {
             const newId = this.generateNewId();
@@ -30,6 +31,7 @@ export class CashFlowManager {
                 cashFlowItem.date,
                 -cashFlowItem.amount,
                 cashFlowItem.category,
+                cashFlowItem.subcategory,
             ];
             CashFlowManager.listAllCostsAndIncomes.push(cost);
             AccountState.changeAccountState(-cashFlowItem.amount);
@@ -52,7 +54,8 @@ export class CashFlowManager {
                 cashFlowItem.comment,
                 cashFlowItem.date,
                 cashFlowItem.amount,
-                cashFlowItem.category
+                cashFlowItem.category,
+                cashFlowItem.subcategory
             ).validateInput()
         ) {
             const newId = this.generateNewId();
@@ -63,6 +66,7 @@ export class CashFlowManager {
                 cashFlowItem.date,
                 cashFlowItem.amount,
                 cashFlowItem.category,
+                cashFlowItem.subcategory,
             ];
             CashFlowManager.listAllCostsAndIncomes.push(income);
             AccountState.changeAccountState(cashFlowItem.amount);

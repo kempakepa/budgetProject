@@ -23,13 +23,16 @@
         <label for="amount"></label>
         <input type="number" placeholder="Amount*" id="amount" data-cy="amount" min="0.01" required oninvalid="this.setCustomValidity('Please fill in this field.')"/></br>
         <label for="category"></label>
-        <select name="category" id="category" placeholder="Category*" data-cy="category" required oninvalid="this.setCustomValidity('Please fill in this field.')">
+        <select name="category" id="category" placeholder="Category*" data-cy="category" onchange="onCategoryChange()" required oninvalid="this.setCustomValidity('Please fill in this field.')">
             <option value="" selected disabled hidden>Category*</option>
             <option value="food">Food</option>
             <option value="salary">Salary</option>
             <option value="taxes">Taxes</option>
             <option value="car">Car</option>
           </select></br>
+        <select id="subcategories" disabled>
+            <option value="" selected disabled hidden>Subcategory</option>
+        </select><br/>
         <input type="submit" value="Send!" onclick="requestSent()" data-cy="sendButton"/></br>
         <div id="submition_message" data-cy="submition_message"></div>
 </form>

@@ -11,7 +11,8 @@ Tests.verify(
         'comment',
         '2022-01-01',
         11,
-        'category'
+        'category',
+        ''
     ).validateInput()
 );
 
@@ -23,7 +24,8 @@ Tests.verify(
         'comment',
         '2022-01-01',
         -11,
-        'category'
+        'category',
+        ''
     ).validateInput()
 );
 
@@ -35,7 +37,8 @@ Tests.verify(
         'comment',
         '2022-01-01',
         0,
-        'category'
+        'category',
+        'Parts'
     ).validateInput()
 );
 Tests.verify(
@@ -46,7 +49,8 @@ Tests.verify(
         'comment',
         '202201-01',
         10,
-        'category'
+        'category',
+        ''
     ).validateInput()
 );
 
@@ -58,7 +62,8 @@ Tests.verify(
         'comment',
         '2022-11-31',
         10,
-        'category'
+        'category',
+        ''
     ).validateInput()
 );
 
@@ -70,7 +75,8 @@ Tests.verify(
         'comment',
         'auć',
         10,
-        'category'
+        'category',
+        ''
     ).validateInput()
 );
 
@@ -82,7 +88,8 @@ Tests.verify(
         'comment',
         '2022-11-32',
         10,
-        'category'
+        'category',
+        ''
     ).validateInput()
 );
 
@@ -94,7 +101,8 @@ Tests.verify(
         'comment',
         '2022-1-1',
         10,
-        'category'
+        'category',
+        ''
     ).validateInput()
 );
 
@@ -106,7 +114,8 @@ Tests.verify(
         'comment',
         '-2022-1-1',
         10,
-        'category'
+        'category',
+        ''
     ).validateInput()
 );
 
@@ -118,7 +127,8 @@ Tests.verify(
         'comment',
         '2022-01-1',
         10,
-        'category'
+        'category',
+        ''
     ).validateInput()
 );
 
@@ -130,7 +140,8 @@ Tests.verify(
         'comment',
         '2022-1-01',
         20,
-        'category'
+        'category',
+        ''
     ).validateInput()
 );
 
@@ -142,7 +153,8 @@ Tests.verify(
         'comment',
         '2022-12-44',
         20,
-        'category'
+        'category',
+        ''
     ).validateInput()
 );
 
@@ -154,7 +166,8 @@ Tests.verify(
         'comment',
         '2022-1-01',
         20,
-        'category'
+        'category',
+        ''
     ).validateInput()
 );
 
@@ -166,7 +179,8 @@ Tests.verify(
         'comment',
         '2022-1-01',
         20,
-        'category'
+        'category',
+        ''
     ).validateInput()
 );
 
@@ -178,7 +192,8 @@ Tests.verify(
         'comment',
         '',
         20,
-        'category'
+        'category',
+        ''
     ).validateInput()
 );
 
@@ -190,6 +205,7 @@ Tests.verify(
         'comment',
         '2022-02-02',
         10,
+        '',
         ''
     ).validateInput()
 );

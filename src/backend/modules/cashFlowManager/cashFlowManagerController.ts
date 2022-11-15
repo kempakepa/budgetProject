@@ -24,7 +24,8 @@ export class CashFlowManagerController extends BaseController {
                     item.comment,
                     item.date,
                     item.amount,
-                    item.category
+                    item.category,
+                    item.subcategory
                 ).validateInput()
             ) {
                 new CashFlowManager().addCost(item);
@@ -54,7 +55,8 @@ export class CashFlowManagerController extends BaseController {
                     item.comment,
                     item.date,
                     item.amount,
-                    item.category
+                    item.category,
+                    item.subcategory
                 ).validateInput()
             ) {
                 new CashFlowManager().addIncome(item);

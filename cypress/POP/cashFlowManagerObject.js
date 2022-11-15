@@ -71,6 +71,9 @@ class CashFlowManagerObject {
         if (addInputs.category) {
             this.insertCategory(addInputs.category);
         }
+        if (addInputs.subcategory) {
+            this.insertSubcategory(addInputs.subcategory);
+        }
         this.submitCashFlowManagerForm();
     }
 
@@ -100,6 +103,14 @@ class CashFlowManagerObject {
         } else {
             return cy.get(`input#${element}:invalid`).should('have.length', 1);
         }
+    }
+
+    static getSubcategoryList() {
+        return cy.get('#subcategories');
+    }
+
+    static insertSubcategory(subcategory) {
+        this.getSubcategoryList().select(subcategory);
     }
 }
 

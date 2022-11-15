@@ -10,10 +10,7 @@ describe('filterer tests', () => {
     beforeEach(() => {
         HomePageObject.visitHomePage();
         HomePageObject.goToFiltererModule();
-        randomCostData = TestDataProvider.customizeReqParamObject(
-            'category',
-            'Food'
-        );
+        randomCostData = TestDataProvider.createReqParamObject();
         sendRequestToAddCostItem(randomCostData);
     });
 
@@ -66,12 +63,6 @@ describe('filterer tests', () => {
         FiltererObject.shouldFilterAtLeastOneItem();
     });
 
-    it('should return at least one array element by valid category uppercased filter', () => {
-        FiltererObject.fillCategory(randomCostData.category.toUpperCase());
-        FiltererObject.clickSend();
-        FiltererObject.shouldFilterAtLeastOneItem();
-    });
-
     it('should return at least one array element by 2 valid filter criteria (title, comment)', () => {
         FiltererObject.fillTitle(randomCostData.title);
         FiltererObject.fillComment(randomCostData.comment);
@@ -82,6 +73,7 @@ describe('filterer tests', () => {
     it('should return at least one array element by 2 valid filter criteria (title, mindate)', () => {
         FiltererObject.fillTitle(randomCostData.title);
         FiltererObject.fillMinDate(randomCostData.date);
+        FiltererObject.fillMaxDate(randomCostData.date);
         FiltererObject.clickSend();
         FiltererObject.shouldFilterAtLeastOneItem();
     });
@@ -89,6 +81,7 @@ describe('filterer tests', () => {
     it('should return at least one array element by 2 valid filter criteria (title, minamount)', () => {
         FiltererObject.fillTitle(randomCostData.title);
         FiltererObject.fillMinAmount(randomCostData.amount);
+        FiltererObject.fillMaxAmount(randomCostData.amount);
         FiltererObject.clickSend();
         FiltererObject.shouldFilterAtLeastOneItem();
     });
@@ -117,13 +110,6 @@ describe('filterer tests', () => {
     it('should return at least one array element by 2 valid filter criteria (title, date) to uppercase', () => {
         FiltererObject.fillTitle(randomCostData.title.toUpperCase());
         FiltererObject.fillMinDate(randomCostData.date.toUpperCase());
-        FiltererObject.clickSend();
-        FiltererObject.shouldFilterAtLeastOneItem();
-    });
-
-    it('should return at least one array element by 2 valid filter criteria (title, category) to uppercase', () => {
-        FiltererObject.fillTitle(randomCostData.title.toUpperCase());
-        FiltererObject.fillCategory(randomCostData.category.toUpperCase());
         FiltererObject.clickSend();
         FiltererObject.shouldFilterAtLeastOneItem();
     });
