@@ -11,8 +11,7 @@ export class CashFlowValidator {
             cashFlowItem.date != '' &&
             this.isValidDate(cashFlowItem.date) &&
             typeof cashFlowItem.category == 'string' &&
-            cashFlowItem.category != '' &&
-            typeof cashFlowItem.subcategory == 'string';
+            cashFlowItem.category != '';
         const numberInput =
             typeof cashFlowItem.amount == 'number' && cashFlowItem.amount > 0;
         return stringInput && numberInput;
