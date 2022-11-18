@@ -4,19 +4,9 @@ import { CashFlowValidator } from './cashFlowValidator';
 
 export class CashFlowManager {
     static listAllCostsAndIncomes: any = [];
-    static cashFlowItem: CashFlowItem;
 
     addCost(cashFlowItem: CashFlowItem) {
-        if (
-            new CashFlowValidator(
-                cashFlowItem.title,
-                cashFlowItem.comment,
-                cashFlowItem.date,
-                cashFlowItem.amount,
-                cashFlowItem.category,
-                cashFlowItem.subcategory
-            ).validateInput()
-        ) {
+        if (CashFlowValidator.validateInput(cashFlowItem)) {
             let cost: unknown = [
                 cashFlowItem.title,
                 cashFlowItem.comment,
@@ -34,16 +24,7 @@ export class CashFlowManager {
     }
 
     addIncome(cashFlowItem: CashFlowItem) {
-        if (
-            new CashFlowValidator(
-                cashFlowItem.title,
-                cashFlowItem.comment,
-                cashFlowItem.date,
-                cashFlowItem.amount,
-                cashFlowItem.category,
-                cashFlowItem.subcategory
-            ).validateInput()
-        ) {
+        if (CashFlowValidator.validateInput(cashFlowItem)) {
             let income: unknown = [
                 cashFlowItem.title,
                 cashFlowItem.comment,

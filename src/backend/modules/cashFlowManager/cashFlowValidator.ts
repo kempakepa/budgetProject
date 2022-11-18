@@ -1,46 +1,34 @@
-import { BaseConstructor } from '../../utils/baseConstructor';
+import { CashFlowItem } from '../../utils/baseInterface';
 
-export class CashFlowValidator extends BaseConstructor {
-    constructor(
-        title: string,
-        comment: string,
-        date: string,
-        amount: number,
-        category: string,
-        subcategory: string
-    ) {
-        super(title, comment, date, amount, category, subcategory);
-    }
-
-    validateInput() {
+export class CashFlowValidator {
+    static validateInput(cashFlowItem: CashFlowItem) {
         const stringInput =
-            typeof this.title == 'string' &&
-            this.title != '' &&
-            typeof this.comment == 'string' &&
-            this.comment != '' &&
-            typeof this.date == 'string' &&
-            this.date != '' &&
-            this.isValidDate() &&
-            typeof this.category == 'string' &&
-            this.category != '' &&
-            typeof this.subcategory == 'string';
-        const numberInput = typeof this.amount == 'number' && this.amount > 0;
+            typeof cashFlowItem.title == 'string' &&
+            cashFlowItem.title != '' &&
+            typeof cashFlowItem.comment == 'string' &&
+            cashFlowItem.comment != '' &&
+            typeof cashFlowItem.date == 'string' &&
+            cashFlowItem.date != '' &&
+            this.isValidDate(cashFlowItem.date) &&
+            typeof cashFlowItem.category == 'string' &&
+            cashFlowItem.category != '' &&
+            typeof cashFlowItem.subcategory == 'string';
+        const numberInput =
+            typeof cashFlowItem.amount == 'number' && cashFlowItem.amount > 0;
 
         return stringInput && numberInput;
     }
 
-    isValidDate() {
+    static isValidDate(date: string) {
         const regEx =
             /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/;
-        if (!this.date.match(regEx)) {
+        if (!date.match(regEx)) {
             return false;
         }
 
-        let dateStandarizedFormat = new Date(this.date)
-            .toISOString()
-            .slice(0, 10);
+        let dateStandarizedFormat = new Date(date).toISOString().slice(0, 10);
 
-        if (this.date == dateStandarizedFormat) {
+        if (date == dateStandarizedFormat) {
             return true;
         } else {
             return false;
