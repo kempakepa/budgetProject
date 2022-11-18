@@ -9,21 +9,9 @@ interface CashFlowManagerResult {
 
 export class CashFlowManager {
     static listAllCostsAndIncomes: any[] = [];
-    static cashFlowItem: CashFlowItem;
-
     addCost(cashFlowItem: CashFlowItem): CashFlowManagerResult {
-        if (
-            new CashFlowValidator(
-                cashFlowItem.title,
-                cashFlowItem.comment,
-                cashFlowItem.date,
-                cashFlowItem.amount,
-                cashFlowItem.category,
-                cashFlowItem.subcategory
-            ).validateInput()
-        ) {
+        if (CashFlowValidator.validateInput(cashFlowItem)) {
             const newId = this.generateNewId();
-
             let cost: unknown = [
                 newId,
                 cashFlowItem.title,
@@ -46,19 +34,10 @@ export class CashFlowManager {
             };
         }
     }
-
     addIncome(cashFlowItem: CashFlowItem): CashFlowManagerResult {
-        if (
-            new CashFlowValidator(
-                cashFlowItem.title,
-                cashFlowItem.comment,
-                cashFlowItem.date,
-                cashFlowItem.amount,
-                cashFlowItem.category,
-                cashFlowItem.subcategory
-            ).validateInput()
-        ) {
+        if (CashFlowValidator.validateInput(cashFlowItem)) {
             const newId = this.generateNewId();
+
             let income: unknown = [
                 newId,
                 cashFlowItem.title,

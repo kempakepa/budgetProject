@@ -18,16 +18,7 @@ export class CashFlowManagerController extends BaseController {
         this.req.on('end', () => {
             const item = JSON.parse(reqBody);
 
-            if (
-                new CashFlowValidator(
-                    item.title,
-                    item.comment,
-                    item.date,
-                    item.amount,
-                    item.category,
-                    item.subcategory
-                ).validateInput()
-            ) {
+            if (CashFlowValidator.validateInput(item)) {
                 new CashFlowManager().addCost(item);
                 this.res.setHeader('Access-Control-Allow-Origin', '*');
                 this.res.statusCode = 200;
@@ -49,16 +40,7 @@ export class CashFlowManagerController extends BaseController {
         this.req.on('end', () => {
             const item = JSON.parse(reqBody);
 
-            if (
-                new CashFlowValidator(
-                    item.title,
-                    item.comment,
-                    item.date,
-                    item.amount,
-                    item.category,
-                    item.subcategory
-                ).validateInput()
-            ) {
+            if (CashFlowValidator.validateInput(item)) {
                 new CashFlowManager().addIncome(item);
                 this.res.setHeader('Access-Control-Allow-Origin', '*');
                 this.res.statusCode = 200;
