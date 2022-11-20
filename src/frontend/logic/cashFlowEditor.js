@@ -61,10 +61,19 @@ const setFormInitValues = (values) => {
         'selected';
 };
 
+const costOrInput = () => {
+    if (getCostTypeElement().checked) {
+        return 'COST';
+    }
+    if (getIncomeTypeElement().checked) {
+        return 'INCOME';
+    }
+};
+
 const readInputValues = () => {
     return {
-        amount: getAmountElement().value,
-        cashFlowType: getCostTypeElement().enabled ? 'COST' : 'INCOME',
+        amount: Number(getAmountElement().value),
+        cashFlowType: costOrInput(),
         category: getCategoryElement().value,
         comment: getCommentElement().value,
         date: getDateElement().value,
