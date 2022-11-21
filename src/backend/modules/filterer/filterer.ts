@@ -1,16 +1,22 @@
-const { CashFlowManager } = require('../cashFlowManager/cashFlowManager');
+import { CashFlowManager } from '../cashFlowManager/cashFlowManager';
 
-class Filterer {
+export class Filterer {
     filtered = [];
+    title: string | undefined;
+    comment: string | undefined;
+    date: string[] | undefined;
+    amount: number[] | undefined;
+    category: string | undefined;
+    subcategory: string | undefined;
 
     filterCostAndIncome(
-        listAllCostsAndIncomes,
-        title,
-        comment,
-        date,
-        amount,
-        category,
-        subcategory
+        listAllCostsAndIncomes: any,
+        title: string | undefined,
+        comment: string | undefined,
+        date: string[] | undefined,
+        amount: number[] | undefined,
+        category: string | undefined,
+        subcategory?: string | undefined
     ) {
         CashFlowManager.listAllCostsAndIncomes = listAllCostsAndIncomes;
         this.title = title;
@@ -21,41 +27,42 @@ class Filterer {
         this.subcategory = subcategory;
         {
             const filteredItems = listAllCostsAndIncomes.filter(
-                (CostsAndIncome) => this.areAllConditionsMet(CostsAndIncome)
+                (CostsAndIncome: any) =>
+                    this.areAllConditionsMet(CostsAndIncome)
             );
             return filteredItems;
         }
     }
 
-    isParamUndefined(param) {
+    isParamUndefined(param: any) {
         return param == undefined;
     }
 
-    isBetween(param, [min, max]) {
+    isBetween(param: any, [min, max]: any) {
         if (param >= min && param <= max) {
             return param;
         }
     }
 
-    includesAtLeastPartStringToLowerCase(arrayElement, param) {
+    includesAtLeastPartStringToLowerCase(arrayElement: any, param: any) {
         return arrayElement.toLowerCase().includes(param.toLowerCase());
     }
 
-    isUndefinedOrTextIncludesPart(param, arrayElemnt) {
+    isUndefinedOrTextIncludesPart(param: any, arrayElemnt: any) {
         return (
             this.isParamUndefined(param) ||
             this.includesAtLeastPartStringToLowerCase(arrayElemnt, param)
         );
     }
 
-    isUndefinedOrIsBetween(param, arrayElemnt) {
+    isUndefinedOrIsBetween(param: any, arrayElemnt: any) {
         return (
             this.isParamUndefined(param) ||
             this.isBetween(arrayElemnt, [param[0], param[1]])
         );
     }
 
-    areAllConditionsMet(arrayElement) {
+    areAllConditionsMet(arrayElement: any) {
         if (
             this.isUndefinedOrTextIncludesPart(this.title, arrayElement[1]) &&
             this.isUndefinedOrTextIncludesPart(this.comment, arrayElement[2]) &&
@@ -77,5 +84,3 @@ class Filterer {
         }
     }
 }
-
-module.exports = { Filterer };

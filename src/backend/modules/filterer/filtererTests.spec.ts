@@ -1,6 +1,6 @@
-const { Tests } = require('../../../../tests/tests.js');
-const { CashFlowManager } = require('../cashFlowManager/cashFlowManager.js');
-const { Filterer } = require('./filterer.js');
+import { Tests } from '../../../../tests/tests.js';
+import { CashFlowManager } from '../cashFlowManager/cashFlowManager.js';
+import { Filterer } from './filterer.js';
 
 const title = 'title';
 const comment = 'comment';
