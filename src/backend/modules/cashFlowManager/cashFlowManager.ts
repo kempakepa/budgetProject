@@ -2,12 +2,18 @@ import { CashFlowItem } from '../../utils/baseInterface';
 import { AccountState } from '../accountState/accountState';
 import { CashFlowValidator } from './cashFlowValidator';
 
-export class CashFlowManager {
-    static listAllCostsAndIncomes: any = [];
+interface CashFlowManagerResult {
+    id: number | undefined;
+    message: string;
+}
 
-    addCost(cashFlowItem: CashFlowItem) {
+export class CashFlowManager {
+    static listAllCostsAndIncomes: any[] = [];
+    addCost(cashFlowItem: CashFlowItem): CashFlowManagerResult {
         if (CashFlowValidator.validateInput(cashFlowItem)) {
+            const newId = this.generateNewId();
             let cost: unknown = [
+                newId,
                 cashFlowItem.title,
                 cashFlowItem.comment,
                 cashFlowItem.date,
@@ -17,15 +23,23 @@ export class CashFlowManager {
             ];
             CashFlowManager.listAllCostsAndIncomes.push(cost);
             AccountState.changeAccountState(-cashFlowItem.amount);
-            return 'Cost added successfully';
+            return {
+                id: newId,
+                message: 'Cost added successfully',
+            };
         } else {
-            return 'Invalid input';
+            return {
+                id: undefined,
+                message: 'Invalid input',
+            };
         }
     }
-
-    addIncome(cashFlowItem: CashFlowItem) {
+    addIncome(cashFlowItem: CashFlowItem): CashFlowManagerResult {
         if (CashFlowValidator.validateInput(cashFlowItem)) {
+            const newId = this.generateNewId();
+
             let income: unknown = [
+                newId,
                 cashFlowItem.title,
                 cashFlowItem.comment,
                 cashFlowItem.date,
@@ -35,13 +49,27 @@ export class CashFlowManager {
             ];
             CashFlowManager.listAllCostsAndIncomes.push(income);
             AccountState.changeAccountState(cashFlowItem.amount);
-            return 'Income added successfully';
+            return {
+                id: newId,
+                message: 'Income added successfully',
+            };
         } else {
-            return 'Invalid input';
+            return {
+                id: undefined,
+                message: 'Invalid input',
+            };
         }
     }
 
     listAllCostAndIncome() {
         return CashFlowManager.listAllCostsAndIncomes;
     }
+
+    private generateNewId = () => {
+        const list = CashFlowManager.listAllCostsAndIncomes;
+        if (list.length === 0) {
+            return 1;
+        }
+        return list[list.length - 1][0] + 1;
+    };
 }

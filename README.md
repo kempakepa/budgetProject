@@ -23,8 +23,10 @@ Projekt ma na celu stworzenie prostej aplikacji do zarzadzania budzetem domowym
 sequenceDiagram
     User->>cashFlowManager: addCost
     User->>cashFlowManager: addIncome
+    User->>cashFlowEditor: editCostOrIncome
     User->>AccountState: getAccountState
     cashFlowManager->>AccountState: changeAccountState
+    cashFlowEditor->>AccountState: changeAccountState
     User->>cashFlowManager: listCostAndIncome
     cashFlowManager->>Filterer: filterCostAndIncome
     User->>FiltererBalancer: getFinanceBalance

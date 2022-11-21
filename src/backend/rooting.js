@@ -1,6 +1,10 @@
 const {
     AccountStateController,
 } = require('./modules/accountState/accountStateController');
+const { CashFlowEditor } = require('./modules/cashFlowEditor/cashFlowEditor');
+const {
+    CashFlowEditorController,
+} = require('./modules/cashFlowEditor/cashFlowEditorController');
 const {
     CashFlowManagerController,
 } = require('./modules/cashFlowManager/cashFlowManagerController');
@@ -41,6 +45,13 @@ const endpoints = [
         },
     },
     {
+        url: '/api/costAndIncomes',
+        method: 'GET',
+        controller: (req, res) => {
+            new CashFlowManagerController(req, res).listAllCostAndIncome();
+        },
+    },
+    {
         url: '/api/filterBudgetItem',
         method: 'GET',
         controller: (req, res) => {
@@ -51,6 +62,13 @@ const endpoints = [
                 ).filterCostAndIncome(),
             };
             //res.end(JSON.stringify(response));
+        },
+    },
+    {
+        url: '/api/editCashFlow',
+        method: 'POST',
+        controller: (req, res) => {
+            new CashFlowEditorController(req, res).editCashFlowItem();
         },
     },
 ];

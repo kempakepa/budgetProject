@@ -100,18 +100,19 @@ const showResultsFiltered = (value) => {
 const showIncomesAndCostsList = (data) => {
     let showValueElement = '';
     for (const valueElement of data) {
-        showValueElement += `<li>${valueElement}</li>`;
+        const editButtonHtml = `<a href="./cashFlowEditor.html?id=${valueElement[0]}" data-cy="edit-link">Edit</a>`;
+        showValueElement += `<li>${valueElement} ${editButtonHtml}</li>`;
     }
     document.getElementById('showlist').innerHTML = showValueElement;
 };
 
 const showFiltererBalancerData = (data) => {
-    const incomes = data.filter((dataRow) => dataRow[3] > 0);
-    const incomesSum = incomes.reduce((acc, object) => acc + object[3], 0);
+    const incomes = data.filter((dataRow) => dataRow[4] > 0);
+    const incomesSum = incomes.reduce((acc, object) => acc + object[4], 0);
 
-    const costs = data.filter((dataRow) => dataRow[3] < 0);
+    const costs = data.filter((dataRow) => dataRow[4] < 0);
     const costsSum = costs.reduce(
-        (acc, object) => acc + Math.abs(object[3]),
+        (acc, object) => acc + Math.abs(object[4]),
         0
     );
 

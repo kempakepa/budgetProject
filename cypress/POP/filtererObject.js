@@ -50,9 +50,41 @@ class FiltererObject {
     static shouldFilterAtLeastOneItem() {
         cy.get('ul#showlist>li').should('not.have.length', 0);
     }
+    
+    static getRow(title) {
+        return cy.get('li').contains(title);
+    }
 
-    static getSubcategoryList() {
+    static rowContainEditButton(cashFlowItemRow) {
+        cashFlowItemRow.find('[data-cy="edit-link"]').should('exist');
+    }
+
+    static clickEditButton(title) {
+        FiltererObject.getRow(title).find('[data-cy="edit-link"]').click();
+    }
+    
+    static rowContainText(cashFlowItemRow, value) {
+        cashFlowItemRow.should('contain.text', value);
+    }
+    
+     static getSubcategoryList() {
         return cy.get('#subcategories');
+    }
+
+    static getRow(title) {
+        return cy.get('li').contains(title);
+    }
+
+    static rowContainEditButton(cashFlowItemRow) {
+        cashFlowItemRow.find('[data-cy="edit-link"]').should('exist');
+    }
+
+    static clickEditButton(title) {
+        FiltererObject.getRow(title).find('[data-cy="edit-link"]').click();
+    }
+
+    static rowContainText(cashFlowItemRow, value) {
+        cashFlowItemRow.should('contain.text', value);
     }
 }
 

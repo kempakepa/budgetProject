@@ -5,7 +5,9 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
-            - run: npm run build:backend && npm run unit:backend
+            - run: |
+                  npm install
+                  npm run build:backend && npm run unit:backend
     cypress-api-tests:
         runs-on: ubuntu-latest
         needs: unit-tests

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Manage Budget Module</title>
+        <meta charset="UTF-8" />
+        <script src = '../main-bundle.js'></script>
+    </head>
+    <body onload="cashFlowEditorOnLoad()">
+        <div>
+            Welcome to Cash Flow editor module, please fill in form below:
+</div></br>
+<form>
+    <input type="text" id="id" hidden/></br>
+        <input type="radio" name="budgetType" id="cost" data-cy="cost" value="cost" required/>
+        <label for="cost">Cost</label>
+        <input type="radio" name= "budgetType" id="income" data-cy="income" value="income"/>
+        <label for="income">Income</label></br>
+        <label for="title"></label>
+        <input type="text" placeholder="Title*" id="title" data-cy="title" required oninvalid="this.setCustomValidity('Please fill in this field.')"/></br>
+        <label for="comment"></label>
+        <input type="text" placeholder="Comment*" id="comment" data-cy="comment" required oninvalid="this.setCustomValidity('Please fill in this field.')"/></br>
+        <label for="date"></label>
+        <input type="date" placeholder="Date*" id="date" data-cy="date" required oninvalid="this.setCustomValidity('Please fill in this field.')"/></br>
+        <label for="amount"></label>
+        <input type="number" placeholder="Amount*" id="amount" data-cy="amount" min="0.01" required oninvalid="this.setCustomValidity('Please fill in this field.')"/></br>
+        <label for="category"></label>
+        <select name="category" id="category" placeholder="Category*" data-cy="category" required oninvalid="this.setCustomValidity('Please fill in this field.')">
+            <option value="" selected disabled hidden>Category*</option>
+            <option value="food">Food</option>
+            <option value="salary">Salary</option>
+            <option value="taxes">Taxes</option>
+            <option value="car">Car</option>
+          </select></br>
+        <input type="submit" value="Send!" onclick="cashFlowEditorOnEdit()" data-cy="update-button"/></br>
+        <div id="submition_message" data-cy="submition_message"></div>
+</form>
+        <div>
+            Go to <a href="../index.html">the Home Page </a>or navigate to
+            <a href="./accountState.html">Account State module</a>
+            or
+            <a href="./filterer.html">Search Budget module.</a>
+        </div>
+    </body>
+</html>
