@@ -1,10 +1,10 @@
-const { BaseController } = require('../../utils/baseController');
-const { Helpers } = require('../../utils/helpers');
-const { CashFlowManager } = require('../cashFlowManager/cashFlowManager');
-const { Filterer } = require('./filterer');
+import { BaseController } from '../../utils/baseController';
+import { Helpers } from '../../utils/helpers';
+import { CashFlowManager } from '../cashFlowManager/cashFlowManager';
+import { Filterer } from './filterer';
 
-class FiltererController extends BaseController {
-    constructor(req, res) {
+export class FiltererController extends BaseController {
+    constructor(req: unknown, res: unknown) {
         super(req, res);
     }
 
@@ -47,5 +47,3 @@ class FiltererController extends BaseController {
         );
     }
 }
-
-module.exports = { FiltererController };
