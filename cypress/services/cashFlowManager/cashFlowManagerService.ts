@@ -1,10 +1,11 @@
-const {
+import {
     addCostItemEndpoint,
     hostname,
     addIncomeItemEndpoint,
-} = require('../utils/endpointsProvider');
+} from '../../utils/endpointsProvider';
+import { CashFlowBody } from './cashFlowManagerInterface';
 
-function sendRequestToAddCostItem(body) {
+export function sendRequestToAddCostItem(body: CashFlowBody) {
     return cy.request({
         url: `${hostname}${addCostItemEndpoint}`,
         method: 'POST',
@@ -13,7 +14,7 @@ function sendRequestToAddCostItem(body) {
     });
 }
 
-function sendRequestToAddIncomeItem(body) {
+export function sendRequestToAddIncomeItem(body: CashFlowBody) {
     return cy.request({
         url: `${hostname}${addIncomeItemEndpoint}`,
         method: 'POST',
@@ -21,5 +22,3 @@ function sendRequestToAddIncomeItem(body) {
         failOnStatusCode: false,
     });
 }
-
-module.exports = { sendRequestToAddCostItem, sendRequestToAddIncomeItem };

@@ -2,11 +2,11 @@ const { TestDataProvider } = require('../../utils/testDataProvider');
 const {
     sendRequestToAddCostItem,
     sendRequestToAddIncomeItem,
-} = require('../../services/cashFlowManagerService');
+} = require('../../services/cashFlowManager/cashFlowManagerService');
 const {
     getCurrentAccountState,
 } = require('../../services/accountStateService');
-const { filterResults } = require('../../services/filtererService');
+const { filterResults } = require('../../services/filterer/filtererService');
 const {
     sendCashFlowEditorPut,
 } = require('../../services/cashFlowEditorService');

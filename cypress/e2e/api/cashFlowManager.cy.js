@@ -2,7 +2,7 @@ const { CashFlowManagerObject } = require('../../POP/cashFlowManagerObject');
 const {
     sendRequestToAddCostItem,
     sendRequestToAddIncomeItem,
-} = require('../../services/cashFlowManagerService');
+} = require('../../services/cashFlowManager/cashFlowManagerService');
 const { TestDataProvider } = require('../../utils/testDataProvider');
 
 describe('cashFlowManager test', () => {

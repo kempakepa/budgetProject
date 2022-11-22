@@ -2,7 +2,7 @@ const { AccountStateObject } = require('../../POP/accountStateObject');
 const { HomePageObject } = require('../../POP/homePageObject');
 const {
     sendRequestToAddCostItem,
-} = require('../../services/cashFlowManagerService');
+} = require('../../services/cashFlowManager/cashFlowManagerService');
 const { TestDataProvider } = require('../../utils/testDataProvider');
 
 describe('accountState test', () => {

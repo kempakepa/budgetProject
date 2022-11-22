@@ -3,7 +3,7 @@ const { HomePageObject } = require('../../POP/homePageObject');
 const {
     sendRequestToAddIncomeItem,
     sendRequestToAddCostItem,
-} = require('../../services/cashFlowManagerService');
+} = require('../../services/cashFlowManager/cashFlowManagerService');
 const { TestDataProvider } = require('../../utils/testDataProvider');
 const { faker } = require('@faker-js/faker');
 

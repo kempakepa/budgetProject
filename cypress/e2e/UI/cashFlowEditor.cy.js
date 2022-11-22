@@ -4,7 +4,7 @@ const { CashFlowEditorObject } = require('../../POP/cashFlowEditorObject');
 const { TestDataProvider } = require('../../utils/testDataProvider');
 const {
     sendRequestToAddCostItem,
-} = require('../../services/cashFlowManagerService');
+} = require('../../services/cashFlowManager/cashFlowManagerService');
 
 describe('cashFlowEditor tests', () => {
     beforeEach(() => {
