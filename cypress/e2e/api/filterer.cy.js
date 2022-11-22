@@ -1,7 +1,7 @@
 const {
     sendRequestToAddCostItem,
-} = require('../../services/cashFlowManagerService');
-const { filterResults } = require('../../services/filtererService');
+} = require('../../services/cashFlowManager/cashFlowManagerService');
+const { filterResults } = require('../../services/filterer/filtererService');
 const { TestDataProvider } = require('../../utils/testDataProvider');
 
 describe('filterer test', () => {

@@ -3,11 +3,11 @@ const { FiltererObject } = require('../../POP/filtererObject');
 const { TestDataProvider } = require('../../utils/testDataProvider');
 const {
     sendRequestToAddCostItem,
-} = require('../../services/cashFlowManagerService');
+} = require('../../services/cashFlowManager/cashFlowManagerService');
 const {
     getCurrentAccountState,
 } = require('../../services/accountStateService');
-const { filterResults } = require('../../services/filtererService');
+const { filterResults } = require('../../services/filterer/filtererService');
 const {
     sendCashFlowEditorPut,
 } = require('../../services/cashFlowEditorService');

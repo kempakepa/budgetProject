@@ -1,18 +1,17 @@
-const { TestDataProvider } = require('../../utils/testDataProvider');
-const {
-    sendRequestToAddCostItem,
-} = require('../../services/cashFlowManagerService');
-const { filterResults } = require('../../services/filtererService');
-const {
-    sendCashFlowEditorPut,
-} = require('../../services/cashFlowEditorService');
+import { TestDataProvider } from '../../utils/testDataProvider';
+import { sendRequestToAddCostItem } from '../../services/cashFlowManager/cashFlowManagerService';
+import { filterResults } from '../../services/filterer/filtererService';
+import { sendCashFlowEditorPut } from '../../services/cashFlowEditorService';
+import { CashFlowBody } from '../../services/cashFlowManager/cashFlowManagerInterface';
 
 describe('cashFlowEditor test', () => {
+    let requestBody: CashFlowBody;
+    beforeEach(() => {
+        requestBody = TestDataProvider.createReqParamObject() as CashFlowBody;
+        sendRequestToAddCostItem(requestBody);
+    });
     it('should return 200 status code if edit cost or income valid', () => {
         //Given
-        const requestBody = TestDataProvider.createReqParamObject();
-        sendRequestToAddCostItem(requestBody);
-
         filterResults({}).then((response) => {
             const addedItemId = response.body.find(
                 (cashItem) => cashItem[1] === requestBody.title
@@ -35,9 +34,6 @@ describe('cashFlowEditor test', () => {
     });
 
     it('should return 404 status code if cost or income not exist', () => {
-        //Given
-        const requestBody = TestDataProvider.createReqParamObject();
-
         //When
         sendCashFlowEditorPut({
             amount: requestBody.amount,
@@ -55,9 +51,6 @@ describe('cashFlowEditor test', () => {
 
     it('should return 400 status code if cost or income ammount = 0', () => {
         //Given
-        const requestBody = TestDataProvider.createReqParamObject();
-        sendRequestToAddCostItem(requestBody);
-
         filterResults({}).then((response) => {
             const addedItemId = response.body.find(
                 (cashItem) => cashItem[1] === requestBody.title
@@ -81,9 +74,6 @@ describe('cashFlowEditor test', () => {
 
     it('should return 400 status code if cost or income ammount < 0', () => {
         //Given
-        const requestBody = TestDataProvider.createReqParamObject();
-        sendRequestToAddCostItem(requestBody);
-
         filterResults({}).then((response) => {
             const addedItemId = response.body.find(
                 (cashItem) => cashItem[1] === requestBody.title
@@ -107,9 +97,6 @@ describe('cashFlowEditor test', () => {
 
     it('should return 400 status code if cost or income containt empty title', () => {
         //Given
-        const requestBody = TestDataProvider.createReqParamObject();
-        sendRequestToAddCostItem(requestBody);
-
         filterResults({}).then((response) => {
             const addedItemId = response.body.find(
                 (cashItem) => cashItem[1] === requestBody.title

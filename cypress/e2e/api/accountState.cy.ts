@@ -1,11 +1,10 @@
-const {
-    getCurrentAccountState,
-} = require('../../services/accountStateService');
-const {
+import { getCurrentAccountState } from '../../services/accountStateService';
+import { CashFlowBody } from '../../services/cashFlowManager/cashFlowManagerInterface';
+import {
     sendRequestToAddCostItem,
     sendRequestToAddIncomeItem,
-} = require('../../services/cashFlowManagerService');
-const { TestDataProvider } = require('../../utils/testDataProvider');
+} from '../../services/cashFlowManager/cashFlowManagerService';
+import { TestDataProvider } from '../../utils/testDataProvider';
 
 describe('accountState test', () => {
     it('should initial accountState be a number value', () => {
@@ -16,10 +15,12 @@ describe('accountState test', () => {
     });
 
     it('should account state be decreased about amount', () => {
-        let accountState = getCurrentAccountState().then((response) => {
+        let accountState: number;
+        getCurrentAccountState().then((response) => {
             accountState = response.body.accountStateValue;
 
-            const requestBody = TestDataProvider.createReqParamObject();
+            const requestBody: CashFlowBody =
+                TestDataProvider.createReqParamObject() as CashFlowBody;
 
             sendRequestToAddCostItem(requestBody);
             getCurrentAccountState().then((response) => {
@@ -31,10 +32,12 @@ describe('accountState test', () => {
         });
     });
     it('should account state be increased about amount', () => {
-        let accountState = getCurrentAccountState().then((response) => {
+        let accountState: number;
+        getCurrentAccountState().then((response) => {
             accountState = response.body.accountStateValue;
 
-            const requestBody = TestDataProvider.createReqParamObject();
+            const requestBody: CashFlowBody =
+                TestDataProvider.createReqParamObject() as CashFlowBody;
 
             sendRequestToAddIncomeItem(requestBody);
             getCurrentAccountState().then((response) => {
